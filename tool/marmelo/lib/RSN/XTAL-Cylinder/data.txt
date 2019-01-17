@@ -1,0 +1,8 @@
+<body>
+	explanation=…»U“®q(‰~“›Œ^)
+	numLeads=2
+	rxLead2=1
+	ryLead2=0
+	xLeadInImg=1
+	yLeadInImg=1
+</body>

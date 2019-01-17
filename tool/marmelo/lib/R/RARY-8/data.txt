@@ -1,0 +1,22 @@
+<body>
+	explanation=抵抗アレイ。9ピン。
+	numLeads=9
+	xLeadInImg=5
+	yLeadInImg=5
+	rxLead2=1
+	ryLead2=0
+	rxLead3=2
+	ryLead3=0
+	rxLead4=3
+	ryLead4=0
+	rxLead5=4
+	ryLead5=0
+	rxLead6=5
+	ryLead6=0
+	rxLead7=6
+	ryLead7=0
+	rxLead8=7
+	ryLead8=0
+	rxLead9=8
+	ryLead9=0
+</body>
