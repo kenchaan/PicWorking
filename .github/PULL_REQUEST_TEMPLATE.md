@@ -1,10 +1,10 @@
-**[対応Issue]**
+**[Issue]**
 #
 
-**[変更点]**
+**[Changes]**
+- 
 
-**[確認]**
-- [ ] 動作確認
+**[Check list]**
+- [ ] Operation check
 
-**[補足]**
-
+**[Supplements]**
