@@ -1,0 +1,28 @@
+<body>
+	explanation=7セグメントLED表示器。4文字
+	numLeads=12
+	rxLead2=1
+	ryLead2=0
+	rxLead3=2
+	ryLead3=0
+	rxLead4=3
+	ryLead4=0
+	rxLead5=4
+	ryLead5=0
+	rxLead6=5
+	ryLead6=0
+	rxLead7=0
+	ryLead7=-6
+	rxLead8=1
+	ryLead8=-6
+	rxLead9=2
+	ryLead9=-6
+	rxLead10=3
+	ryLead10=-6
+	rxLead11=4
+	ryLead11=-6
+	rxLead12=5
+	ryLead12=-6
+	xLeadInImg=79
+	yLeadInImg=74
+</body>
