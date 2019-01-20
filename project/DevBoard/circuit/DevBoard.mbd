@@ -14,13 +14,13 @@
 		<statistics>
 			numHole=40,28
 			numParts=64
-			numWires=243
+			numWires=244
 			numCmtTags=0
 		</statistics>
 		<options>
 			showBackWiresOnFrontWindow=TRUE
 			showFrontWiresOnBackWindow=TRUE
-			mirrorModeOnBackWindow=TRUE
+			mirrorModeOnBackWindow=FALSE
 			showCmtTags=TRUE
 		</options>
 		<parts>
@@ -1877,7 +1877,7 @@
 			<wire90>
 				side=back
 				shielded=FALSE
-				pos=10,7
+				pos=13,7
 				pos2=11,7
 				color=0xFF
 				ann=90
@@ -1911,11 +1911,11 @@
 				comment=
 			</wire92>
 			<wire93>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=13,7
-				pos2=14,7
-				color=0xFF0000
+				pos=11,7
+				pos2=11,6
+				color=0xFF
 				ann=93
 				val1=
 				val2=
@@ -2897,8 +2897,8 @@
 			<wire175>
 				side=back
 				shielded=FALSE
-				pos=11,7
-				pos2=11,8
+				pos=11,8
+				pos2=11,7
 				color=0xFF
 				ann=183
 				val1=
@@ -2945,8 +2945,8 @@
 			<wire179>
 				side=back
 				shielded=FALSE
-				pos=11,6
-				pos2=11,7
+				pos=10,7
+				pos2=9,7
 				color=0xFF
 				ann=178
 				val1=
@@ -3710,6 +3710,18 @@
 				val3=
 				comment=
 			</wire242>
+			<wire243>
+				side=front
+				shielded=FALSE
+				pos=9,7
+				pos2=8,7
+				color=0xFF0000
+				ann=211
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire243>
 		</wires>
 		<cmtTags>
 		</cmtTags>
