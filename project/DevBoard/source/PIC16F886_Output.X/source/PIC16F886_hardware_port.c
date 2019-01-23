@@ -80,7 +80,7 @@ void HW_PORT_Initialize( void )
 	/* ポートA */
 	REG_WRITE_08( ANSEL, 0x00 );
 	REG_WRITE_08( PORTA, 0x00 );
-	REG_WRITE_08( TRISA, 0xC7 );
+	REG_WRITE_08( TRISA, 0xC0 );
 
 	/* ポートB */
 	REG_RMW_08( OPTION_REG, 0xC0, 0x80 );
@@ -92,7 +92,7 @@ void HW_PORT_Initialize( void )
 
 	/* ポートC */
 	REG_WRITE_08( PORTC, 0x00 );
-	REG_WRITE_08( TRISC, 0x1B );
+	REG_WRITE_08( TRISC, 0x00 );
 
 	/* ポートE */
 	/* DO NOTHING */

@@ -14,7 +14,7 @@
 		<statistics>
 			numHole=40,28
 			numParts=64
-			numWires=244
+			numWires=243
 			numCmtTags=0
 		</statistics>
 		<options>
@@ -2849,18 +2849,6 @@
 			<wire171>
 				side=back
 				shielded=FALSE
-				pos=20,11
-				pos2=21,11
-				color=0xFF
-				ann=169
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire171>
-			<wire172>
-				side=back
-				shielded=FALSE
 				pos=30,11
 				pos2=30,19
 				color=0xFF
@@ -2869,8 +2857,8 @@
 				val2=
 				val3=
 				comment=
-			</wire172>
-			<wire173>
+			</wire171>
+			<wire172>
 				side=back
 				shielded=FALSE
 				pos=30,19
@@ -2881,8 +2869,8 @@
 				val2=
 				val3=
 				comment=
-			</wire173>
-			<wire174>
+			</wire172>
+			<wire173>
 				side=back
 				shielded=FALSE
 				pos=11,6
@@ -2893,8 +2881,8 @@
 				val2=
 				val3=
 				comment=
-			</wire174>
-			<wire175>
+			</wire173>
+			<wire174>
 				side=back
 				shielded=FALSE
 				pos=11,8
@@ -2905,8 +2893,8 @@
 				val2=
 				val3=
 				comment=
-			</wire175>
-			<wire176>
+			</wire174>
+			<wire175>
 				side=back
 				shielded=FALSE
 				pos=29,8
@@ -2917,8 +2905,8 @@
 				val2=
 				val3=
 				comment=
-			</wire176>
-			<wire177>
+			</wire175>
+			<wire176>
 				side=back
 				shielded=FALSE
 				pos=28,7
@@ -2929,8 +2917,8 @@
 				val2=
 				val3=
 				comment=
-			</wire177>
-			<wire178>
+			</wire176>
+			<wire177>
 				side=back
 				shielded=FALSE
 				pos=35,9
@@ -2941,8 +2929,8 @@
 				val2=
 				val3=
 				comment=
-			</wire178>
-			<wire179>
+			</wire177>
+			<wire178>
 				side=back
 				shielded=FALSE
 				pos=10,7
@@ -2953,8 +2941,8 @@
 				val2=
 				val3=
 				comment=
-			</wire179>
-			<wire180>
+			</wire178>
+			<wire179>
 				side=back
 				shielded=FALSE
 				pos=27,8
@@ -2965,8 +2953,8 @@
 				val2=
 				val3=
 				comment=
-			</wire180>
-			<wire181>
+			</wire179>
+			<wire180>
 				side=back
 				shielded=FALSE
 				pos=26,7
@@ -2977,8 +2965,8 @@
 				val2=
 				val3=
 				comment=
-			</wire181>
-			<wire182>
+			</wire180>
+			<wire181>
 				side=back
 				shielded=FALSE
 				pos=25,13
@@ -2989,8 +2977,8 @@
 				val2=
 				val3=
 				comment=
-			</wire182>
-			<wire183>
+			</wire181>
+			<wire182>
 				side=back
 				shielded=FALSE
 				pos=26,14
@@ -3001,8 +2989,8 @@
 				val2=
 				val3=
 				comment=
-			</wire183>
-			<wire184>
+			</wire182>
+			<wire183>
 				side=back
 				shielded=FALSE
 				pos=22,23
@@ -3013,8 +3001,8 @@
 				val2=
 				val3=
 				comment=
-			</wire184>
-			<wire185>
+			</wire183>
+			<wire184>
 				side=back
 				shielded=FALSE
 				pos=29,13
@@ -3025,8 +3013,8 @@
 				val2=
 				val3=
 				comment=
-			</wire185>
-			<wire186>
+			</wire184>
+			<wire185>
 				side=front
 				shielded=FALSE
 				pos=26,18
@@ -3037,8 +3025,8 @@
 				val2=
 				val3=
 				comment=
-			</wire186>
-			<wire187>
+			</wire185>
+			<wire186>
 				side=back
 				shielded=FALSE
 				pos=38,22
@@ -3049,8 +3037,8 @@
 				val2=
 				val3=
 				comment=
-			</wire187>
-			<wire188>
+			</wire186>
+			<wire187>
 				side=back
 				shielded=FALSE
 				pos=33,15
@@ -3061,8 +3049,8 @@
 				val2=
 				val3=
 				comment=
-			</wire188>
-			<wire189>
+			</wire187>
+			<wire188>
 				side=back
 				shielded=FALSE
 				pos=22,22
@@ -3073,8 +3061,8 @@
 				val2=
 				val3=
 				comment=
-			</wire189>
-			<wire190>
+			</wire188>
+			<wire189>
 				side=back
 				shielded=FALSE
 				pos=18,23
@@ -3085,8 +3073,8 @@
 				val2=
 				val3=
 				comment=
-			</wire190>
-			<wire191>
+			</wire189>
+			<wire190>
 				side=back
 				shielded=FALSE
 				pos=23,23
@@ -3097,8 +3085,8 @@
 				val2=
 				val3=
 				comment=
-			</wire191>
-			<wire192>
+			</wire190>
+			<wire191>
 				side=back
 				shielded=FALSE
 				pos=26,13
@@ -3109,8 +3097,8 @@
 				val2=
 				val3=
 				comment=
-			</wire192>
-			<wire193>
+			</wire191>
+			<wire192>
 				side=back
 				shielded=FALSE
 				pos=37,16
@@ -3121,8 +3109,8 @@
 				val2=
 				val3=
 				comment=
-			</wire193>
-			<wire194>
+			</wire192>
+			<wire193>
 				side=back
 				shielded=FALSE
 				pos=20,21
@@ -3133,8 +3121,8 @@
 				val2=
 				val3=
 				comment=
-			</wire194>
-			<wire195>
+			</wire193>
+			<wire194>
 				side=back
 				shielded=FALSE
 				pos=19,22
@@ -3145,8 +3133,8 @@
 				val2=
 				val3=
 				comment=
-			</wire195>
-			<wire196>
+			</wire194>
+			<wire195>
 				side=back
 				shielded=FALSE
 				pos=37,13
@@ -3157,8 +3145,8 @@
 				val2=
 				val3=
 				comment=
-			</wire196>
-			<wire197>
+			</wire195>
+			<wire196>
 				side=back
 				shielded=FALSE
 				pos=26,20
@@ -3169,8 +3157,8 @@
 				val2=
 				val3=
 				comment=
-			</wire197>
-			<wire198>
+			</wire196>
+			<wire197>
 				side=back
 				shielded=FALSE
 				pos=28,21
@@ -3181,8 +3169,8 @@
 				val2=
 				val3=
 				comment=
-			</wire198>
-			<wire199>
+			</wire197>
+			<wire198>
 				side=back
 				shielded=FALSE
 				pos=34,14
@@ -3193,8 +3181,8 @@
 				val2=
 				val3=
 				comment=
-			</wire199>
-			<wire200>
+			</wire198>
+			<wire199>
 				side=back
 				shielded=FALSE
 				pos=34,17
@@ -3205,8 +3193,8 @@
 				val2=
 				val3=
 				comment=
-			</wire200>
-			<wire201>
+			</wire199>
+			<wire200>
 				side=front
 				shielded=FALSE
 				pos=37,13
@@ -3217,8 +3205,8 @@
 				val2=
 				val3=
 				comment=
-			</wire201>
-			<wire202>
+			</wire200>
+			<wire201>
 				side=back
 				shielded=FALSE
 				pos=33,9
@@ -3229,8 +3217,8 @@
 				val2=
 				val3=
 				comment=
-			</wire202>
-			<wire203>
+			</wire201>
+			<wire202>
 				side=back
 				shielded=FALSE
 				pos=24,19
@@ -3241,8 +3229,8 @@
 				val2=
 				val3=
 				comment=
-			</wire203>
-			<wire204>
+			</wire202>
+			<wire203>
 				side=back
 				shielded=FALSE
 				pos=25,22
@@ -3253,8 +3241,8 @@
 				val2=
 				val3=
 				comment=
-			</wire204>
-			<wire205>
+			</wire203>
+			<wire204>
 				side=back
 				shielded=FALSE
 				pos=23,20
@@ -3265,8 +3253,8 @@
 				val2=
 				val3=
 				comment=
-			</wire205>
-			<wire206>
+			</wire204>
+			<wire205>
 				side=back
 				shielded=FALSE
 				pos=14,21
@@ -3277,8 +3265,8 @@
 				val2=
 				val3=
 				comment=
-			</wire206>
-			<wire207>
+			</wire205>
+			<wire206>
 				side=front
 				shielded=FALSE
 				pos=34,14
@@ -3289,8 +3277,8 @@
 				val2=
 				val3=
 				comment=
-			</wire207>
-			<wire208>
+			</wire206>
+			<wire207>
 				side=back
 				shielded=FALSE
 				pos=27,23
@@ -3301,8 +3289,8 @@
 				val2=
 				val3=
 				comment=
-			</wire208>
-			<wire209>
+			</wire207>
+			<wire208>
 				side=back
 				shielded=FALSE
 				pos=35,5
@@ -3313,8 +3301,8 @@
 				val2=
 				val3=
 				comment=
-			</wire209>
-			<wire210>
+			</wire208>
+			<wire209>
 				side=back
 				shielded=FALSE
 				pos=39,9
@@ -3325,8 +3313,8 @@
 				val2=
 				val3=
 				comment=
-			</wire210>
-			<wire211>
+			</wire209>
+			<wire210>
 				side=front
 				shielded=FALSE
 				pos=37,21
@@ -3337,8 +3325,8 @@
 				val2=
 				val3=
 				comment=
-			</wire211>
-			<wire212>
+			</wire210>
+			<wire211>
 				side=back
 				shielded=FALSE
 				pos=37,20
@@ -3349,8 +3337,8 @@
 				val2=
 				val3=
 				comment=
-			</wire212>
-			<wire213>
+			</wire211>
+			<wire212>
 				side=back
 				shielded=FALSE
 				pos=28,22
@@ -3361,8 +3349,8 @@
 				val2=
 				val3=
 				comment=
-			</wire213>
-			<wire214>
+			</wire212>
+			<wire213>
 				side=back
 				shielded=FALSE
 				pos=39,15
@@ -3373,8 +3361,8 @@
 				val2=
 				val3=
 				comment=
-			</wire214>
-			<wire215>
+			</wire213>
+			<wire214>
 				side=back
 				shielded=FALSE
 				pos=29,16
@@ -3385,8 +3373,8 @@
 				val2=
 				val3=
 				comment=
-			</wire215>
-			<wire216>
+			</wire214>
+			<wire215>
 				side=back
 				shielded=FALSE
 				pos=39,19
@@ -3397,8 +3385,8 @@
 				val2=
 				val3=
 				comment=
-			</wire216>
-			<wire217>
+			</wire215>
+			<wire216>
 				side=back
 				shielded=FALSE
 				pos=25,21
@@ -3409,8 +3397,8 @@
 				val2=
 				val3=
 				comment=
-			</wire217>
-			<wire218>
+			</wire216>
+			<wire217>
 				side=back
 				shielded=FALSE
 				pos=10,18
@@ -3421,8 +3409,8 @@
 				val2=
 				val3=
 				comment=
-			</wire218>
-			<wire219>
+			</wire217>
+			<wire218>
 				side=back
 				shielded=FALSE
 				pos=9,19
@@ -3433,8 +3421,8 @@
 				val2=
 				val3=
 				comment=
-			</wire219>
-			<wire220>
+			</wire218>
+			<wire219>
 				side=back
 				shielded=FALSE
 				pos=7,12
@@ -3445,8 +3433,8 @@
 				val2=
 				val3=
 				comment=
-			</wire220>
-			<wire221>
+			</wire219>
+			<wire220>
 				side=back
 				shielded=FALSE
 				pos=8,13
@@ -3457,8 +3445,8 @@
 				val2=
 				val3=
 				comment=
-			</wire221>
-			<wire222>
+			</wire220>
+			<wire221>
 				side=back
 				shielded=FALSE
 				pos=7,13
@@ -3469,8 +3457,8 @@
 				val2=
 				val3=
 				comment=
-			</wire222>
-			<wire223>
+			</wire221>
+			<wire222>
 				side=back
 				shielded=FALSE
 				pos=8,14
@@ -3481,8 +3469,8 @@
 				val2=
 				val3=
 				comment=
-			</wire223>
-			<wire224>
+			</wire222>
+			<wire223>
 				side=back
 				shielded=FALSE
 				pos=7,14
@@ -3493,8 +3481,8 @@
 				val2=
 				val3=
 				comment=
-			</wire224>
-			<wire225>
+			</wire223>
+			<wire224>
 				side=back
 				shielded=FALSE
 				pos=8,19
@@ -3505,8 +3493,8 @@
 				val2=
 				val3=
 				comment=
-			</wire225>
-			<wire226>
+			</wire224>
+			<wire225>
 				side=back
 				shielded=FALSE
 				pos=32,2
@@ -3517,8 +3505,8 @@
 				val2=
 				val3=
 				comment=
-			</wire226>
-			<wire227>
+			</wire225>
+			<wire226>
 				side=back
 				shielded=FALSE
 				pos=28,3
@@ -3529,8 +3517,8 @@
 				val2=
 				val3=
 				comment=
-			</wire227>
-			<wire228>
+			</wire226>
+			<wire227>
 				side=back
 				shielded=FALSE
 				pos=32,4
@@ -3541,8 +3529,8 @@
 				val2=
 				val3=
 				comment=
-			</wire228>
-			<wire229>
+			</wire227>
+			<wire228>
 				side=back
 				shielded=FALSE
 				pos=18,15
@@ -3553,8 +3541,8 @@
 				val2=
 				val3=
 				comment=
-			</wire229>
-			<wire230>
+			</wire228>
+			<wire229>
 				side=back
 				shielded=FALSE
 				pos=27,19
@@ -3565,8 +3553,8 @@
 				val2=
 				val3=
 				comment=
-			</wire230>
-			<wire231>
+			</wire229>
+			<wire230>
 				side=back
 				shielded=FALSE
 				pos=23,21
@@ -3577,8 +3565,8 @@
 				val2=
 				val3=
 				comment=
-			</wire231>
-			<wire232>
+			</wire230>
+			<wire231>
 				side=back
 				shielded=FALSE
 				pos=24,21
@@ -3589,8 +3577,8 @@
 				val2=
 				val3=
 				comment=
-			</wire232>
-			<wire233>
+			</wire231>
+			<wire232>
 				side=back
 				shielded=FALSE
 				pos=31,20
@@ -3601,8 +3589,8 @@
 				val2=
 				val3=
 				comment=
-			</wire233>
-			<wire234>
+			</wire232>
+			<wire233>
 				side=back
 				shielded=FALSE
 				pos=20,17
@@ -3613,8 +3601,8 @@
 				val2=
 				val3=
 				comment=
-			</wire234>
-			<wire235>
+			</wire233>
+			<wire234>
 				side=back
 				shielded=FALSE
 				pos=29,23
@@ -3625,8 +3613,8 @@
 				val2=
 				val3=
 				comment=
-			</wire235>
-			<wire236>
+			</wire234>
+			<wire235>
 				side=back
 				shielded=FALSE
 				pos=32,10
@@ -3637,8 +3625,8 @@
 				val2=
 				val3=
 				comment=
-			</wire236>
-			<wire237>
+			</wire235>
+			<wire236>
 				side=back
 				shielded=FALSE
 				pos=26,19
@@ -3649,8 +3637,8 @@
 				val2=
 				val3=
 				comment=
-			</wire237>
-			<wire238>
+			</wire236>
+			<wire237>
 				side=back
 				shielded=FALSE
 				pos=37,16
@@ -3661,8 +3649,8 @@
 				val2=
 				val3=
 				comment=
-			</wire238>
-			<wire239>
+			</wire237>
+			<wire238>
 				side=back
 				shielded=FALSE
 				pos=37,18
@@ -3673,8 +3661,8 @@
 				val2=
 				val3=
 				comment=
-			</wire239>
-			<wire240>
+			</wire238>
+			<wire239>
 				side=back
 				shielded=FALSE
 				pos=30,20
@@ -3685,8 +3673,8 @@
 				val2=
 				val3=
 				comment=
-			</wire240>
-			<wire241>
+			</wire239>
+			<wire240>
 				side=back
 				shielded=FALSE
 				pos=32,18
@@ -3697,8 +3685,8 @@
 				val2=
 				val3=
 				comment=
-			</wire241>
-			<wire242>
+			</wire240>
+			<wire241>
 				side=front
 				shielded=FALSE
 				pos=28,14
@@ -3709,8 +3697,8 @@
 				val2=
 				val3=
 				comment=
-			</wire242>
-			<wire243>
+			</wire241>
+			<wire242>
 				side=front
 				shielded=FALSE
 				pos=9,7
@@ -3721,7 +3709,7 @@
 				val2=
 				val3=
 				comment=
-			</wire243>
+			</wire242>
 		</wires>
 		<cmtTags>
 		</cmtTags>
