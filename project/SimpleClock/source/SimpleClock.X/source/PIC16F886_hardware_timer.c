@@ -50,6 +50,7 @@
 *	static variable
 *-----------------------------------------------------------------------------*/
 static volatile U32 g_u32TimerCount_Ary[ eTIMER_TYPE_MAX ];
+static volatile BOOL g_isEnableInterrupt_Ary[ eTIMER_TYPE_MAX ];
 
 /*------------------------------------------------------------------------------
 *	static function prototype
@@ -78,8 +79,8 @@ static volatile U32 g_u32TimerCount_Ary[ eTIMER_TYPE_MAX ];
 void HW_TIM_Initialize( void)
 {
 	/* TMR0設定(フレーム処理用) */
-	/* 20MHz,1:256,61 → 9.984msec */
-	REG_RMW_08( OPTION_REG, 0x3F, 0x07 );
+	/* 20MHz,1:64,0 → 3.2768msec */
+	REG_RMW_08( OPTION_REG, 0x3F, 0x05 );
 	REG_WRITE_08( TMR0, TMR0_DEFAULT );
 	REG_SET_08( INTCON, 0x20 );
 
@@ -105,6 +106,7 @@ void HW_TIM_StartProcess( void )
 
 	for( E_TIMER_TYPE e = eTIMER_TYPE_MIN; e < eTIMER_TYPE_MAX; e++ ){
 		g_u32TimerCount_Ary[ e ] = 0;
+		g_isEnableInterrupt_Ary[ e ] = TRUE;
 	}
 }
 
@@ -119,6 +121,17 @@ U32 HW_TIM_GetCount( CE_TIMER_TYPE index )
 }
 
 /*------------------------------------------------------------------------------
+* OverView	: タイマ設定
+* Parameter	: index	: タイマインデックス
+* 			: count	: タイマ値
+* Return	: None
+*-----------------------------------------------------------------------------*/
+void HW_TIM_SetCount( CE_TIMER_TYPE index, const U32 count )
+{
+	g_u32TimerCount_Ary[ index ] = count;
+}
+
+/*------------------------------------------------------------------------------
 * OverView	: タイマクリア
 * Parameter	: index	: タイマインデックス
 * Return	: None
@@ -129,14 +142,35 @@ void HW_TIM_Clear( CE_TIMER_TYPE index )
 }
 
 /*------------------------------------------------------------------------------
+* OverView	: タイマ割り込み許可
+* Parameter	: index		: タイマインデックス
+* 			: isEnable	: TRUE:有効 FALSE:無効
+* Return	: None
+*-----------------------------------------------------------------------------*/
+void HW_TIM_EnableInterrupt( CE_TIMER_TYPE index, const BOOL isEnable )
+{
+	g_isEnableInterrupt_Ary[ index ] = isEnable;
+}
+
+/*------------------------------------------------------------------------------
 * OverView	: タイマ周期処理
 * Parameter	: index	: タイマインデックス
 * Return	: None
 *-----------------------------------------------------------------------------*/
 void HW_TIM_Interrupt( CE_TIMER_TYPE index )
 {
+	if( !g_isEnableInterrupt_Ary[ index ] ){
+		return;
+	}
+
 	if( g_u32TimerCount_Ary[ index ] < 0xFFFFFFFF ){
 		g_u32TimerCount_Ary[ index ]++;
+	}
+
+	if( index == eTIMER_TYPE_TIME ){
+		if( g_u32TimerCount_Ary[ index ] >= 86400 ){
+			g_u32TimerCount_Ary[ index ] = 0;
+		}
 	}
 }
 

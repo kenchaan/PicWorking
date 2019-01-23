@@ -14,6 +14,7 @@
 #include <xc.h>
 #include "types.h"
 #include "regaccess.h"
+#include "hardware.h"
 #include "hardware_port.h"
 
 /*------------------------------------------------------------------------------
@@ -24,7 +25,26 @@
 /*------------------------------------------------------------------------------
 *	define
 *-----------------------------------------------------------------------------*/
+#define CHATTER_TH				(3)
+#define CONTINUE_TH				(100)
 
+#define SW_HOUR_PORT			(PORTA)
+#define SW_HOUR_BIT				(0x01)
+#define SW_MINUTE_PORT			(PORTA)
+#define SW_MINUTE_BIT			(0x02)
+#define SW_SECOND_PORT			(PORTA)
+#define SW_SECOND_BIT			(0x04)
+
+#define DIGIT_H10_PORT			(PORTC)
+#define DIGIT_H10_BIT			(0x10)
+#define DIGIT_H01_PORT			(PORTC)
+#define DIGIT_H01_BIT			(0x20)
+#define DIGIT_M10_PORT			(PORTC)
+#define DIGIT_M10_BIT			(0x40)
+#define DIGIT_M01_PORT			(PORTC)
+#define DIGIT_M01_BIT			(0x80)
+
+#define SEG_DATA_PORT			(PORTB)
 
 /*------------------------------------------------------------------------------
 *	macro
@@ -49,7 +69,7 @@
 /*------------------------------------------------------------------------------
 *	static variable
 *-----------------------------------------------------------------------------*/
-
+static U08 g_u08PortActiveCount_Ary[ eINPUT_PORT_MAX ] = { 0, 0, 0 };
 
 /*------------------------------------------------------------------------------
 *	static function prototype
@@ -59,7 +79,19 @@
 /*------------------------------------------------------------------------------
 *	static const data
 *-----------------------------------------------------------------------------*/
-
+static const U08 g_cu08SegData_Ary[ 11 ] = {
+	0x3F,	/* 0 */
+	0x06,	/* 1 */
+	0x5B,	/* 2 */
+	0x4F,	/* 3 */
+	0x66,	/* 4 */
+	0x6D,	/* 5 */
+	0x7D,	/* 6 */
+	0x27,	/* 7 */
+	0x7F,	/* 8 */
+	0x6F,	/* 9 */
+	0x00	/*   */
+};
 
 /*------------------------------------------------------------------------------
 *	extern const data
@@ -96,6 +128,103 @@ void HW_PORT_Initialize( void )
 
 	/* ポートE */
 	/* DO NOTHING */
+}
+
+/*------------------------------------------------------------------------------
+* OverView	: ポート状態更新
+* Parameter	: None
+* Return	: None
+*-----------------------------------------------------------------------------*/
+void HW_PORT_Update( void )
+{
+	if( REG_READ_08( SW_HOUR_PORT ) & SW_HOUR_BIT ){
+		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_HOUR ] < 0xFF ){
+			g_u08PortActiveCount_Ary[ eINPUT_PORT_HOUR ]++;
+		}
+	}else{
+		g_u08PortActiveCount_Ary[ eINPUT_PORT_HOUR ] = 0;
+	}
+
+	if( REG_READ_08( SW_MINUTE_PORT ) & SW_MINUTE_BIT ){
+		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_MINUTE ] < 0xFF ){
+			g_u08PortActiveCount_Ary[ eINPUT_PORT_MINUTE ]++;
+		}
+	}else{
+		g_u08PortActiveCount_Ary[ eINPUT_PORT_MINUTE ] = 0;
+	}
+
+	if( REG_READ_08( SW_SECOND_PORT ) & SW_SECOND_BIT ){
+		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_SECOND ] < 0xFF ){
+			g_u08PortActiveCount_Ary[ eINPUT_PORT_SECOND ]++;
+		}
+	}else{
+		g_u08PortActiveCount_Ary[ eINPUT_PORT_SECOND ] = 0;
+	}
+}
+
+/*------------------------------------------------------------------------------
+* OverView	: ポート状態取得
+* Parameter	: port	: 入力ポート
+* Return	: TRUE	: Active
+* 			: FALSE	: Not Active
+*-----------------------------------------------------------------------------*/
+BOOL HW_PORT_IsActive( CE_INPUT_PORT port )
+{
+	if( g_u08PortActiveCount_Ary[ port ] == CHATTER_TH ){
+		return TRUE;
+	}else if( g_u08PortActiveCount_Ary[ port ] > CONTINUE_TH ){
+		return TRUE;
+	}else{
+		return FALSE;
+	}
+}
+
+/*------------------------------------------------------------------------------
+* OverView	: セグメントデータ出力
+* Parameter	: digit	: 出力桁
+* 			: data	: 出力データ
+* Return	: None
+*-----------------------------------------------------------------------------*/
+void HW_PORT_SetSegData( CE_OUTPUT_PORT_DIGIT digit, const U08 data )
+{
+	if( data >= 11 ){
+		return;
+	}
+
+	/* 消灯 */
+	REG_CLR_08( DIGIT_H10_PORT, DIGIT_H10_BIT );
+	REG_CLR_08( DIGIT_H01_PORT, DIGIT_H01_BIT );
+	REG_CLR_08( DIGIT_M10_PORT, DIGIT_M10_BIT );
+	REG_CLR_08( DIGIT_M01_PORT, DIGIT_M01_BIT );
+
+	__delay_us( 100 );
+
+	/* データセット */
+	if( digit != eOUTPUT_PORT_DIGIT_NONE ){
+		REG_WRITE_08( SEG_DATA_PORT, g_cu08SegData_Ary[ data ] );
+	}else{
+		REG_WRITE_08( SEG_DATA_PORT, 0x00 );
+	}
+
+	__delay_us( 100 );
+
+	/* 点灯 */
+	switch( digit ){
+	case eOUTPUT_PORT_DIGIT_HOUR_10:
+		REG_SET_08( DIGIT_H10_PORT, DIGIT_H10_BIT );
+		break;
+	case eOUTPUT_PORT_DIGIT_HOUR_01:
+		REG_SET_08( DIGIT_H01_PORT, DIGIT_H01_BIT );
+		break;
+	case eOUTPUT_PORT_DIGIT_MINUTE_10:
+		REG_SET_08( DIGIT_M10_PORT, DIGIT_M10_BIT );
+		break;
+	case eOUTPUT_PORT_DIGIT_MINUTE_01:
+		REG_SET_08( DIGIT_M01_PORT, DIGIT_M01_BIT );
+		break;
+	default:
+		break;
+	}
 }
 
 

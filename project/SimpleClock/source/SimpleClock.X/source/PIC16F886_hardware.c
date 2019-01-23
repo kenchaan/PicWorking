@@ -10,7 +10,7 @@
 
 	/*           Device overview            */
 	/*             ┌────┐             */
-	/*      MCLR =>│RE3  RB7│-> NC        */
+	/*      MCLR =>│RE3  RB7│-> SEG_DP    */
 	/*   SW_HOUR ->│RA0  RB6│-> SEG_G     */
 	/* SW_MINUTE ->│RA1  RB5│-> SEG_F     */
 	/* SW_SECOND ->│RA2  RB4│-> SEG_E     */
@@ -23,7 +23,7 @@
 	/*     T1OSO ->│OSC  RC7│-> DIGIT_M01 */
 	/*     T1OSI ->│OSC  RC6│-> DIGIT_M10 */
 	/*        NC <-│RC2  RC5│-> DIGIT_H01 */
-	/*        NC <-│RC3  RC4│-> DIGIT_H10 */
+	/*     COLON <-│RC3  RC4│-> DIGIT_H10 */
 	/*             └────┘             */
 
 /*------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ void HW_WaitFrameStart( void )
 *-----------------------------------------------------------------------------*/
 void HW_FramePreProcess( void )
 {
-	/* DO NOTHING */
+	HW_PORT_Update();
 }
 
 /*------------------------------------------------------------------------------

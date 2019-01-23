@@ -21,7 +21,7 @@ extern "C" {	/* } */
 /*------------------------------------------------------------------------------
 *	define
 *-----------------------------------------------------------------------------*/
-#define TMR0_DEFAULT			(0x3D)
+#define TMR0_DEFAULT			(0x00)
 #define TMR1H_DEFAULT			(0x80)
 
 /*------------------------------------------------------------------------------
@@ -62,7 +62,9 @@ typedef const E_TIMER_TYPE CE_TIMER_TYPE;
 void HW_TIM_Initialize( void);
 void HW_TIM_StartProcess( void );
 U32 HW_TIM_GetCount( CE_TIMER_TYPE index );
+void HW_TIM_SetCount( CE_TIMER_TYPE index, const U32 count );
 void HW_TIM_Clear( CE_TIMER_TYPE index );
+void HW_TIM_EnableInterrupt( CE_TIMER_TYPE index, const BOOL isEnable );
 void HW_TIM_Interrupt( CE_TIMER_TYPE index );
 
 
