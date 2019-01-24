@@ -126,16 +126,23 @@ void APP_FrameMainProcess( void )
 
 	switch( g_eOutputDigit ){
 	case eOUTPUT_PORT_DIGIT_HOUR_10:
-		/* 時間更新 */
-		{
+		if( HW_TIM_IsUpdate( eTIMER_TYPE_TIME )){
+			/* 時間更新 */
 			U32 count = HW_TIM_GetCount( eTIMER_TYPE_TIME );
-			U08 h = (U08)( count / 3600 );
-			U08 m = (U08)(( count % 3600 ) / 60 );
-			// U08 s = (U08)( count % 60 );
+			U08 h = (U08)(  (U32)( count / 2 ) / 3600 );
+			U08 m = (U08)(( (U32)( count / 2 ) % 3600 ) / 60 );
+			// U08 s = (U08)(  (U32)( count / 2 ) % 60 );
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_10 ] = (U08)( h / 10 );
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_01 ] = (U08)( h % 10 );
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_MINUTE_10 ] = (U08)( m / 10 );
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_MINUTE_01 ] = (U08)( m % 10 );
+
+			/* 点滅 */
+			if(( count % 2 ) == 0 ){
+				HW_PORT_Set( eOUTPUT_PORT_COLON, TRUE );
+			}else{
+				HW_PORT_Set( eOUTPUT_PORT_COLON, FALSE );
+			}
 		}
 
 		data = g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_10 ];

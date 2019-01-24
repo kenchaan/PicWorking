@@ -50,6 +50,7 @@
 *	static variable
 *-----------------------------------------------------------------------------*/
 static volatile U32 g_u32TimerCount_Ary[ eTIMER_TYPE_MAX ];
+static volatile BOOL g_isUpdateTimer_Ary[ eTIMER_TYPE_MAX ];
 static volatile BOOL g_isEnableInterrupt_Ary[ eTIMER_TYPE_MAX ];
 
 /*------------------------------------------------------------------------------
@@ -106,17 +107,31 @@ void HW_TIM_StartProcess( void )
 
 	for( E_TIMER_TYPE e = eTIMER_TYPE_MIN; e < eTIMER_TYPE_MAX; e++ ){
 		g_u32TimerCount_Ary[ e ] = 0;
+		g_isUpdateTimer_Ary[ e ] = FALSE;
 		g_isEnableInterrupt_Ary[ e ] = TRUE;
 	}
 }
 
 /*------------------------------------------------------------------------------
+* OverView	: タイマ更新有無取得
+* Parameter	: index	: タイマインデックス
+* Return	: TRUE	: 更新あり
+* 			: FALSE	: 更新なし
+*-----------------------------------------------------------------------------*/
+BOOL HW_TIM_IsUpdate( CE_TIMER_TYPE index )
+{
+	return g_isUpdateTimer_Ary[ index ];
+}
+
+/*------------------------------------------------------------------------------
 * OverView	: タイマ取得
 * Parameter	: index	: タイマインデックス
-* Return	: None
+* Return	: タイマ値
 *-----------------------------------------------------------------------------*/
 U32 HW_TIM_GetCount( CE_TIMER_TYPE index )
 {
+	g_isUpdateTimer_Ary[ index ] = FALSE;
+
 	return g_u32TimerCount_Ary[ index ];
 }
 
@@ -129,6 +144,7 @@ U32 HW_TIM_GetCount( CE_TIMER_TYPE index )
 void HW_TIM_SetCount( CE_TIMER_TYPE index, const U32 count )
 {
 	g_u32TimerCount_Ary[ index ] = count;
+	g_isUpdateTimer_Ary[ index ] = TRUE;
 }
 
 /*------------------------------------------------------------------------------
@@ -139,6 +155,7 @@ void HW_TIM_SetCount( CE_TIMER_TYPE index, const U32 count )
 void HW_TIM_Clear( CE_TIMER_TYPE index )
 {
 	g_u32TimerCount_Ary[ index ] = 0;
+	g_isUpdateTimer_Ary[ index ] = TRUE;
 }
 
 /*------------------------------------------------------------------------------
@@ -168,10 +185,12 @@ void HW_TIM_Interrupt( CE_TIMER_TYPE index )
 	}
 
 	if( index == eTIMER_TYPE_TIME ){
-		if( g_u32TimerCount_Ary[ index ] >= 86400 ){
+		if( g_u32TimerCount_Ary[ index ] >= 172800 ){
 			g_u32TimerCount_Ary[ index ] = 0;
 		}
 	}
+
+	g_isUpdateTimer_Ary[ index ] = TRUE;
 }
 
 

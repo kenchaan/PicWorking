@@ -36,6 +36,13 @@
 #define SW_SECOND_PORT			(PORTA)
 #define SW_SECOND_BIT			(0x04)
 
+#define COLON_PORT				(PORTC)
+#define COLON_BIT				(0x08)
+#define STATUS_INT_TMR0_PORT	(PORTA)
+#define STATUS_INT_TMR0_BIT		(0x08)
+#define STATUS_INT_TMR1_PORT	(PORTA)
+#define STATUS_INT_TMR1_BIT		(0x10)
+
 #define DIGIT_H10_PORT			(PORTC)
 #define DIGIT_H10_BIT			(0x10)
 #define DIGIT_H01_PORT			(PORTC)
@@ -182,6 +189,45 @@ BOOL HW_PORT_IsActive( CE_INPUT_PORT port )
 		return TRUE;
 	}else{
 		return FALSE;
+	}
+}
+
+/*------------------------------------------------------------------------------
+* OverView	: ポート出力
+* Parameter	: port		: 出力ポート
+* 			: isActive	: TRUE:Active FALSE:NotActive
+* Return	: None
+*-----------------------------------------------------------------------------*/
+void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
+{
+	if( isActive ){
+		switch( port ){
+		case eOUTPUT_PORT_COLON:
+			REG_SET_08( COLON_PORT, COLON_BIT );
+			break;
+		case eOUTPUT_PORT_ST_INT_TMR0:
+			REG_SET_08( STATUS_INT_TMR0_PORT, STATUS_INT_TMR0_BIT );
+			break;
+		case eOUTPUT_PORT_ST_INT_TMR1:
+			REG_SET_08( STATUS_INT_TMR1_PORT, STATUS_INT_TMR1_BIT );
+			break;
+		default:
+			break;
+		}
+	}else{
+		switch( port ){
+		case eOUTPUT_PORT_COLON:
+			REG_CLR_08( COLON_PORT, COLON_BIT );
+			break;
+		case eOUTPUT_PORT_ST_INT_TMR0:
+			REG_CLR_08( STATUS_INT_TMR0_PORT, STATUS_INT_TMR0_BIT );
+			break;
+		case eOUTPUT_PORT_ST_INT_TMR1:
+			REG_CLR_08( STATUS_INT_TMR1_PORT, STATUS_INT_TMR1_BIT );
+			break;
+		default:
+			break;
+		}
 	}
 }
 

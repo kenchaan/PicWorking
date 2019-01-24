@@ -16,6 +16,7 @@
 #include "regaccess.h"
 #include "hardware_timer.h"
 #include "hardware_interrupt.h"
+#include "hardware_port.h"
 
 /*------------------------------------------------------------------------------
 *	pragma
@@ -82,9 +83,9 @@ void interrupt InterruptHandler( void )
 		/* T0IF */
 		REG_WRITE_08( TMR0, TMR0_DEFAULT );
 		REG_CLR_08( INTCON, 0x04 );
-		REG_SET_08( PORTA, 0x10 );
+		HW_PORT_Set( eOUTPUT_PORT_ST_INT_TMR0, TRUE );
 		HW_TIM_Interrupt( eTIMER_TYPE_FRAME );
-		REG_CLR_08( PORTA, 0x10 );
+		HW_PORT_Set( eOUTPUT_PORT_ST_INT_TMR0, FALSE );
 
 	// }else if( REG_READ_08( INTCON ) & 0x02 ){
 	// 	/* INTF */
@@ -122,9 +123,9 @@ void interrupt InterruptHandler( void )
 		/* TMR1IF */
 		REG_WRITE_08( TMR1H, TMR1H_DEFAULT );
 		REG_CLR_08( PIR1, 0x01 );
-		REG_SET_08( PORTA, 0x08 );
+		HW_PORT_Set( eOUTPUT_PORT_ST_INT_TMR1, TRUE );
 		HW_TIM_Interrupt( eTIMER_TYPE_TIME );
-		REG_CLR_08( PORTA, 0x08 );
+		HW_PORT_Set( eOUTPUT_PORT_ST_INT_TMR0, FALSE );
 
 	// }else if( REG_READ_08( PIR2 ) & 0x80 ){
 	// 	/* OSFIF */
