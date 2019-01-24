@@ -51,7 +51,7 @@
 /*------------------------------------------------------------------------------
 *	static variable
 *-----------------------------------------------------------------------------*/
-static U08 g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_MAX ] = { 0, 0, 0, 0 };
+static U08 g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_MAX ];
 static E_OUTPUT_PORT_DIGIT g_eOutputDigit = eOUTPUT_PORT_DIGIT_MIN;
 
 /*------------------------------------------------------------------------------
@@ -80,7 +80,9 @@ static E_OUTPUT_PORT_DIGIT g_eOutputDigit = eOUTPUT_PORT_DIGIT_MIN;
 *-----------------------------------------------------------------------------*/
 void APP_Initialize( void )
 {
-	/* DO NOTHING */
+	for( E_OUTPUT_PORT_DIGIT e = eOUTPUT_PORT_DIGIT_MIN; e < eOUTPUT_PORT_DIGIT_MAX; e++ ){
+		g_u08DigitData_Ary[ e ] = 0;
+	}
 }
 
 /*------------------------------------------------------------------------------

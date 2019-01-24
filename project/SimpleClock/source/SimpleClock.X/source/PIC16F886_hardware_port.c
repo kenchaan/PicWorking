@@ -27,6 +27,7 @@
 *-----------------------------------------------------------------------------*/
 #define CHATTER_TH				(3)
 #define CONTINUE_TH				(100)
+#define CONTINUE_INTERVAL		(10)
 
 #define SW_HOUR_PORT			(PORTA)
 #define SW_HOUR_BIT				(0x01)
@@ -69,7 +70,7 @@
 /*------------------------------------------------------------------------------
 *	static variable
 *-----------------------------------------------------------------------------*/
-static U08 g_u08PortActiveCount_Ary[ eINPUT_PORT_MAX ] = { 0, 0, 0 };
+static U08 g_u08PortActiveCount_Ary[ eINPUT_PORT_MAX ];
 
 /*------------------------------------------------------------------------------
 *	static function prototype
@@ -128,6 +129,10 @@ void HW_PORT_Initialize( void )
 
 	/* ポートE */
 	/* DO NOTHING */
+
+	for( E_INPUT_PORT e = eINPUT_PORT_MIN; e < eINPUT_PORT_MAX; e++ ){
+		g_u08PortActiveCount_Ary[ e ] = 0;
+	}
 }
 
 /*------------------------------------------------------------------------------
@@ -172,7 +177,8 @@ BOOL HW_PORT_IsActive( CE_INPUT_PORT port )
 {
 	if( g_u08PortActiveCount_Ary[ port ] == CHATTER_TH ){
 		return TRUE;
-	}else if( g_u08PortActiveCount_Ary[ port ] > CONTINUE_TH ){
+	}else if( g_u08PortActiveCount_Ary[ port ] >= CONTINUE_TH ){
+		g_u08PortActiveCount_Ary[ port ] -= CONTINUE_INTERVAL;
 		return TRUE;
 	}else{
 		return FALSE;
