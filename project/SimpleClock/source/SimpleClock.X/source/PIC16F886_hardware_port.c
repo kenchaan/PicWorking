@@ -85,18 +85,29 @@ static U08 g_u08PortActiveCount_Ary[ eINPUT_PORT_MAX ];
 /*------------------------------------------------------------------------------
 *	static const data
 *-----------------------------------------------------------------------------*/
-static const U08 g_cu08SegData_Ary[ 11 ] = {
-	0x3F,	/* 0 */
-	0x06,	/* 1 */
-	0x5B,	/* 2 */
-	0x4F,	/* 3 */
-	0x66,	/* 4 */
-	0x6D,	/* 5 */
-	0x7D,	/* 6 */
-	0x27,	/* 7 */
-	0x7F,	/* 8 */
-	0x6F,	/* 9 */
-	0x00	/*   */
+static const U08 g_cu08SegData_Ary[ 22 ] = {
+	0x3F,	/* 0  */
+	0x06,	/* 1  */
+	0x5B,	/* 2  */
+	0x4F,	/* 3  */
+	0x66,	/* 4  */
+	0x6D,	/* 5  */
+	0x7D,	/* 6  */
+	0x27,	/* 7  */
+	0x7F,	/* 8  */
+	0x6F,	/* 9  */
+	0xBF,	/* 0. */
+	0x86,	/* 1. */
+	0xDB,	/* 2. */
+	0xCF,	/* 3. */
+	0xE6,	/* 4. */
+	0xED,	/* 5. */
+	0xFD,	/* 6. */
+	0xA7,	/* 7. */
+	0xFF,	/* 8. */
+	0xEF,	/* 9. */
+	0x00,	/*    */
+	0x80	/*  . */
 };
 
 /*------------------------------------------------------------------------------
@@ -200,9 +211,6 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 {
 	if( isActive ){
 		switch( port ){
-		case eOUTPUT_PORT_COLON:
-			REG_SET_08( COLON_PORT, COLON_BIT );
-			break;
 		case eOUTPUT_PORT_ERROR_PROC_FAIL:
 			REG_SET_08( ERROR_PROC_FAIL_PORT, ERROR_PROC_FAIL_BIT );
 			break;
@@ -211,9 +219,6 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 		}
 	}else{
 		switch( port ){
-		case eOUTPUT_PORT_COLON:
-			REG_CLR_08( COLON_PORT, COLON_BIT );
-			break;
 		case eOUTPUT_PORT_ERROR_PROC_FAIL:
 			REG_CLR_08( ERROR_PROC_FAIL_PORT, ERROR_PROC_FAIL_BIT );
 			break;
@@ -231,7 +236,7 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 *-----------------------------------------------------------------------------*/
 void HW_PORT_SetSegData( CE_OUTPUT_PORT_DIGIT digit, const U08 data )
 {
-	if( data >= 11 ){
+	if( data >= 22 ){
 		return;
 	}
 

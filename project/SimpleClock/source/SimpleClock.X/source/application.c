@@ -135,7 +135,9 @@ void APP_FrameMainProcess( void )
 			U32 count = HW_TIM_GetTimeCount();
 			if( count >= 172800 ){
 				HW_TIM_ClearTimeCount();
+				count = 0;
 			}
+
 			U08 h = (U08)(  (U32)( count / 2 ) / 3600 );
 			U08 m = (U08)(( (U32)( count / 2 ) % 3600 ) / 60 );
 			// U08 s = (U08)(  (U32)( count / 2 ) % 60 );
@@ -145,14 +147,12 @@ void APP_FrameMainProcess( void )
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_MINUTE_01 ] = (U08)( m % 10 );
 
 			if( g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_10 ] == 0 ){
-				g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_10 ] = 10;
+				g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_10 ] = 20;
 			}
 
 			/* 点滅 */
 			if(( count % 2 ) == 0 ){
-				HW_PORT_Set( eOUTPUT_PORT_COLON, TRUE );
-			}else{
-				HW_PORT_Set( eOUTPUT_PORT_COLON, FALSE );
+				g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_01 ] += 10;
 			}
 		}
 	}
