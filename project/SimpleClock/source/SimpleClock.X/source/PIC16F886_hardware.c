@@ -8,23 +8,23 @@
 *	Copyright (c) 2019 kenchaan All Rights Reserved.
 *******************************************************************************/
 
-	/*             Device overview            */
-	/*               ┌────┐             */
-	/*        MCLR =>│RE3  RB7│-> SEG_DP    */
-	/*     SW_HOUR ->│RA0  RB6│-> SEG_G     */
-	/*   SW_MINUTE ->│RA1  RB5│-> SEG_F     */
-	/*   SW_SECOND ->│RA2  RB4│-> SEG_E     */
-	/* ST_INT_TMR0 <-│RA3  RB3│-> SEG_D     */
-	/* ST_INT_TMR1 <-│RA4  RB2│-> SEG_C     */
-	/*          NC <-│RA5  RB1│-> SEG_B     */
-	/*         Vss ==│Vss  RB0│-> SEG_A     */
-	/*         OSC ==│OSC  Vdd│== Vdd       */
-	/*         OSC ==│OSC  Vss│== Vss       */
-	/*       T1OSO ->│OSC  RC7│-> DIGIT_M01 */
-	/*       T1OSI ->│OSC  RC6│-> DIGIT_M10 */
-	/*          NC <-│RC2  RC5│-> DIGIT_H01 */
-	/*       COLON <-│RC3  RC4│-> DIGIT_H10 */
-	/*               └────┘             */
+	/*               Device overview            */
+	/*                 ┌────┐             */
+	/*          MCLR =>│RE3  RB7│-> SEG_DP    */
+	/*       SW_HOUR ->│RA0  RB6│-> SEG_G     */
+	/*     SW_MINUTE ->│RA1  RB5│-> SEG_F     */
+	/*     SW_SECOND ->│RA2  RB4│-> SEG_E     */
+	/*            NC <-│RA3  RB3│-> SEG_D     */
+	/*            NC <-│RA4  RB2│-> SEG_C     */
+	/*            NC <-│RA5  RB1│-> SEG_B     */
+	/*           Vss ==│Vss  RB0│-> SEG_A     */
+	/*           OSC ==│OSC  Vdd│== Vdd       */
+	/*           OSC ==│OSC  Vss│== Vss       */
+	/*         T1OSO ->│OSC  RC7│-> DIGIT_M01 */
+	/*         T1OSI ->│OSC  RC6│-> DIGIT_M10 */
+	/* ERR_PROC_FAIL <-│RC2  RC5│-> DIGIT_H01 */
+	/*         COLON <-│RC3  RC4│-> DIGIT_H10 */
+	/*                 └────┘             */
 
 /*------------------------------------------------------------------------------
 *	include

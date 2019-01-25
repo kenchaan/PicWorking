@@ -26,7 +26,7 @@
 *	define
 *-----------------------------------------------------------------------------*/
 #define CHATTER_TH				(3)
-#define CONTINUE_TH				(100)
+#define CONTINUE_TH				(200)
 #define CONTINUE_INTERVAL		(10)
 
 #define SW_HOUR_PORT			(PORTA)
@@ -38,8 +38,8 @@
 
 #define COLON_PORT				(PORTC)
 #define COLON_BIT				(0x08)
-#define ERROR_PROC_FAIL_PORT	(PORTA)
-#define ERROR_PROC_FAIL_BIT		(0x08)
+#define ERROR_PROC_FAIL_PORT	(PORTC)
+#define ERROR_PROC_FAIL_BIT		(0x04)
 
 #define DIGIT_H10_PORT			(PORTC)
 #define DIGIT_H10_BIT			(0x10)

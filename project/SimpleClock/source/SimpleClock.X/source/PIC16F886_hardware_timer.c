@@ -87,7 +87,7 @@ void HW_TIM_Initialize( void)
 	REG_SET_08( INTCON, 0x20 );
 
 	/* TMR1設定(時間カウント用) */
-	/* 32.768kHz(External),1:1,49,152 → 0.5sec */
+	/* 32.768kHz(External),1:1,49152 → 0.5sec */
 	REG_WRITE_08( T1CON, 0x0B );
 	REG_WRITE_08( TMR1H, TMR1H_DEFAULT );
 	REG_SET_08( PIE1, 0x01 );
