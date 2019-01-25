@@ -52,7 +52,6 @@
 *-----------------------------------------------------------------------------*/
 static volatile U32 g_u32TimeCount = 0;
 static volatile BOOL g_isUpdatedTime = FALSE;
-static volatile BOOL g_isEnableUpdateTime = TRUE;
 
 /*------------------------------------------------------------------------------
 *	static function prototype
@@ -115,10 +114,8 @@ void HW_TIM_StartProcess( void )
 void HW_TIM_Update( void )
 {
 	if( HW_INT_IsInterrupted( eINTERRUPT_TYPE_TMR1 )){
-		if( g_isEnableUpdateTime ){
-			g_u32TimeCount++;
-			g_isUpdatedTime = TRUE;
-		}
+		g_u32TimeCount++;
+		g_isUpdatedTime = TRUE;
 	}
 }
 
@@ -128,7 +125,7 @@ void HW_TIM_Update( void )
 * Return	: TRUE	: 更新あり
 * 			: FALSE	: 更新なし
 *-----------------------------------------------------------------------------*/
-BOOL HW_TIM_IsUpdateTime( void )
+BOOL HW_TIM_IsUpdatedTime( void )
 {
 	return g_isUpdatedTime;
 }
@@ -163,16 +160,6 @@ void HW_TIM_ClearTimeCount( void )
 {
 	g_u32TimeCount = 0;
 	g_isUpdatedTime = TRUE;
-}
-
-/*------------------------------------------------------------------------------
-* OverView	: 時間カウント許可
-* Parameter	: isEnable	: TRUE:有効 FALSE:無効
-* Return	: None
-*-----------------------------------------------------------------------------*/
-void HW_TIM_EnableUpdateCount( const BOOL isEnable )
-{
-	g_isEnableUpdateTime = isEnable;
 }
 
 

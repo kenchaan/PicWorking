@@ -93,27 +93,33 @@ void APP_Initialize( void )
 *-----------------------------------------------------------------------------*/
 void APP_FramePreProcess( void )
 {
+	U32 count = HW_TIM_GetTimeCount();
+	U08 h = (U08)(  (U32)( count / 2 ) / 3600 );
+	U08 m = (U08)(( (U32)( count / 2 ) % 3600 ) / 60 );
+	U08 s = (U08)(  (U32)( count / 2 ) % 60 );
+	U08 ss = (U08)( count % 2 );
+
 	/* スイッチ処理 */
 	if( HW_PORT_IsActive( eINPUT_PORT_HOUR )){
-		HW_TIM_EnableUpdateCount( FALSE );
-		U32 count = ( HW_TIM_GetTimeCount() + 7200 ) % 172800;
-		HW_TIM_SetTimeCount( count );
-		HW_TIM_EnableUpdateCount( TRUE );
+		h++;
+		if( h >= 24 ){
+			h = 0;
+		}
 	}
 
 	if( HW_PORT_IsActive( eINPUT_PORT_MINUTE )){
-		HW_TIM_EnableUpdateCount( FALSE );
-		U32 count = ( HW_TIM_GetTimeCount() + 120 ) % 172800;
-		HW_TIM_SetTimeCount( count );
-		HW_TIM_EnableUpdateCount( TRUE );
+		m++;
+		if( m >= 60 ){
+			m = 0;
+		}
 	}
 
 	if( HW_PORT_IsActive( eINPUT_PORT_SECOND )){
-		HW_TIM_EnableUpdateCount( FALSE );
-		U32 count = ( (U32)( HW_TIM_GetTimeCount() / 120 ) ) * 120;
-		HW_TIM_SetTimeCount( count );
-		HW_TIM_EnableUpdateCount( TRUE );
+		s = 0;
 	}
+
+	count = ( (U32)h * 3600 + (U32)m * 60 + (U32)s ) * 2 + (U32)ss;
+	HW_TIM_SetTimeCount( count );
 }
 
 /*------------------------------------------------------------------------------
@@ -125,7 +131,7 @@ void APP_FrameMainProcess( void )
 {
 	if( g_eOutputDigit == eOUTPUT_PORT_DIGIT_MIN ){
 		/* 時間更新 */
-		if( HW_TIM_IsUpdateTime() ){
+		if( HW_TIM_IsUpdatedTime() ){
 			U32 count = HW_TIM_GetTimeCount();
 			if( count >= 172800 ){
 				HW_TIM_ClearTimeCount();
