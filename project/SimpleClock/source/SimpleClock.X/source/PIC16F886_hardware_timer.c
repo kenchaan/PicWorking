@@ -14,6 +14,7 @@
 #include <xc.h>
 #include "types.h"
 #include "regaccess.h"
+#include "hardware_interrupt.h"
 #include "hardware_timer.h"
 
 /*------------------------------------------------------------------------------
@@ -49,9 +50,9 @@
 /*------------------------------------------------------------------------------
 *	static variable
 *-----------------------------------------------------------------------------*/
-static volatile U32 g_u32TimerCount_Ary[ eTIMER_TYPE_MAX ];
-static volatile BOOL g_isUpdateTimer_Ary[ eTIMER_TYPE_MAX ];
-static volatile BOOL g_isEnableInterrupt_Ary[ eTIMER_TYPE_MAX ];
+static volatile U32 g_u32TimeCount = 0;
+static volatile BOOL g_isUpdatedTime = FALSE;
+static volatile BOOL g_isEnableUpdateTime = TRUE;
 
 /*------------------------------------------------------------------------------
 *	static function prototype
@@ -86,7 +87,7 @@ void HW_TIM_Initialize( void)
 	REG_SET_08( INTCON, 0x20 );
 
 	/* TMR1設定(時間カウント用) */
-	/* 32.768kHz(External),1:1,32768 → 1.0sec */
+	/* 32.768kHz(External),1:1,49,152 → 0.5sec */
 	REG_WRITE_08( T1CON, 0x0B );
 	REG_WRITE_08( TMR1H, TMR1H_DEFAULT );
 	REG_SET_08( PIE1, 0x01 );
@@ -104,93 +105,74 @@ void HW_TIM_StartProcess( void )
 
 	/* TMR1クリア */
 	REG_WRITE_08( TMR1H, TMR1H_DEFAULT );
+}
 
-	for( E_TIMER_TYPE e = eTIMER_TYPE_MIN; e < eTIMER_TYPE_MAX; e++ ){
-		g_u32TimerCount_Ary[ e ] = 0;
-		g_isUpdateTimer_Ary[ e ] = FALSE;
-		g_isEnableInterrupt_Ary[ e ] = TRUE;
+/*------------------------------------------------------------------------------
+* OverView	: タイマ更新
+* Parameter	: None
+* Return	: None
+*-----------------------------------------------------------------------------*/
+void HW_TIM_Update( void )
+{
+	if( HW_INT_IsInterrupted( eINTERRUPT_TYPE_TMR1 )){
+		if( g_isEnableUpdateTime ){
+			g_u32TimeCount++;
+			g_isUpdatedTime = TRUE;
+		}
 	}
 }
 
 /*------------------------------------------------------------------------------
 * OverView	: タイマ更新有無取得
-* Parameter	: index	: タイマインデックス
+* Parameter	: None
 * Return	: TRUE	: 更新あり
 * 			: FALSE	: 更新なし
 *-----------------------------------------------------------------------------*/
-BOOL HW_TIM_IsUpdate( CE_TIMER_TYPE index )
+BOOL HW_TIM_IsUpdateTime( void )
 {
-	return g_isUpdateTimer_Ary[ index ];
+	return g_isUpdatedTime;
 }
 
 /*------------------------------------------------------------------------------
-* OverView	: タイマ取得
-* Parameter	: index	: タイマインデックス
-* Return	: タイマ値
+* OverView	: 時間カウント取得
+* Parameter	: None
+* Return	: 時間カウント値
 *-----------------------------------------------------------------------------*/
-U32 HW_TIM_GetCount( CE_TIMER_TYPE index )
+U32 HW_TIM_GetTimeCount( void )
 {
-	g_isUpdateTimer_Ary[ index ] = FALSE;
-
-	return g_u32TimerCount_Ary[ index ];
+	return g_u32TimeCount;
 }
 
 /*------------------------------------------------------------------------------
-* OverView	: タイマ設定
-* Parameter	: index	: タイマインデックス
-* 			: count	: タイマ値
+* OverView	: 時間カウント設定
+* Parameter	: count	: 時間カウント値
 * Return	: None
 *-----------------------------------------------------------------------------*/
-void HW_TIM_SetCount( CE_TIMER_TYPE index, const U32 count )
+void HW_TIM_SetTimeCount( const U32 count )
 {
-	g_u32TimerCount_Ary[ index ] = count;
-	g_isUpdateTimer_Ary[ index ] = TRUE;
+	g_u32TimeCount = count;
+	g_isUpdatedTime = TRUE;
 }
 
 /*------------------------------------------------------------------------------
-* OverView	: タイマクリア
-* Parameter	: index	: タイマインデックス
+* OverView	: 時間カウントクリア
+* Parameter	: None
 * Return	: None
 *-----------------------------------------------------------------------------*/
-void HW_TIM_Clear( CE_TIMER_TYPE index )
+void HW_TIM_ClearTimeCount( void )
 {
-	g_u32TimerCount_Ary[ index ] = 0;
-	g_isUpdateTimer_Ary[ index ] = TRUE;
+	g_u32TimeCount = 0;
+	g_isUpdatedTime = TRUE;
 }
 
 /*------------------------------------------------------------------------------
-* OverView	: タイマ割り込み許可
-* Parameter	: index		: タイマインデックス
-* 			: isEnable	: TRUE:有効 FALSE:無効
+* OverView	: 時間カウント許可
+* Parameter	: isEnable	: TRUE:有効 FALSE:無効
 * Return	: None
 *-----------------------------------------------------------------------------*/
-void HW_TIM_EnableInterrupt( CE_TIMER_TYPE index, const BOOL isEnable )
+void HW_TIM_EnableUpdateCount( const BOOL isEnable )
 {
-	g_isEnableInterrupt_Ary[ index ] = isEnable;
-}
-
-/*------------------------------------------------------------------------------
-* OverView	: タイマ周期処理
-* Parameter	: index	: タイマインデックス
-* Return	: None
-*-----------------------------------------------------------------------------*/
-void HW_TIM_Interrupt( CE_TIMER_TYPE index )
-{
-	if( !g_isEnableInterrupt_Ary[ index ] ){
-		return;
-	}
-
-	if( g_u32TimerCount_Ary[ index ] < 0xFFFFFFFF ){
-		g_u32TimerCount_Ary[ index ]++;
-	}
-
-	if( index == eTIMER_TYPE_TIME ){
-		if( g_u32TimerCount_Ary[ index ] >= 172800 ){
-			g_u32TimerCount_Ary[ index ] = 0;
-		}
-	}
-
-	g_isUpdateTimer_Ary[ index ] = TRUE;
+	g_isEnableUpdateTime = isEnable;
 }
 
 

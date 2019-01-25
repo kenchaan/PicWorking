@@ -38,10 +38,8 @@
 
 #define COLON_PORT				(PORTC)
 #define COLON_BIT				(0x08)
-#define STATUS_INT_TMR0_PORT	(PORTA)
-#define STATUS_INT_TMR0_BIT		(0x08)
-#define STATUS_INT_TMR1_PORT	(PORTA)
-#define STATUS_INT_TMR1_BIT		(0x10)
+#define ERROR_PROC_FAIL_PORT	(PORTA)
+#define ERROR_PROC_FAIL_BIT		(0x08)
 
 #define DIGIT_H10_PORT			(PORTC)
 #define DIGIT_H10_BIT			(0x10)
@@ -205,11 +203,8 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 		case eOUTPUT_PORT_COLON:
 			REG_SET_08( COLON_PORT, COLON_BIT );
 			break;
-		case eOUTPUT_PORT_ST_INT_TMR0:
-			REG_SET_08( STATUS_INT_TMR0_PORT, STATUS_INT_TMR0_BIT );
-			break;
-		case eOUTPUT_PORT_ST_INT_TMR1:
-			REG_SET_08( STATUS_INT_TMR1_PORT, STATUS_INT_TMR1_BIT );
+		case eOUTPUT_PORT_ERROR_PROC_FAIL:
+			REG_SET_08( ERROR_PROC_FAIL_PORT, ERROR_PROC_FAIL_BIT );
 			break;
 		default:
 			break;
@@ -219,11 +214,8 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 		case eOUTPUT_PORT_COLON:
 			REG_CLR_08( COLON_PORT, COLON_BIT );
 			break;
-		case eOUTPUT_PORT_ST_INT_TMR0:
-			REG_CLR_08( STATUS_INT_TMR0_PORT, STATUS_INT_TMR0_BIT );
-			break;
-		case eOUTPUT_PORT_ST_INT_TMR1:
-			REG_CLR_08( STATUS_INT_TMR1_PORT, STATUS_INT_TMR1_BIT );
+		case eOUTPUT_PORT_ERROR_PROC_FAIL:
+			REG_CLR_08( ERROR_PROC_FAIL_PORT, ERROR_PROC_FAIL_BIT );
 			break;
 		default:
 			break;
@@ -249,16 +241,12 @@ void HW_PORT_SetSegData( CE_OUTPUT_PORT_DIGIT digit, const U08 data )
 	REG_CLR_08( DIGIT_M10_PORT, DIGIT_M10_BIT );
 	REG_CLR_08( DIGIT_M01_PORT, DIGIT_M01_BIT );
 
-	__delay_us( 100 );
-
 	/* データセット */
 	if( digit != eOUTPUT_PORT_DIGIT_NONE ){
 		REG_WRITE_08( SEG_DATA_PORT, g_cu08SegData_Ary[ data ] );
 	}else{
 		REG_WRITE_08( SEG_DATA_PORT, 0x00 );
 	}
-
-	__delay_us( 100 );
 
 	/* 点灯 */
 	switch( digit ){

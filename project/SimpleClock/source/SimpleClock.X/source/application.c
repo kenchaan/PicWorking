@@ -14,9 +14,10 @@
 #include <xc.h>
 #include "types.h"
 #include "regaccess.h"
-#include "application.h"
+#include "hardware_interrupt.h"
 #include "hardware_port.h"
 #include "hardware_timer.h"
+#include "application.h"
 
 /*------------------------------------------------------------------------------
 *	pragma
@@ -94,24 +95,24 @@ void APP_FramePreProcess( void )
 {
 	/* スイッチ処理 */
 	if( HW_PORT_IsActive( eINPUT_PORT_HOUR )){
-		HW_TIM_EnableInterrupt( eTIMER_TYPE_TIME, FALSE );
-		U32 count = ( HW_TIM_GetCount( eTIMER_TYPE_TIME ) + 3600 ) % 86400;
-		HW_TIM_SetCount( eTIMER_TYPE_TIME, count );
-		HW_TIM_EnableInterrupt( eTIMER_TYPE_TIME, TRUE );
+		HW_TIM_EnableUpdateCount( FALSE );
+		U32 count = ( HW_TIM_GetTimeCount() + 7200 ) % 172800;
+		HW_TIM_SetTimeCount( count );
+		HW_TIM_EnableUpdateCount( TRUE );
 	}
 
 	if( HW_PORT_IsActive( eINPUT_PORT_MINUTE )){
-		HW_TIM_EnableInterrupt( eTIMER_TYPE_TIME, FALSE );
-		U32 count = ( HW_TIM_GetCount( eTIMER_TYPE_TIME ) + 60 ) % 86400;
-		HW_TIM_SetCount( eTIMER_TYPE_TIME, count );
-		HW_TIM_EnableInterrupt( eTIMER_TYPE_TIME, TRUE );
+		HW_TIM_EnableUpdateCount( FALSE );
+		U32 count = ( HW_TIM_GetTimeCount() + 120 ) % 172800;
+		HW_TIM_SetTimeCount( count );
+		HW_TIM_EnableUpdateCount( TRUE );
 	}
 
 	if( HW_PORT_IsActive( eINPUT_PORT_SECOND )){
-		HW_TIM_EnableInterrupt( eTIMER_TYPE_TIME, FALSE );
-		U32 count = ( (U32)( HW_TIM_GetCount( eTIMER_TYPE_TIME ) / 60 ) ) * 60;
-		HW_TIM_SetCount( eTIMER_TYPE_TIME, count );
-		HW_TIM_EnableInterrupt( eTIMER_TYPE_TIME, TRUE );
+		HW_TIM_EnableUpdateCount( FALSE );
+		U32 count = ( (U32)( HW_TIM_GetTimeCount() / 120 ) ) * 120;
+		HW_TIM_SetTimeCount( count );
+		HW_TIM_EnableUpdateCount( TRUE );
 	}
 }
 
@@ -122,13 +123,13 @@ void APP_FramePreProcess( void )
 *-----------------------------------------------------------------------------*/
 void APP_FrameMainProcess( void )
 {
-	U08 data;
-
-	switch( g_eOutputDigit ){
-	case eOUTPUT_PORT_DIGIT_HOUR_10:
-		if( HW_TIM_IsUpdate( eTIMER_TYPE_TIME )){
-			/* 時間更新 */
-			U32 count = HW_TIM_GetCount( eTIMER_TYPE_TIME );
+	if( g_eOutputDigit == eOUTPUT_PORT_DIGIT_MIN ){
+		/* 時間更新 */
+		if( HW_TIM_IsUpdateTime() ){
+			U32 count = HW_TIM_GetTimeCount();
+			if( count >= 172800 ){
+				HW_TIM_ClearTimeCount();
+			}
 			U08 h = (U08)(  (U32)( count / 2 ) / 3600 );
 			U08 m = (U08)(( (U32)( count / 2 ) % 3600 ) / 60 );
 			// U08 s = (U08)(  (U32)( count / 2 ) % 60 );
@@ -137,6 +138,10 @@ void APP_FrameMainProcess( void )
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_MINUTE_10 ] = (U08)( m / 10 );
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_MINUTE_01 ] = (U08)( m % 10 );
 
+			if( g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_10 ] == 0 ){
+				g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_10 ] = 10;
+			}
+
 			/* 点滅 */
 			if(( count % 2 ) == 0 ){
 				HW_PORT_Set( eOUTPUT_PORT_COLON, TRUE );
@@ -144,28 +149,9 @@ void APP_FrameMainProcess( void )
 				HW_PORT_Set( eOUTPUT_PORT_COLON, FALSE );
 			}
 		}
-
-		data = g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_10 ];
-		if( data == 0 ){
-			data = 10;
-		}
-		break;
-
-	case eOUTPUT_PORT_DIGIT_HOUR_01:
-		data = g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_01 ];
-		break;
-	case eOUTPUT_PORT_DIGIT_MINUTE_10:
-		data = g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_MINUTE_10 ];
-		break;
-	case eOUTPUT_PORT_DIGIT_MINUTE_01:
-		data = g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_MINUTE_01 ];
-		break;
-	default:
-		data = 0;
-		break;
 	}
 
-	HW_PORT_SetSegData( g_eOutputDigit, data );
+	HW_PORT_SetSegData( g_eOutputDigit, g_u08DigitData_Ary[ g_eOutputDigit ]);
 
 	g_eOutputDigit++;
 	if( g_eOutputDigit >= eOUTPUT_PORT_DIGIT_MAX ){

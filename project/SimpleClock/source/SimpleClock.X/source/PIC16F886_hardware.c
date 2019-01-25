@@ -138,10 +138,19 @@ void HW_StartProcess( void )
 *-----------------------------------------------------------------------------*/
 void HW_WaitFrameStart( void )
 {
+	/* 処理落ち確認 */
+	if( HW_INT_IsInterrupted( eINTERRUPT_TYPE_TMR0 )){
+		HW_PORT_Set( eOUTPUT_PORT_ERROR_PROC_FAIL, TRUE );
+	}else{
+		HW_PORT_Set( eOUTPUT_PORT_ERROR_PROC_FAIL, FALSE );
+	}
+
 	/* フレーム開始待ち */
-	U32 current = HW_TIM_GetCount( eTIMER_TYPE_FRAME );
-	while( HW_TIM_GetCount( eTIMER_TYPE_FRAME ) == current );
-	HW_TIM_Clear( eTIMER_TYPE_FRAME );
+	while( TRUE ){
+		if( HW_INT_IsInterrupted( eINTERRUPT_TYPE_TMR0 )){
+			break;
+		}
+	}
 }
 
 /*------------------------------------------------------------------------------
@@ -151,6 +160,7 @@ void HW_WaitFrameStart( void )
 *-----------------------------------------------------------------------------*/
 void HW_FramePreProcess( void )
 {
+	HW_TIM_Update();
 	HW_PORT_Update();
 }
 

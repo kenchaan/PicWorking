@@ -37,14 +37,7 @@ extern "C" {	/* } */
 /*------------------------------------------------------------------------------
 *	enum
 *-----------------------------------------------------------------------------*/
-typedef enum tagE_TIMER_TYPE {
-	eTIMER_TYPE_MIN = 0,
-	eTIMER_TYPE_FRAME = eTIMER_TYPE_MIN,
-	eTIMER_TYPE_TIME,
-	eTIMER_TYPE_MAX,
-	eTIMER_TYPE_INVALID
-} E_TIMER_TYPE;
-typedef const E_TIMER_TYPE CE_TIMER_TYPE;
+
 
 /*------------------------------------------------------------------------------
 *	struct
@@ -61,12 +54,12 @@ typedef const E_TIMER_TYPE CE_TIMER_TYPE;
 *-----------------------------------------------------------------------------*/
 void HW_TIM_Initialize( void);
 void HW_TIM_StartProcess( void );
-BOOL HW_TIM_IsUpdate( CE_TIMER_TYPE index );
-U32  HW_TIM_GetCount( CE_TIMER_TYPE index );
-void HW_TIM_SetCount( CE_TIMER_TYPE index, const U32 count );
-void HW_TIM_Clear( CE_TIMER_TYPE index );
-void HW_TIM_EnableInterrupt( CE_TIMER_TYPE index, const BOOL isEnable );
-void HW_TIM_Interrupt( CE_TIMER_TYPE index );
+void HW_TIM_Update( void );
+BOOL HW_TIM_IsUpdateTime( void );
+U32  HW_TIM_GetTimeCount( void );
+void HW_TIM_SetTimeCount( const U32 count );
+void HW_TIM_ClearTimeCount( void );
+void HW_TIM_EnableUpdateCount( const BOOL isEnable );
 
 
 /*------------------------------------------------------------------------------
