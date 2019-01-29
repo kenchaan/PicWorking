@@ -72,11 +72,9 @@ typedef const E_INTERRUPT_TYPE CE_INTERRUPT_TYPE;
 /*------------------------------------------------------------------------------
 *	extern function prototype
 *-----------------------------------------------------------------------------*/
-void interrupt InterruptHandler( void );
 void HW_INT_Initialize( void );
 void HW_INT_StartProcess( void );
 BOOL HW_INT_IsInterrupted( CE_INTERRUPT_TYPE type );
-void HW_INT_Clear( CE_INTERRUPT_TYPE type );
 
 
 /*------------------------------------------------------------------------------
