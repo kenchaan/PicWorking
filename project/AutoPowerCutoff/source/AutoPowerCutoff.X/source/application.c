@@ -85,6 +85,9 @@ void APP_Initialize( void )
 	for( E_OUTPUT_PORT_DIGIT e = eOUTPUT_PORT_DIGIT_MIN; e < eOUTPUT_PORT_DIGIT_MAX; e++ ){
 		g_u08DigitData_Ary[ e ] = 0;
 	}
+
+	/* POWER ON */
+	HW_PORT_Set( eOUTPUT_PORT_POWER_CONTROL, TRUE );
 }
 
 /*------------------------------------------------------------------------------
@@ -107,6 +110,8 @@ void APP_FramePreProcess( void )
 			if( h >= 99 ){
 				h = 0;
 			}
+			s = 0;
+			ss = 0;
 		}
 
 		if( HW_PORT_IsActive( eINPUT_PORT_MINUTE )){
@@ -114,6 +119,8 @@ void APP_FramePreProcess( void )
 			if( m >= 60 ){
 				m = 0;
 			}
+			s = 0;
+			ss = 0;
 		}
 
 		if( HW_PORT_IsActive( eINPUT_PORT_START )){
@@ -123,12 +130,15 @@ void APP_FramePreProcess( void )
 	}
 
 	if( HW_PORT_IsActive( eINPUT_PORT_CANCEL )){
-		HW_TIM_EnableTimeCount( FALSE );
-		g_isCountingTime = FALSE;
-		h = 0;
-		m = 0;
-		s = 0;
-		ss = 0;
+		if( g_isCountingTime ){
+			HW_TIM_EnableTimeCount( FALSE );
+			g_isCountingTime = FALSE;
+		}else{
+			h = 0;
+			m = 0;
+			s = 0;
+			ss = 0;
+		}
 	}
 
 	U32 updated = ( (U32)h * 3600 + (U32)m * 60 + (U32)s ) * 2 + (U32)ss;
@@ -148,8 +158,13 @@ void APP_FrameMainProcess( void )
 		/* 時間更新 */
 		if( HW_TIM_IsUpdatedTime() ){
 			U32 count = HW_TIM_GetTimeCount();
-			if( count == 0 ){
+			if( count == 0 && g_isCountingTime ){
+				/* カウント終了 */
 				HW_TIM_EnableTimeCount( FALSE );
+				g_isCountingTime = FALSE;
+				/* POWER OFF */
+				HW_PORT_Set( eOUTPUT_PORT_POWER_CONTROL, FALSE );
+				/* ここで電源がおちるはず、放置 */
 			}
 
 			U08 h = (U08)(  (U32)( count / 2 ) / 3600 );
@@ -163,15 +178,17 @@ void APP_FrameMainProcess( void )
 			if( g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_10 ] == 0 ){
 				g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_10 ] = 20;
 			}
+			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_01 ] += 10;
 
+			/* 状態点灯 */
 			if( g_isCountingTime ){
-				/* 点滅 */
 				if(( count % 2 ) == 0 ){
-					g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_01 ] += 10;
+					HW_PORT_Set( eOUTPUT_PORT_STATUS_COUNT, TRUE );
+				}else{
+					HW_PORT_Set( eOUTPUT_PORT_STATUS_COUNT, FALSE );
 				}
 			}else{
-				/* 点灯 */
-				g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_01 ] += 10;
+				HW_PORT_Set( eOUTPUT_PORT_STATUS_COUNT, TRUE );
 			}
 		}
 	}

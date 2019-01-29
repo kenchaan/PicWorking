@@ -41,8 +41,10 @@
 #define POWER_CTRL_PORT			(PORTA)
 #define POWER_CTRL_BIT			(0x10)
 
+#define STATUS_COUNT_PORT		(PORTC)
+#define STATUS_COUNT_BIT		(0x04)
 #define ERROR_PROC_FAIL_PORT	(PORTC)
-#define ERROR_PROC_FAIL_BIT		(0x04)
+#define ERROR_PROC_FAIL_BIT		(0x08)
 
 #define DIGIT_H10_PORT			(PORTC)
 #define DIGIT_H10_BIT			(0x10)
@@ -222,6 +224,12 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 {
 	if( isActive ){
 		switch( port ){
+		case eOUTPUT_PORT_POWER_CONTROL:
+			REG_SET_08( POWER_CTRL_PORT, POWER_CTRL_BIT );
+			break;
+		case eOUTPUT_PORT_STATUS_COUNT:
+			REG_SET_08( STATUS_COUNT_PORT, STATUS_COUNT_BIT );
+			break;
 		case eOUTPUT_PORT_ERROR_PROC_FAIL:
 			REG_SET_08( ERROR_PROC_FAIL_PORT, ERROR_PROC_FAIL_BIT );
 			break;
@@ -230,6 +238,12 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 		}
 	}else{
 		switch( port ){
+		case eOUTPUT_PORT_POWER_CONTROL:
+			REG_CLR_08( POWER_CTRL_PORT, POWER_CTRL_BIT );
+			break;
+		case eOUTPUT_PORT_STATUS_COUNT:
+			REG_CLR_08( STATUS_COUNT_PORT, STATUS_COUNT_BIT );
+			break;
 		case eOUTPUT_PORT_ERROR_PROC_FAIL:
 			REG_CLR_08( ERROR_PROC_FAIL_PORT, ERROR_PROC_FAIL_BIT );
 			break;

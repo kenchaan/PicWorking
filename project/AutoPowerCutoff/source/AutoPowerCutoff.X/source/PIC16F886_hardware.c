@@ -22,8 +22,8 @@
 	/*           OSC ==│OSC  Vss│== Vss       */
 	/*         T1OSO ->│OSC  RC7│-> DIGIT_M01 */
 	/*         T1OSI ->│OSC  RC6│-> DIGIT_M10 */
-	/* ERR_PROC_FAIL <-│RC2  RC5│-> DIGIT_H01 */
-	/*            NC <-│RC3  RC4│-> DIGIT_H10 */
+	/*      ST_COUNT <-│RC2  RC5│-> DIGIT_H01 */
+	/* ERR_PROC_FAIL <-│RC3  RC4│-> DIGIT_H10 */
 	/*                 └────┘             */
 
 /*------------------------------------------------------------------------------
