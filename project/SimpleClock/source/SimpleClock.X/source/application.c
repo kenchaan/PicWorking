@@ -118,8 +118,10 @@ void APP_FramePreProcess( void )
 		s = 0;
 	}
 
-	count = ( (U32)h * 3600 + (U32)m * 60 + (U32)s ) * 2 + (U32)ss;
-	HW_TIM_SetTimeCount( count );
+	U32 updated = ( (U32)h * 3600 + (U32)m * 60 + (U32)s ) * 2 + (U32)ss;
+	if( updated != count ){
+		HW_TIM_SetTimeCount( updated );
+	}
 }
 
 /*------------------------------------------------------------------------------
