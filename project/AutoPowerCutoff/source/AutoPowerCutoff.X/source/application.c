@@ -14,7 +14,6 @@
 #include <xc.h>
 #include "types.h"
 #include "regaccess.h"
-#include "hardware_interrupt.h"
 #include "hardware_port.h"
 #include "hardware_timer.h"
 #include "application.h"
@@ -97,13 +96,21 @@ void APP_Initialize( void )
 *-----------------------------------------------------------------------------*/
 void APP_FramePreProcess( void )
 {
+	/* 表示更新 */
+	HW_PORT_SetSegData( g_eOutputDigit, g_u08DigitData_Ary[ g_eOutputDigit ]);
+
+	g_eOutputDigit++;
+	if( g_eOutputDigit >= eOUTPUT_PORT_DIGIT_MAX ){
+		g_eOutputDigit = eOUTPUT_PORT_DIGIT_MIN;
+	}
+
+	/* スイッチ処理 */
 	U32 count = HW_TIM_GetTimeCount();
 	U08 h = (U08)(  (U32)( count / 2 ) / 3600 );
 	U08 m = (U08)(( (U32)( count / 2 ) % 3600 ) / 60 );
 	U08 s = (U08)(  (U32)( count / 2 ) % 60 );
 	U08 ss = (U08)( count % 2 );
 
-	/* スイッチ処理 */
 	if ( !g_isCountingTime ){
 		if( HW_PORT_IsActive( eINPUT_PORT_HOUR )){
 			h++;
@@ -158,6 +165,18 @@ void APP_FrameMainProcess( void )
 		/* 時間更新 */
 		if( HW_TIM_IsUpdatedTime() ){
 			U32 count = HW_TIM_GetTimeCount();
+
+			/* 状態点灯 */
+			if( g_isCountingTime ){
+				if(( count % 2 ) == 0 ){
+					HW_PORT_Set( eOUTPUT_PORT_STATUS_COUNT, TRUE );
+				}else{
+					HW_PORT_Set( eOUTPUT_PORT_STATUS_COUNT, FALSE );
+				}
+			}else{
+				HW_PORT_Set( eOUTPUT_PORT_STATUS_COUNT, FALSE );
+			}
+
 			if( count == 0 && g_isCountingTime ){
 				/* カウント終了 */
 				HW_TIM_EnableTimeCount( FALSE );
@@ -179,25 +198,7 @@ void APP_FrameMainProcess( void )
 				g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_10 ] = 20;
 			}
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_01 ] += 10;
-
-			/* 状態点灯 */
-			if( g_isCountingTime ){
-				if(( count % 2 ) == 0 ){
-					HW_PORT_Set( eOUTPUT_PORT_STATUS_COUNT, TRUE );
-				}else{
-					HW_PORT_Set( eOUTPUT_PORT_STATUS_COUNT, FALSE );
-				}
-			}else{
-				HW_PORT_Set( eOUTPUT_PORT_STATUS_COUNT, TRUE );
-			}
 		}
-	}
-
-	HW_PORT_SetSegData( g_eOutputDigit, g_u08DigitData_Ary[ g_eOutputDigit ]);
-
-	g_eOutputDigit++;
-	if( g_eOutputDigit >= eOUTPUT_PORT_DIGIT_MAX ){
-		g_eOutputDigit = eOUTPUT_PORT_DIGIT_MIN;
 	}
 }
 
