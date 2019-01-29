@@ -35,6 +35,7 @@
 #include "hardware.h"
 #include "hardware_interrupt.h"
 #include "hardware_port.h"
+#include "hardware_rom.h"
 #include "hardware_timer.h"
 
 /*------------------------------------------------------------------------------
@@ -118,6 +119,7 @@ void HW_Initialize( void )
 	HW_INT_Initialize();
 	HW_PORT_Initialize();
 	HW_TIM_Initialize();
+	HW_ROM_Initialize();
 }
 
 /*------------------------------------------------------------------------------

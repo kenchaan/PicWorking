@@ -25,6 +25,8 @@
       <itemPath>source/main.c</itemPath>
       <itemPath>source/regaccess.h</itemPath>
       <itemPath>source/types.h</itemPath>
+      <itemPath>source/PIC16F886_hardware_rom.c</itemPath>
+      <itemPath>source/hardware_rom.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

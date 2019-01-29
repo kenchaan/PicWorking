@@ -215,6 +215,20 @@ BOOL HW_INT_IsInterrupted( CE_INTERRUPT_TYPE type )
 	return interrupted;
 }
 
+/*------------------------------------------------------------------------------
+* OverView	: 割り込み許可
+* Parameter	: isEnable	: TRUE:有効 FALSE:無効
+* Return	: None
+*-----------------------------------------------------------------------------*/
+void HW_INT_EnableAll( const BOOL isEnable )
+{
+	if( isEnable ){
+		REG_SET_08( INTCON, 0x80 );
+	}else{
+		REG_CLR_08( INTCON, 0x80 );
+	}
+}
+
 
 /*------------------------------------------------------------------------------
 *	End Of File

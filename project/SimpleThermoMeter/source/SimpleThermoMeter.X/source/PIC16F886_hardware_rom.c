@@ -1,9 +1,9 @@
 /*******************************************************************************
 *	Author		|	Date		|	FileName
 *-------------------------------------------------------------------------------
-*	kenchaan	|	2019/01/29	|	application.c
+*	kenchaan	|	2019/01/29	|	PIC16F886_hardware_rom.c
 *-------------------------------------------------------------------------------
-*	Description	|	アプリケーション処理
+*	Description	|	[PIC16F886]ROM制御
 *-------------------------------------------------------------------------------
 *	Copyright (c) 2019 kenchaan All Rights Reserved.
 *******************************************************************************/
@@ -14,9 +14,9 @@
 #include <xc.h>
 #include "types.h"
 #include "regaccess.h"
-#include "hardware_port.h"
+#include "hardware.h"
+#include "hardware_interrupt.h"
 #include "hardware_rom.h"
-#include "application.h"
 
 /*------------------------------------------------------------------------------
 *	pragma
@@ -51,10 +51,7 @@
 /*------------------------------------------------------------------------------
 *	static variable
 *-----------------------------------------------------------------------------*/
-static U08 g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_MAX ];
-static E_OUTPUT_PORT_DIGIT g_eOutputDigit = eOUTPUT_PORT_DIGIT_MIN;
-static BOOL g_isSettingTemp = FALSE;
-static U08 g_u08TempThreshold = 60;
+
 
 /*------------------------------------------------------------------------------
 *	static function prototype
@@ -76,114 +73,69 @@ static U08 g_u08TempThreshold = 60;
 *-----------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------
-* OverView	: アプリケーション初期化
+* OverView	: ROM初期化
 * Parameter	: None
 * Return	: None
 *-----------------------------------------------------------------------------*/
-void APP_Initialize( void )
+void HW_ROM_Initialize( void )
 {
-	for( E_OUTPUT_PORT_DIGIT e = eOUTPUT_PORT_DIGIT_MIN; e < eOUTPUT_PORT_DIGIT_MAX; e++ ){
-		g_u08DigitData_Ary[ e ] = 0;
-	}
-
-	g_u08TempThreshold = HW_ROM_Read( 0x00 );
+	REG_WRITE_08( EECON1, 0x00 );
 }
 
 /*------------------------------------------------------------------------------
-* OverView	: フレーム事前処理
-* Parameter	: None
-* Return	: None
+* OverView	: ROM読み出し
+* Parameter	: addr	: 読み出しアドレス
+* Return	: 読み出し値
 *-----------------------------------------------------------------------------*/
-void APP_FramePreProcess( void )
+U08 HW_ROM_Read( const U08 addr )
 {
-	/* 表示更新 */
-	HW_PORT_SetSegData( g_eOutputDigit, g_u08DigitData_Ary[ g_eOutputDigit ]);
+	/* 書き込み/読み出し待ち */
+	while(( REG_READ_08( EECON1 ) & 0x03 ) != 0 );
 
-	g_eOutputDigit++;
-	if( g_eOutputDigit >= eOUTPUT_PORT_DIGIT_MAX ){
-		g_eOutputDigit = eOUTPUT_PORT_DIGIT_MIN;
-	}
+	/* アドレス設定 */
+	REG_WRITE_08( EEADR, addr );
 
-	/* スイッチ処理 */
-	if( HW_PORT_IsActive( eINPUT_PORT_TEMP_SET )){
-		if( g_isSettingTemp ){
-			g_isSettingTemp = FALSE;
-		}else{
-			g_isSettingTemp = TRUE;
-		}
-	}
+	/* 読み出し */
+	REG_SET_08( EECON1, 0x01 );
+	while(( REG_READ_08( EECON1 ) & 0x03 ) != 0 );
 
-	if( HW_PORT_IsActive( eINPUT_PORT_TEMP_UP )){
-		if( g_isSettingTemp ){
-			g_u08TempThreshold++;
-			if( g_u08TempThreshold >= 100 ){
-				g_u08TempThreshold = 0;
-			}
-			HW_ROM_Write( 0x00, g_u08TempThreshold );
-		}else{
-			g_isSettingTemp = TRUE;
-		}
-	}
+	return REG_READ_08( EEDAT );
 }
 
 /*------------------------------------------------------------------------------
-* OverView	: フレーム処理
-* Parameter	: None
+* OverView	: ROM書き込み
+* Parameter	: addr	: 書き込みアドレス
+* 			: data	: 書き込み値
 * Return	: None
 *-----------------------------------------------------------------------------*/
-void APP_FrameMainProcess( void )
+void HW_ROM_Write( const U08 addr, const U08 data )
 {
-	if( g_eOutputDigit == eOUTPUT_PORT_DIGIT_MIN ){
-		U16 data = HW_PORT_GetAnalogData( eINPUT_ANALOG_PORT_TEMP );
-		F32 temp = 100.0 * ( (F32)data / 1024.0 );
-		if( temp >= 100.0 ){
-			temp = 99.9;
-		}
+	/* 書き込み/読み出し待ち */
+	while(( REG_READ_08( EECON1 ) & 0x03 ) != 0 );
 
-		/* FAN制御 */
-		BOOL isEnable;
-		if( g_u08TempThreshold == 0 ){
-			/* 常にON */
-			isEnable = TRUE;
-		}else{
-			if( (F32)( g_u08TempThreshold + 1 ) < temp ){
-				isEnable = TRUE;
-			}else if( (F32)( g_u08TempThreshold - 1 ) < temp ){
-				isEnable = FALSE;
-			}else{
-				/* 変更なし */
-				isEnable = HW_PORT_GetOutputData( eOUTPUT_PORT_FAN_CTRL );
-			}
-		}
-		HW_PORT_Set( eOUTPUT_PORT_FAN_CTRL, isEnable );
+	/* アドレス/書き込み値設定 */
+	REG_WRITE_08( EEADR, addr );
+	REG_WRITE_08( EEDAT, data );
 
-		/* 表示値更新 */
-		if( g_isSettingTemp ){
-			/* 設定温度 */
-			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_INT_10 ] = (U08)( g_u08TempThreshold / 10 );
-			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_INT_01 ] = (U08)( g_u08TempThreshold % 10 );
-			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_DEC ] = 0;
-		}else{
-			/* 現在温度 */
-			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_INT_10 ] = (U08)( (U32)temp / 10 );
-			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_INT_01 ] = (U08)( (U32)temp % 10 );
-			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_DEC ] = (U08)( (U32)( temp * 10 ) % 10 );
-		}
-		if ( g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_INT_10 ] == 0 ){
-			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_INT_10 ] += 20;
-		}
-		g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_INT_01 ] += 10;
-	}
-}
+	/* 書き込み許可 */
+	REG_SET_08( EECON1, 0x04 );
 
-/*------------------------------------------------------------------------------
-* OverView	: フレーム事後処理
-* Parameter	: None
-* Return	: None
-*-----------------------------------------------------------------------------*/
-void APP_FramePostProcess( void )
-{
-	/* DO NOTHING */
+	/* 割り込み禁止 */
+	HW_INT_EnableAll( FALSE );
+
+	/* 書き込み */
+	REG_SET_08( EECON2, 0x55 );
+	REG_SET_08( EECON2, 0xAA );
+	REG_SET_08( EECON1, 0x02 );
+
+	/* 割り込み許可 */
+	HW_INT_EnableAll( TRUE );
+
+	/* 書き込み/読み出し待ち */
+	while(( REG_READ_08( EECON1 ) & 0x03 ) != 0 );
+
+	/* 書き込み禁止 */
+	REG_CLR_08( EECON1, 0x04 );
 }
 
 
