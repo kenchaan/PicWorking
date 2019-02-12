@@ -1,0 +1,66 @@
+!_TAG_FILE_ENCODING	cp932	//
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_JP_AUTHOR	HIGASHI Hirohito	/Twitter: @h_east/
+!_TAG_PROGRAM_JP_URL	http://hp.vector.co.jp/authors/VA025040/	//
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8J2	//
+APP_FrameMainProcess	application.c	101;"	f
+APP_FramePostProcess	application.c	139;"	f
+APP_FramePreProcess	application.c	91;"	f
+APP_Initialize	application.c	81;"	f
+BOOL	types.h	53;"	t
+CE_TIMER_TYPE	hardware_timer.h	47;"	t
+E_TIMER_TYPE	hardware_timer.h	46;"	t	typeref:enum:tagE_TIMER_TYPE
+F32	types.h	50;"	t
+FALSE	types.h	28;"	d
+HW_FrameMainProcess	PIC16F886_hardware.c	162;"	f
+HW_FramePostProcess	PIC16F886_hardware.c	172;"	f
+HW_FramePreProcess	PIC16F886_hardware.c	152;"	f
+HW_INT_Initialize	PIC16F886_hardware_interrupt.c	164;"	f
+HW_INT_StartProcess	PIC16F886_hardware_interrupt.c	177;"	f
+HW_Initialize	PIC16F886_hardware.c	113;"	f
+HW_PORT_Initialize	PIC16F886_hardware_port.c	78;"	f
+HW_StartProcess	PIC16F886_hardware.c	128;"	f
+HW_TIM_Clear	PIC16F886_hardware_timer.c	126;"	f
+HW_TIM_GetCount	PIC16F886_hardware_timer.c	116;"	f
+HW_TIM_Initialize	PIC16F886_hardware_timer.c	78;"	f
+HW_TIM_Interrupt	PIC16F886_hardware_timer.c	136;"	f
+HW_TIM_StartProcess	PIC16F886_hardware_timer.c	98;"	f
+HW_WaitFrameStart	PIC16F886_hardware.c	139;"	f
+InterruptHandler	PIC16F886_hardware_interrupt.c	79;"	f
+NULL	types.h	25;"	d
+REG_CLR_08	regaccess.h	39;"	d
+REG_READ_08	regaccess.h	35;"	d
+REG_RMW_08	regaccess.h	40;"	d
+REG_SET_08	regaccess.h	38;"	d
+REG_WRITE_08	regaccess.h	36;"	d
+REG_WRITE_16	regaccess.h	37;"	d
+S08	types.h	40;"	t
+S16	types.h	41;"	t
+S32	types.h	42;"	t
+TMR0_DEFAULT	hardware_timer.h	24;"	d
+TMR1_DEFAULT	hardware_timer.h	25;"	d
+TRUE	types.h	29;"	d
+U08	types.h	45;"	t
+U16	types.h	46;"	t
+U32	types.h	47;"	t
+_APPLICATION_H_	application.h	2;"	d
+_HARDWARE_H_	hardware.h	2;"	d
+_HARDWARE_INTERRUPT_H_	hardware_interrupt.h	2;"	d
+_HARDWARE_PORT_H_	hardware_port.h	2;"	d
+_HARDWARE_TIMER_H_	hardware_timer.h	2;"	d
+_REGACCESS_H_	regaccess.h	2;"	d
+_TYPES_H_	types.h	2;"	d
+eTIMER_TYPE_FRAME	hardware_timer.h	42;"	e	enum:tagE_TIMER_TYPE
+eTIMER_TYPE_INVALID	hardware_timer.h	45;"	e	enum:tagE_TIMER_TYPE
+eTIMER_TYPE_MAX	hardware_timer.h	44;"	e	enum:tagE_TIMER_TYPE
+eTIMER_TYPE_MIN	hardware_timer.h	41;"	e	enum:tagE_TIMER_TYPE
+eTIMER_TYPE_TIME	hardware_timer.h	43;"	e	enum:tagE_TIMER_TYPE
+g_u08FrameCount	application.c	54;"	v	file:
+g_u08State	application.c	55;"	v	file:
+g_u32TimerCount_Ary	PIC16F886_hardware_timer.c	52;"	v	file:
+main	main.c	78;"	f
+tagE_TIMER_TYPE	hardware_timer.h	40;"	g

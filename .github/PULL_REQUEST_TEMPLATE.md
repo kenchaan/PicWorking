@@ -1,10 +1,21 @@
-**[å¯¾å¿œIssue]**
+**[Issue]**
 #
 
-**[å¤‰æ›´ç‚¹]**
+**[Changes]**
+- 
 
-**[ç¢ºèª]**
-- [ ] å‹•ä½œç¢ºèª
+**[Check list]**
+- [ ] Operation check
 
-**[è£œè¶³]**
+**[Supplements]**
 
+¡ ª Regular PullRequest ª ¡
+¡ « Release PullRequest « ¡
+
+**[ReleaseItem]**
+
+
+**[Check list]**
+- [ ] [Release Page](https://github.com/kenchaan/PicWorking/releases)
+
+**[Supplements]**

@@ -1,21 +1,20 @@
-**[内容]**
+**[Description]**
 
-**[成果物]**
+**[Artifacts]**
 
-**[クローズ条件]**
+**[Closing requirements]**
 
-**[補足]**
+**[Supplements]**
 
-■ ↑ 通常Issue ↑ ■
-■ ↓ バグIssue ↓ ■
+■ ↑ Regular issue ↑ ■
+■ ↓ Bug issue ↓ ■
 
-**[現象]**
+**[Symptom]**
 
-**[原因]**
+**[Cause]**
 
-**[対策]**
+**[Countermeasure]**
 
-**[影響範囲]**
+**[Impact range]**
 
-**[補足]**
-
+**[Supplements]**

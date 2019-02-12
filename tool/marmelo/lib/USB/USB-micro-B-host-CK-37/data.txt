@@ -1,0 +1,20 @@
+<body>
+	explanation=USB-micro-Bコネクタ。ホスト側。サンハヤトCK-37
+	numLeads=8
+	xLeadInImg=4
+	yLeadInImg=78
+	rxLead2=0
+	ryLead2=-1
+	rxLead3=0
+	ryLead3=-2
+	rxLead4=0
+	ryLead4=-3
+	rxLead5=0
+	ryLead5=-4
+	rxLead6=0
+	ryLead6=-5
+	rxLead7=4
+	ryLead7=-6
+	rxLead8=4
+	ryLead8=2
+</body>
