@@ -6,7 +6,7 @@
 
 **[Supplements]**
 
-■ ↑ Normal issue ↑ ■
+■ ↑ Regular issue ↑ ■
 ■ ↓ Bug issue ↓ ■
 
 **[Symptom]**
