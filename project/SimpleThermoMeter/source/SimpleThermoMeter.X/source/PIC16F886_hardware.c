@@ -14,8 +14,8 @@
 	/*   TEMP_SENSOR ->│AN0  RB6│-> SEG_G     */
 	/*   SW_TEMP_SET ->│RA1  RB5│-> SEG_F     */
 	/*    SW_TEMP_UP ->│RA2  RB4│-> SEG_E     */
-	/*            NC <-│RA3  RB3│-> SEG_D     */
-	/*      FAN_CTRL <-│RA4  RB2│-> SEG_C     */
+	/*  SW_TEMP_DOWN ->│RA3  RB3│-> SEG_D     */
+	/*     TEMP_CTRL <-│RA4  RB2│-> SEG_C     */
 	/*            NC <-│RA5  RB1│-> SEG_B     */
 	/*           Vss ==│Vss  RB0│-> SEG_A     */
 	/*           OSC ==│OSC  Vdd│== Vdd       */

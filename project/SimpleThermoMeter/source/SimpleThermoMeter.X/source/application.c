@@ -87,6 +87,10 @@ void APP_Initialize( void )
 	}
 
 	g_u08TempThreshold = HW_ROM_Read( 0x00 );
+    if( g_u08TempThreshold > 99 ){
+        g_u08TempThreshold = 99;
+        HW_ROM_Write( 0x00, g_u08TempThreshold );
+    }
 }
 
 /*------------------------------------------------------------------------------
@@ -108,6 +112,7 @@ void APP_FramePreProcess( void )
 	if( HW_PORT_IsActive( eINPUT_PORT_TEMP_SET )){
 		if( g_isSettingTemp ){
 			g_isSettingTemp = FALSE;
+			HW_ROM_Write( 0x00, g_u08TempThreshold );
 		}else{
 			g_isSettingTemp = TRUE;
 		}
@@ -115,11 +120,19 @@ void APP_FramePreProcess( void )
 
 	if( HW_PORT_IsActive( eINPUT_PORT_TEMP_UP )){
 		if( g_isSettingTemp ){
-			g_u08TempThreshold++;
-			if( g_u08TempThreshold >= 100 ){
-				g_u08TempThreshold = 0;
+			if( g_u08TempThreshold < 99 ){
+				g_u08TempThreshold++;
 			}
-			HW_ROM_Write( 0x00, g_u08TempThreshold );
+		}else{
+			g_isSettingTemp = TRUE;
+		}
+	}
+
+	if( HW_PORT_IsActive( eINPUT_PORT_TEMP_DOWN )){
+		if( g_isSettingTemp ){
+			if( g_u08TempThreshold > 0 ){
+				g_u08TempThreshold--;
+			}
 		}else{
 			g_isSettingTemp = TRUE;
 		}
@@ -141,21 +154,24 @@ void APP_FrameMainProcess( void )
 		}
 
 		/* FAN制御 */
-		BOOL isEnable;
-		if( g_u08TempThreshold == 0 ){
-			/* 常にON */
-			isEnable = TRUE;
-		}else{
-			if( (F32)( g_u08TempThreshold + 1 ) < temp ){
-				isEnable = TRUE;
-			}else if( (F32)( g_u08TempThreshold - 1 ) < temp ){
-				isEnable = FALSE;
+		if( !g_isSettingTemp ){
+			if( g_u08TempThreshold == 0 ){
+				/* 常にON */
+				HW_PORT_Set( eOUTPUT_PORT_TEMP_CTRL, TRUE );
+			}else if( g_u08TempThreshold >= 99 ){
+				/* 常にOFF */
+				HW_PORT_Set( eOUTPUT_PORT_TEMP_CTRL, FALSE );
 			}else{
-				/* 変更なし */
-				isEnable = HW_PORT_GetOutputData( eOUTPUT_PORT_FAN_CTRL );
+				if( (F32)( g_u08TempThreshold + 1 ) < temp ){
+					HW_PORT_Set( eOUTPUT_PORT_TEMP_CTRL, TRUE );
+				}else if( (F32)( g_u08TempThreshold - 1 ) < temp ){
+					HW_PORT_Set( eOUTPUT_PORT_TEMP_CTRL, FALSE );
+				}else{
+					/* 変更なし */
+					/* DO NOTHING */
+				}
 			}
 		}
-		HW_PORT_Set( eOUTPUT_PORT_FAN_CTRL, isEnable );
 
 		/* 表示値更新 */
 		if( g_isSettingTemp ){
@@ -169,6 +185,7 @@ void APP_FrameMainProcess( void )
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_INT_01 ] = (U08)( (U32)temp % 10 );
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_DEC ] = (U08)( (U32)( temp * 10 ) % 10 );
 		}
+
 		if ( g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_INT_10 ] == 0 ){
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_INT_10 ] += 20;
 		}

@@ -33,9 +33,11 @@
 #define SW_TEMP_SET_BIT			(0x02)
 #define SW_TEMP_UP_PORT			(PORTA)
 #define SW_TEMP_UP_BIT			(0x04)
+#define SW_TEMP_DOWN_PORT		(PORTA)
+#define SW_TEMP_DOWN_BIT		(0x08)
 
-#define FAN_CTRL_PORT			(PORTA)
-#define FAN_CTRL_BIT			(0x10)
+#define TEMP_CTRL_PORT			(PORTA)
+#define TEMP_CTRL_BIT			(0x10)
 #define ERROR_PROC_FAIL_PORT	(PORTC)
 #define ERROR_PROC_FAIL_BIT		(0x01)
 
@@ -125,7 +127,7 @@ void HW_PORT_Initialize( void )
 	/* ポートA */
 	REG_WRITE_08( ANSEL, 0x01 );
 	REG_WRITE_08( PORTA, 0x00 );
-	REG_WRITE_08( TRISA, 0xC7 );
+	REG_WRITE_08( TRISA, 0xCF );
 	REG_WRITE_08( ADCON0, 0x01 );
 	REG_WRITE_08( ADCON1, 0x81 );
 
@@ -170,6 +172,14 @@ void HW_PORT_Update( void )
 		}
 	}else{
 		g_u08PortActiveCount_Ary[ eINPUT_PORT_TEMP_UP ] = 0;
+	}
+
+	if( REG_READ_08( SW_TEMP_DOWN_PORT ) & SW_TEMP_DOWN_BIT ){
+		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_TEMP_DOWN ] < 0xFF ){
+			g_u08PortActiveCount_Ary[ eINPUT_PORT_TEMP_DOWN ]++;
+		}
+	}else{
+		g_u08PortActiveCount_Ary[ eINPUT_PORT_TEMP_DOWN ] = 0;
 	}
 }
 
@@ -232,8 +242,8 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 {
 	if( isActive ){
 		switch( port ){
-		case eOUTPUT_PORT_FAN_CTRL:
-			REG_SET_08( FAN_CTRL_PORT, FAN_CTRL_BIT );
+		case eOUTPUT_PORT_TEMP_CTRL:
+			REG_SET_08( TEMP_CTRL_PORT, TEMP_CTRL_BIT );
 			break;
 		case eOUTPUT_PORT_ERROR_PROC_FAIL:
 			REG_SET_08( ERROR_PROC_FAIL_PORT, ERROR_PROC_FAIL_BIT );
@@ -243,8 +253,8 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 		}
 	}else{
 		switch( port ){
-		case eOUTPUT_PORT_FAN_CTRL:
-			REG_CLR_08( FAN_CTRL_PORT, FAN_CTRL_BIT );
+		case eOUTPUT_PORT_TEMP_CTRL:
+			REG_CLR_08( TEMP_CTRL_PORT, TEMP_CTRL_BIT );
 			break;
 		case eOUTPUT_PORT_ERROR_PROC_FAIL:
 			REG_CLR_08( ERROR_PROC_FAIL_PORT, ERROR_PROC_FAIL_BIT );
@@ -252,32 +262,6 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 		default:
 			break;
 		}
-	}
-}
-
-/*------------------------------------------------------------------------------
-* OverView	: 出力値取得
-* Parameter	: port	: 出力ポート
-* Return	: TRUE	: Active
-* 			: FALSE	: Not Active
-*-----------------------------------------------------------------------------*/
-BOOL HW_PORT_GetOutputData( CE_OUTPUT_PORT port )
-{
-	switch( port ){
-	case eOUTPUT_PORT_FAN_CTRL:
-		if( REG_READ_08( FAN_CTRL_PORT ) & FAN_CTRL_BIT ){
-			return TRUE;
-		}else{
-			return FALSE;
-		}
-	case eOUTPUT_PORT_ERROR_PROC_FAIL:
-		if( REG_READ_08( ERROR_PROC_FAIL_PORT) & ERROR_PROC_FAIL_BIT ){
-			return TRUE;
-		}else{
-			return FALSE;
-		}
-	default:
-		return FALSE;
 	}
 }
 
