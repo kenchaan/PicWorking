@@ -124,8 +124,8 @@ void HW_ROM_Write( const U08 addr, const U08 data )
 	HW_INT_EnableAll( FALSE );
 
 	/* 書き込み */
-	REG_SET_08( EECON2, 0x55 );
-	REG_SET_08( EECON2, 0xAA );
+	REG_WRITE_08( EECON2, 0x55 );
+	REG_WRITE_08( EECON2, 0xAA );
 	REG_SET_08( EECON1, 0x02 );
 
 	/* 割り込み許可 */
