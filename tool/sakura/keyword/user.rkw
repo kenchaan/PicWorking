@@ -1,0 +1,20 @@
+﻿// 正規表現キーワード Ver1
+RxKey[000]=KW2,/((^\s*)|(\s+))\({0,1}((MD_)|()){0,1}((S64)|(S32)|(S16)|(S08)|(U64)|(U32)|(U16)|(U08))(\){0,1})/k
+RxKey[001]=KW2,/((^\s*)|(\s+))\({0,1}((MD_)|()){0,1}((BOOL)|(STRING)|(INT)|(UINT)|(F32)|(F64))(\){0,1})/k
+RxKey[002]=KW3,/((^\s*)|(\s+))(\({0,1})((C)|())((P)|())S_[A-Z0-9_]*(\){0,1})/k
+RxKey[003]=KW3,/((^\s*)|(\s+))(\({0,1})((C)|())((P)|())U_[A-Z0-9_]*(\){0,1})/k
+RxKey[004]=KW3,/((^\s*)|(\s+))(\({0,1})((C)|())E_[A-Z0-9_]*(\){0,1})/k
+RxKey[005]=KW5,/[\W*]e[A-Z_][0-9A-Z_]*[\W*]/k
+RxKey[006]=KW6,/[\W*][A-Z_][0-9A-Z_]*(\()/k
+RxKey[007]=KW4,/[\W*][A-Z_][0-9A-Z_]*[\W*]/k
+RxKey[008]=KW8,/0x[0-9a-fA-F]*/k
+RxKey[009]=KW9,/[+-]{0,1}\d*[.]\d*(e[+-]\d*){0,1}f{0,1}/k
+RxKey[010]=KWA,/[+-]{0,1}[0-9]/k
+RxKey[011]=KW2,/((^\s*)|(\s+))\({0,1}((GLvoid)|(GLchar)|(GLenum)|(GLboolean)|(GLbitfield))(\){0,1})/k
+RxKey[012]=KW2,/((^\s*)|(\s+))\({0,1}((GLbyte)|(GLshort)|(GLint)|(GLsizei)|(GLubyte))(\){0,1})/k
+RxKey[013]=KW2,/((^\s*)|(\s+))\({0,1}((GLushort)|(GLuint)|(GLfloat)|(GLclampf)|(GLfixed))(\){0,1})/k
+RxKey[014]=KW2,/((^\s*)|(\s+))\({0,1}((CriUint64Adr))(\){0,1})/k
+RxKey[015]=KW2,/((^\s*)|(\s+))\({0,1}((CriUint8)|(CriUint16)|(CriUint32)|(CriUint64)|(CriUint128))(\){0,1})/k
+RxKey[016]=KW2,/((^\s*)|(\s+))\({0,1}((CriSint8)|(CriSint16)|(CriSint32)|(CriSint64)|(CriSint128))(\){0,1})/k
+RxKey[017]=KW2,/((^\s*)|(\s+))\({0,1}((CriFloat16)|(CriFloat32)|(CriFloat64)|(CriFixed32))(\){0,1})/k
+RxKey[018]=KW2,/((^\s*)|(\s+))\({0,1}((CriBool)|(CriChar8)|(CriSintPtr)|(CriSintPtr)|(CriUintPtr))(\){0,1})/k
