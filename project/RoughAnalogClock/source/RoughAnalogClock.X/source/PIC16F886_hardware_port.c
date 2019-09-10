@@ -86,9 +86,9 @@ typedef const E_OUTPUT_PORT_DIGIT CE_OUTPUT_PORT_DIGIT;
 static U08 g_u08PortActiveCount_Ary[ eINPUT_PORT_MAX ];
 
 static E_CLOCK_TYPE g_eClockType = eCLOCK_TYPE_ANALOG;
-static U08 g_u08Hour = 0;
-static U08 g_u08Minute = 0;
-static U08 g_u08Second = 0;
+static U08 g_u08Hour_Ary[ 2 ]   = {0, 0};
+static U08 g_u08Minute_Ary[ 2 ] = {0, 0};
+static U08 g_u08Second_Ary[ 2 ] = {0, 0};
 
 static E_OUTPUT_PORT_DIGIT g_eCurrentOutputDigit = eOUTPUT_PORT_DIGIT_MIN;
 
@@ -263,9 +263,9 @@ void HW_PORT_SetClockType( CE_CLOCK_TYPE type )
 *-----------------------------------------------------------------------------*/
 void HW_PORT_SetTime( const U08 hour, const U08 minute, const U08 second )
 {
-	g_u08Hour = hour;
-	g_u08Minute = minute;
-	g_u08Second = second;
+	g_u08Hour_Ary[ 1 ] = hour;
+	g_u08Minute_Ary[ 1 ] = minute;
+	g_u08Second_Ary[ 1 ] = second;
 }
 
 /*------------------------------------------------------------------------------
@@ -275,6 +275,12 @@ void HW_PORT_SetTime( const U08 hour, const U08 minute, const U08 second )
 *-----------------------------------------------------------------------------*/
 static void update_output( void )
 {
+	if( g_eCurrentOutputDigit == eOUTPUT_PORT_DIGIT_MIN ){
+		g_u08Hour_Ary[ 0 ] = g_u08Hour_Ary[ 1 ];
+		g_u08Minute_Ary[ 0 ] = g_u08Minute_Ary[ 1 ];
+		g_u08Second_Ary[ 0 ] = g_u08Second_Ary[ 1 ];
+	}
+
 	/* 消灯 */
 	REG_CLR_08( DIGIT_0_PORT, DIGIT_0_BIT );
 	REG_CLR_08( DIGIT_1_PORT, DIGIT_1_BIT );
@@ -286,12 +292,12 @@ static void update_output( void )
 	switch( g_eClockType ){
 	case eCLOCK_TYPE_ANALOG:
 		{
-			U32 allCount = (U32)g_u08Hour * 3600 + (U32)g_u08Minute * 60 + (U32)g_u08Second;
+			U32 allCount = (U32)g_u08Hour_Ary[ 0 ] * 3600 + (U32)g_u08Minute_Ary[ 0 ] * 60 + (U32)g_u08Second_Ary[ 0 ];
 			if( allCount < 150 ){
 				allCount += 43200;
 			}
 			allCount -= 150;
-			U08 h = (U08)( allCount / 3600 );
+			U08 h = (U08)(  allCount / 3600 );
 			U08 m = (U08)(( allCount % 3600 ) / 60 );
 			switch( g_eCurrentOutputDigit ){
 			case eOUTPUT_PORT_DIGIT_0:
@@ -311,16 +317,16 @@ static void update_output( void )
 	case eCLOCK_TYPE_DIGITAL:
 		switch( g_eCurrentOutputDigit ){
 		case eOUTPUT_PORT_DIGIT_0:
-			data = g_cu08SegDataDigital_Ary[ (U08)( g_u08Hour / 10 )];
+			data = g_cu08SegDataDigital_Ary[ (U08)( g_u08Hour_Ary[ 0 ] / 10 )];
 			break;
 		case eOUTPUT_PORT_DIGIT_1:
-			data = g_cu08SegDataDigital_Ary[ (U08)( g_u08Hour % 10 )];
+			data = g_cu08SegDataDigital_Ary[ (U08)( g_u08Hour_Ary[ 0 ] % 10 )];
 			break;
 		case eOUTPUT_PORT_DIGIT_2:
-			data = g_cu08SegDataDigital_Ary[ (U08)( g_u08Minute / 10 )];
+			data = g_cu08SegDataDigital_Ary[ (U08)( g_u08Minute_Ary[ 0 ] / 10 )];
 			break;
 		case eOUTPUT_PORT_DIGIT_3:
-			data = g_cu08SegDataDigital_Ary[ (U08)( g_u08Minute % 10 )];
+			data = g_cu08SegDataDigital_Ary[ (U08)( g_u08Minute_Ary[ 0 ] % 10 )];
 			break;
 		default:
 			break;
