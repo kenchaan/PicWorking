@@ -14,6 +14,7 @@
 #include <xc.h>
 #include "types.h"
 #include "hardware.h"
+#include "hardware_port.h"
 #include "application.h"
 
 /*------------------------------------------------------------------------------
@@ -77,10 +78,21 @@
 *-----------------------------------------------------------------------------*/
 void main( void )
 {
+	U32 i;
+
 	HW_Initialize();
 	APP_Initialize();
 
 	HW_StartProcess();
+
+	for( i = 0; i < 300; i++ ){
+		HW_WaitFrameStart();
+		HW_PORT_ActivateAll( TRUE );
+	}
+	for( i = 0; i < 150; i++ ){
+		HW_WaitFrameStart();
+		HW_PORT_ActivateAll( FALSE );
+	}
 
 	while( TRUE ){
 		HW_WaitFrameStart();

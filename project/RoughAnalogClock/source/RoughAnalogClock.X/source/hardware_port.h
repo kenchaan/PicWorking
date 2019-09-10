@@ -77,6 +77,7 @@ typedef const E_CLOCK_TYPE CE_CLOCK_TYPE;
 *	extern function prototype
 *-----------------------------------------------------------------------------*/
 void HW_PORT_Initialize( void );
+void HW_PORT_ActivateAll( BOOL isActive );
 void HW_PORT_Update( void );
 BOOL HW_PORT_IsActive( CE_INPUT_PORT port );
 void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive );

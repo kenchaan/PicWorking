@@ -85,7 +85,7 @@ typedef const E_OUTPUT_PORT_DIGIT CE_OUTPUT_PORT_DIGIT;
 *-----------------------------------------------------------------------------*/
 static U08 g_u08PortActiveCount_Ary[ eINPUT_PORT_MAX ];
 
-static E_CLOCK_TYPE g_eClockType = eCLOCK_TYPE_ANALOG;
+static E_CLOCK_TYPE g_eClockType = eCLOCK_TYPE_MIN;
 static U08 g_u08Hour_Ary[ 2 ]   = { 0, 0 };
 static U08 g_u08Minute_Ary[ 2 ] = { 0, 0 };
 static U08 g_u08Second_Ary[ 2 ] = { 0, 0 };
@@ -173,6 +173,52 @@ void HW_PORT_Initialize( void )
 
 	for( E_INPUT_PORT e = eINPUT_PORT_MIN; e < eINPUT_PORT_MAX; e++ ){
 		g_u08PortActiveCount_Ary[ e ] = 0;
+	}
+}
+
+/*------------------------------------------------------------------------------
+* OverView	: 出力ポート全設定
+* Parameter	: isActive	 : TRUE:全ON、FALSE:全OFF
+* Return	: None
+*-----------------------------------------------------------------------------*/
+void HW_PORT_ActivateAll( BOOL isActive )
+{
+	/* 消灯 */
+	REG_CLR_08( DIGIT_0_PORT, DIGIT_0_BIT );
+	REG_CLR_08( DIGIT_1_PORT, DIGIT_1_BIT );
+	REG_CLR_08( DIGIT_2_PORT, DIGIT_2_BIT );
+	REG_CLR_08( DIGIT_3_PORT, DIGIT_3_BIT );
+
+	/* データセット */
+	if( isActive ){
+		REG_WRITE_08( SEG_DATA_PORT, 0xFF );
+	}else{
+		REG_WRITE_08( SEG_DATA_PORT, 0x00 );
+		g_eCurrentOutputDigit = eOUTPUT_PORT_DIGIT_MIN;
+		return;
+	}
+
+	/* 点灯 */
+	switch( g_eCurrentOutputDigit ){
+	case eOUTPUT_PORT_DIGIT_0:
+		REG_SET_08( DIGIT_0_PORT, DIGIT_0_BIT );
+		break;
+	case eOUTPUT_PORT_DIGIT_1:
+		REG_SET_08( DIGIT_1_PORT, DIGIT_1_BIT );
+		break;
+	case eOUTPUT_PORT_DIGIT_2:
+		REG_SET_08( DIGIT_2_PORT, DIGIT_2_BIT );
+		break;
+	case eOUTPUT_PORT_DIGIT_3:
+		REG_SET_08( DIGIT_3_PORT, DIGIT_3_BIT );
+		break;
+	default:
+		break;
+	}
+
+	g_eCurrentOutputDigit++;
+	if( g_eCurrentOutputDigit >= eOUTPUT_PORT_DIGIT_MAX ){
+		g_eCurrentOutputDigit = eOUTPUT_PORT_DIGIT_MIN;
 	}
 }
 
