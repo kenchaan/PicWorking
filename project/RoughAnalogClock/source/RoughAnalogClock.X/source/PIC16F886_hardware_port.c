@@ -96,6 +96,8 @@ static E_OUTPUT_PORT_DIGIT g_eCurrentOutputDigit = eOUTPUT_PORT_DIGIT_MIN;
 *	static function prototype
 *-----------------------------------------------------------------------------*/
 static void update_output( void );
+static U08 get_output_data_analog( void );
+static U08 get_output_data_digital( void );
 static void update_input( void );
 
 /*------------------------------------------------------------------------------
@@ -291,48 +293,11 @@ static void update_output( void )
 	U08 data = 0x00;
 	switch( g_eClockType ){
 	case eCLOCK_TYPE_ANALOG:
-		{
-			U32 allCount = (U32)g_u08Hour_Ary[ 0 ] * 3600 + (U32)g_u08Minute_Ary[ 0 ] * 60 + (U32)g_u08Second_Ary[ 0 ];
-			if( allCount < 150 ){
-				allCount += 43200;
-			}
-			allCount -= 150;
-			U08 h = (U08)(  allCount / 3600 );
-			U08 m = (U08)(( allCount % 3600 ) / 60 );
-			switch( g_eCurrentOutputDigit ){
-			case eOUTPUT_PORT_DIGIT_0:
-			case eOUTPUT_PORT_DIGIT_1:
-				data = g_cu08SegDataAnalog_Ary[ (U08)( h % 6 )];
-				break;
-			case eOUTPUT_PORT_DIGIT_2:
-			case eOUTPUT_PORT_DIGIT_3:
-				data = g_cu08SegDataAnalog_Ary[ (U08)( (U08)( m / 5 ) % 6 )];
-				break;
-			default:
-				break;
-			}
-		}
+		data = get_output_data_analog();
 		break;
-
 	case eCLOCK_TYPE_DIGITAL:
-		switch( g_eCurrentOutputDigit ){
-		case eOUTPUT_PORT_DIGIT_0:
-			data = g_cu08SegDataDigital_Ary[ (U08)( g_u08Hour_Ary[ 0 ] / 10 )];
-			break;
-		case eOUTPUT_PORT_DIGIT_1:
-			data = g_cu08SegDataDigital_Ary[ (U08)( g_u08Hour_Ary[ 0 ] % 10 )];
-			break;
-		case eOUTPUT_PORT_DIGIT_2:
-			data = g_cu08SegDataDigital_Ary[ (U08)( g_u08Minute_Ary[ 0 ] / 10 )];
-			break;
-		case eOUTPUT_PORT_DIGIT_3:
-			data = g_cu08SegDataDigital_Ary[ (U08)( g_u08Minute_Ary[ 0 ] % 10 )];
-			break;
-		default:
-			break;
-		}
+		data = get_output_data_digital();
 		break;
-
 	default:
 		break;
 	}
@@ -359,6 +324,58 @@ static void update_output( void )
 	g_eCurrentOutputDigit++;
 	if( g_eCurrentOutputDigit >= eOUTPUT_PORT_DIGIT_MAX ){
 		g_eCurrentOutputDigit = eOUTPUT_PORT_DIGIT_MIN;
+	}
+}
+
+/*------------------------------------------------------------------------------
+* OverView	: アナログ用出力データ取得
+* Parameter	: None
+* Return	: 出力データ
+*-----------------------------------------------------------------------------*/
+static U08 get_output_data_analog( void )
+{
+	U32 allCount =	(U32)g_u08Hour_Ary[ 0 ] * 3600 +
+					(U32)g_u08Minute_Ary[ 0 ] * 60 +
+					(U32)g_u08Second_Ary[ 0 ];
+	if( allCount < 150 ){
+		allCount += 43200;
+	}
+	allCount -= 150;
+
+	U08 h = (U08)(  allCount / 3600 );
+	U08 m = (U08)(( allCount % 3600 ) / 60 );
+
+	switch( g_eCurrentOutputDigit ){
+	case eOUTPUT_PORT_DIGIT_0:
+	case eOUTPUT_PORT_DIGIT_1:
+		return (U08)(	g_cu08SegDataAnalog_Ary[ (U08)( h % 6 )] +
+						g_cu08SegDataAnalog_Ary[ (U08)( (U08)( m / 5 ) % 6 )]);
+	case eOUTPUT_PORT_DIGIT_2:
+	case eOUTPUT_PORT_DIGIT_3:
+		return g_cu08SegDataAnalog_Ary[ (U08)( (U08)( m / 5 ) % 6 )];
+	default:
+		return 0x00;
+	}
+}
+
+/*------------------------------------------------------------------------------
+* OverView	: デジタル用出力データ取得
+* Parameter	: None
+* Return	: 出力データ
+*-----------------------------------------------------------------------------*/
+static U08 get_output_data_digital( void )
+{
+	switch( g_eCurrentOutputDigit ){
+	case eOUTPUT_PORT_DIGIT_0:
+		return g_cu08SegDataDigital_Ary[ (U08)( g_u08Hour_Ary[ 0 ] / 10 )];
+	case eOUTPUT_PORT_DIGIT_1:
+		return g_cu08SegDataDigital_Ary[ (U08)( g_u08Hour_Ary[ 0 ] % 10 )];
+	case eOUTPUT_PORT_DIGIT_2:
+		return g_cu08SegDataDigital_Ary[ (U08)( g_u08Minute_Ary[ 0 ] / 10 )];
+	case eOUTPUT_PORT_DIGIT_3:
+		return g_cu08SegDataDigital_Ary[ (U08)( g_u08Minute_Ary[ 0 ] % 10 )];
+	default:
+		return 0x00;
 	}
 }
 
