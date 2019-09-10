@@ -92,7 +92,28 @@ void APP_FramePreProcess( void )
 		HW_TIM_EnableCount( FALSE );
 		HW_PORT_SetClockType( eCLOCK_TYPE_DIGITAL );
 
-		// TODO : 時間設定
+		U32 count = HW_TIM_GetTimeCount();
+		U08 h = (U08)(  count / 3600 );
+		U08 m = (U08)(( count % 3600 ) / 60 );
+		U08 s = 0; /* 秒は0 */
+
+		if( HW_PORT_IsActive( eINPUT_PORT_HOUR )){
+			h++;
+			if( h >= 12 ){
+				h = 0;
+			}
+		}
+		if( HW_PORT_IsActive( eINPUT_PORT_MINUTE )){
+			m++;
+			if( m >= 60 ){
+				m = 0;
+			}
+		}
+
+		U32 updated = (U32)h * 3600 + (U32)m * 60;
+		if( updated != count ){
+			HW_TIM_SetTimeCount( updated );
+		}
 
 	}else{
 		HW_TIM_EnableCount( TRUE );
@@ -108,7 +129,7 @@ void APP_FramePreProcess( void )
 void APP_FrameMainProcess( void )
 {
 	U32 count = HW_TIM_GetTimeCount();
-	if( count >= 86400 ){
+	if( count >= 43200 ){
 		HW_TIM_ClearTimeCount();
 		count = 0;
 	}
