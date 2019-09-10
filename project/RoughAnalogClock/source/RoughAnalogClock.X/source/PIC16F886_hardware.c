@@ -13,8 +13,8 @@
 	/*          MCLR =>│RE3  RB7│-> SEG_DP    */
 	/*       SW_HOUR ->│RA0  RB6│-> SEG_G     */
 	/*     SW_MINUTE ->│RA1  RB5│-> SEG_F     */
-	/*     SW_SECOND ->│RA2  RB4│-> SEG_E     */
-	/*     SW_SELECT ->│RA3  RB3│-> SEG_D     */
+	/*     SW_SELECT ->│RA2  RB4│-> SEG_E     */
+	/*            NC <-│RA3  RB3│-> SEG_D     */
 	/*            NC <-│RA4  RB2│-> SEG_C     */
 	/*            NC <-│RA5  RB1│-> SEG_B     */
 	/*           Vss ==│Vss  RB0│-> SEG_A     */

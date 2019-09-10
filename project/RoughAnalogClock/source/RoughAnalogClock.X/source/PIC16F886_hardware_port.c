@@ -33,10 +33,8 @@
 #define SW_HOUR_BIT				(0x01)
 #define SW_MINUTE_PORT			(PORTA)
 #define SW_MINUTE_BIT			(0x02)
-#define SW_SECOND_PORT			(PORTA)
-#define SW_SECOND_BIT			(0x04)
 #define SW_SELECT_PORT			(PORTA)
-#define SW_SELECT_BIT			(0x08)
+#define SW_SELECT_BIT			(0x04)
 
 #define ERROR_PROC_FAIL_PORT	(PORTC)
 #define ERROR_PROC_FAIL_BIT		(0x04)
@@ -198,7 +196,6 @@ BOOL HW_PORT_IsActive( CE_INPUT_PORT port )
 	switch( port ){
 	case eINPUT_PORT_HOUR:
 	case eINPUT_PORT_MINUTE:
-	case eINPUT_PORT_SECOND:
 		if( g_u08PortActiveCount_Ary[ port ] == CHATTER_TH ){
 			return TRUE;
 		}else if( g_u08PortActiveCount_Ary[ port ] >= CONTINUE_TH ){
@@ -290,11 +287,10 @@ static void update_output( void )
 	case eCLOCK_TYPE_ANALOG:
 		{
 			U32 allCount = (U32)g_u08Hour * 3600 + (U32)g_u08Minute * 60 + (U32)g_u08Second;
-			if( allCount >= 150 ){
-				allCount -= 150;
-			}else{
-				allCount += 43050;
+			if( allCount < 150 ){
+				allCount += 43200;
 			}
+			allCount -= 150;
 			U08 h = (U08)( allCount / 3600 );
 			U08 m = (U08)(( allCount % 3600 ) / 60 );
 			switch( g_eCurrentOutputDigit ){
@@ -311,6 +307,7 @@ static void update_output( void )
 			}
 		}
 		break;
+
 	case eCLOCK_TYPE_DIGITAL:
 		switch( g_eCurrentOutputDigit ){
 		case eOUTPUT_PORT_DIGIT_0:
@@ -329,6 +326,7 @@ static void update_output( void )
 			break;
 		}
 		break;
+
 	default:
 		break;
 	}
@@ -350,6 +348,11 @@ static void update_output( void )
 		break;
 	default:
 		break;
+	}
+
+	g_eCurrentOutputDigit++;
+	if( g_eCurrentOutputDigit >= eOUTPUT_PORT_DIGIT_MAX ){
+		g_eCurrentOutputDigit = eOUTPUT_PORT_DIGIT_MIN;
 	}
 }
 
@@ -374,14 +377,6 @@ static void update_input( void )
 		}
 	}else{
 		g_u08PortActiveCount_Ary[ eINPUT_PORT_MINUTE ] = 0;
-	}
-
-	if( REG_READ_08( SW_SECOND_PORT ) & SW_SECOND_BIT ){
-		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_SECOND ] < 0xFF ){
-			g_u08PortActiveCount_Ary[ eINPUT_PORT_SECOND ]++;
-		}
-	}else{
-		g_u08PortActiveCount_Ary[ eINPUT_PORT_SECOND ] = 0;
 	}
 
 	if( REG_READ_08( SW_SELECT_PORT ) & SW_SELECT_BIT ){
