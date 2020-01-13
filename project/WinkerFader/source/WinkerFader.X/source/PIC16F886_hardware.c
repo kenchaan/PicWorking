@@ -10,20 +10,20 @@
 
 	/*             Device overview      */
 	/*               ┌────┐       */
-	/*        MCLR =>│RE3  RB7│<- Vdd */
-	/*   SW_HAZARD ->│RA0  RB6│<- Vdd */
-	/* SW_WINKER_R ->│RA1  RB5│<- Vdd */
-	/* SW_WINKER_R ->│RA2  RB4│<- Vdd */
-	/*         GND ->│RA3  RB3│<- Vdd */
-	/*         GND ->│RA4  RB2│<- Vdd */
-	/*         GND ->│RA5  RB1│<- Vdd */
-	/*         Vss ==│Vss  RB0│<- Vdd */
+	/*        MCLR =>│RE3  RB7│-> NC  */
+	/*   SW_HAZARD ->│RA0  RB6│-> NC  */
+	/* SW_WINKER_R ->│RA1  RB5│-> NC  */
+	/* SW_WINKER_R ->│RA2  RB4│-> NC  */
+	/*          NC <-│RA3  RB3│-> NC  */
+	/*          NC <-│RA4  RB2│-> NC  */
+	/*          NC <-│RA5  RB1│-> NC  */
+	/*         Vss ==│Vss  RB0│-> NC  */
 	/*         OSC ==│OSC  Vdd│== Vdd */
 	/*         OSC ==│OSC  Vss│== Vss */
-	/*         GND ->│RC0  RC7│<- Vss */
-	/*         PWM <-│RC1  RC6│<- Vss */
-	/* OUTPUT_R_EN <-│RC2  RC5│<- Vss */
-	/* OUTPUT_L_EN <-│RC3  RC4│<- Vss */
+	/* OUTPUT_R_EN <-│RC0  RC7│-> NC  */
+	/* OUTPUT_L_EN <-│RC1  RC6│-> NC  */
+	/*         PWM <-│RC2  RC5│-> NC  */
+	/*          NC <-│RC3  RC4│-> NC  */
 	/*               └────┘       */
 
 /*------------------------------------------------------------------------------
@@ -36,13 +36,14 @@
 #include "hardware_interrupt.h"
 #include "hardware_port.h"
 #include "hardware_timer.h"
+#include "hardware_ccp.h"
 
 /*------------------------------------------------------------------------------
 *	pragma
 *-----------------------------------------------------------------------------*/
 // CONFIG1
 #pragma config FOSC = HS        // Oscillator Selection bits (HS oscillator: High-speed crystal/resonator on RA6/OSC2/CLKOUT and RA7/OSC1/CLKIN)
-#pragma config WDTE = ON        // Watchdog Timer Enable bit (WDT enabled)
+#pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT enabled)
 #pragma config PWRTE = ON       // Power-up Timer Enable bit (PWRT enabled)
 #pragma config MCLRE = ON       // RE3/MCLR pin function select bit (RE3/MCLR pin function is MCLR)
 #pragma config CP = OFF         // Code Protection bit (Program memory code protection is disabled)
@@ -118,6 +119,7 @@ void HW_Initialize( void )
 	HW_INT_Initialize();
 	HW_PORT_Initialize();
 	HW_TIM_Initialize();
+	HW_CCP_Initialize();
 }
 
 /*------------------------------------------------------------------------------
@@ -153,7 +155,6 @@ void HW_WaitFrameStart( void )
 *-----------------------------------------------------------------------------*/
 void HW_FramePreProcess( void )
 {
-	HW_TIM_Update();
 	HW_PORT_Update();
 }
 

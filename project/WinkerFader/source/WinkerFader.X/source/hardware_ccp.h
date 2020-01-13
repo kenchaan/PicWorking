@@ -1,16 +1,16 @@
-#ifndef _HARDWARE_TIMER_H_
-#define _HARDWARE_TIMER_H_
+#ifndef _HARDWARE_CCP_H_
+#define _HARDWARE_CCP_H_
 #ifdef __cplusplus
 extern "C" {	/* } */
 #endif
 /*******************************************************************************
 *	Author		|	Date		|	FileName
 *-------------------------------------------------------------------------------
-*	kenchaan	|	2020/01/13	|	hardware_timer.h
+*	ken_chaan	|	2020/01/13	|	hardware_ccp.h
 *-------------------------------------------------------------------------------
-*	Description	|	„Çø„Ç§„ÉûÂà∂Âæ°
+*	Description	|	[PIC16F886]CCPêßå‰
 *-------------------------------------------------------------------------------
-*	Copyright (c) 2020 kenchaan All Rights Reserved.
+*	Copyright (c) 2020 ken_chaan All Rights Reserved.
 *******************************************************************************/
 
 /*------------------------------------------------------------------------------
@@ -21,9 +21,7 @@ extern "C" {	/* } */
 /*------------------------------------------------------------------------------
 *	define
 *-----------------------------------------------------------------------------*/
-#define TMR0_DEFAULT			(61)
-#define TMR2_DEFAULT			(0)
-#define TMR2_PERIOD				(249)
+
 
 /*------------------------------------------------------------------------------
 *	macro
@@ -38,15 +36,7 @@ extern "C" {	/* } */
 /*------------------------------------------------------------------------------
 *	enum
 *-----------------------------------------------------------------------------*/
-typedef enum tagE_TIMER_TYPE {
-	eTIMER_TYPE_MIN = 0,
-	eTIMER_TYPE_TMR0 = eTIMER_TYPE_MIN,
-	eTIMER_TYPE_TMR1,
-	eTIMER_TYPE_TMR2,
-	eTIMER_TYPE_MAX,
-	eTIMER_TYPE_INVALID
-} E_TIMER_TYPE;
-typedef const E_TIMER_TYPE CE_TIMER_TYPE;
+
 
 /*------------------------------------------------------------------------------
 *	struct
@@ -61,9 +51,9 @@ typedef const E_TIMER_TYPE CE_TIMER_TYPE;
 /*------------------------------------------------------------------------------
 *	extern function prototype
 *-----------------------------------------------------------------------------*/
-void HW_TIM_Initialize( void);
-void HW_TIM_StartProcess( void );
-void HW_TIM_EnableTimer( CE_TIMER_TYPE eType, const BOOL isEnable );
+void HW_CCP_Initialize( void );
+void HW_CCP_EnableFlash( const BOOL isEnable );
+void HW_CCP_SetDuty( const U08 duty );
 
 
 /*------------------------------------------------------------------------------
@@ -72,4 +62,4 @@ void HW_TIM_EnableTimer( CE_TIMER_TYPE eType, const BOOL isEnable );
 #ifdef __cplusplus
 }
 #endif
-#endif	/* _HARDWARE_TIMER_H_ */
+#endif	/* _HARDWARE_CCP_H_ */

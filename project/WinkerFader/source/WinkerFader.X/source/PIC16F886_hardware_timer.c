@@ -83,6 +83,12 @@ void HW_TIM_Initialize( void)
 	REG_RMW_08( OPTION_REG, 0x3F, 0x07 );
 	REG_WRITE_08( TMR0, TMR0_DEFAULT );
 	REG_SET_08( INTCON, 0x20 );
+
+	/* TMR2設定(PWM用) */
+	/* 20MHz,1:16,249 → 0.8msec */
+	REG_WRITE_08( PR2, TMR2_PERIOD );
+	REG_WRITE_08( T2CON, 0x78 );
+	REG_SET_08( PIE1, 0x02 );
 }
 
 /*------------------------------------------------------------------------------
@@ -94,6 +100,50 @@ void HW_TIM_StartProcess( void )
 {
 	/* TMR0クリア */
 	REG_WRITE_08( TMR0, TMR0_DEFAULT );
+
+	/* TMR1クリア */
+	REG_WRITE_08( TMR2, TMR2_DEFAULT );
+}
+
+/*------------------------------------------------------------------------------
+* OverView	: タイマ有効/無効設定
+* Parameter	: eType		: タイマ種別
+* 			: isEnable	: TRUE:有効 FALSE:無効
+* Return	: None
+*-----------------------------------------------------------------------------*/
+void HW_TIM_EnableTimer( CE_TIMER_TYPE eType, const BOOL isEnable )
+{
+	if( isEnable ){
+		switch( eType ){
+		case eTIMER_TYPE_TMR0:
+			/* DO NOTHING */
+			break;
+		case eTIMER_TYPE_TMR1:
+			REG_SET_08( T1CON, 0x01 );
+			break;
+		case eTIMER_TYPE_TMR2:
+			REG_SET_08( T2CON, 0x04 );
+			break;
+		default:
+			break;
+		}
+
+	}else{
+		switch( eType ){
+		case eTIMER_TYPE_TMR0:
+			/* DO NOTHING */
+			break;
+		case eTIMER_TYPE_TMR1:
+			REG_CLR_08( T1CON, 0x01 );
+			break;
+		case eTIMER_TYPE_TMR2:
+			REG_CLR_08( T2CON, 0x04 );
+			break;
+		default:
+			break;
+		}
+	}
+
 }
 
 

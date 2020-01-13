@@ -119,10 +119,10 @@ void interrupt InterruptHandler( void )
 	//	REG_CLR_08( PIR1, 0x04 );
 	//	g_isInterrupted_Ary[ eINTERRUPT_TYPE_CCP1 ] = TRUE;
 
-	//}else if( REG_READ_08( PIR1 ) & 0x02 ){
-	//	/* TMR2IF */
-	//	REG_CLR_08( PIR1, 0x02 );
-	//	g_isInterrupted_Ary[ eINTERRUPT_TYPE_TMR2 ] = TRUE;
+	}else if( REG_READ_08( PIR1 ) & 0x02 ){
+		/* TMR2IF */
+		REG_CLR_08( PIR1, 0x02 );
+		g_isInterrupted_Ary[ eINTERRUPT_TYPE_TMR2 ] = TRUE;
 
 	//}else if( REG_READ_08( PIR1 ) & 0x01 ){
 	//	/* TMR1IF */

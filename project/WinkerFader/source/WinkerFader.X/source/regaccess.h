@@ -37,7 +37,7 @@ extern "C" {	/* } */
 #define REG_WRITE_16(addr,data)			((addr) = (U16)(data))
 #define REG_SET_08(addr,data)			((addr) |= (U08)(data))
 #define REG_CLR_08(addr,data)			((addr) &= (U08)~(data))
-#define REG_RMW_08(addr,mask,data)		((addr) = (U08)((REG_READ_08(addr) & (U08)(mask)) | ((U08)(data) & (U08)(mask))))
+#define REG_RMW_08(addr,mask,data)		((addr) = (U08)((REG_READ_08(addr) & (U08)~(mask)) | ((U08)(data) & (U08)(mask))))
 
 /*------------------------------------------------------------------------------
 *	typedef
