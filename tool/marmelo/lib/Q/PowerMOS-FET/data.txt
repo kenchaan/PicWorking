@@ -1,0 +1,10 @@
+<body>
+	explanation=ÉpÉèÅ[MOS-FETÅB
+	numLeads=3
+	rxLead2=2
+	ryLead2=0
+	rxLead3=4
+	ryLead3=0
+	xLeadInImg=14
+	yLeadInImg=14
+</body>
