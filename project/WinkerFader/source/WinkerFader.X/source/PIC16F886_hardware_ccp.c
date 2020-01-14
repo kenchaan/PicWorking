@@ -81,8 +81,8 @@
 void HW_CCP_Initialize( void )
 {
 	/* CCP1 */
-	REG_WRITE_08( CCP1CON, 0x3C );
-	REG_WRITE_08( CCPR1L, 0x20 );
+	REG_WRITE_08( CCP1CON, 0x0C );
+	REG_WRITE_08( CCPR1L, 0x00 );
 
 	/* CCP2 */
 	REG_WRITE_08( CCP2CON, 0x00 );

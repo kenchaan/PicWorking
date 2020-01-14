@@ -65,7 +65,7 @@ typedef const E_FLASH_TYPE CE_FLASH_TYPE;
 /*------------------------------------------------------------------------------
 *	static variable
 *-----------------------------------------------------------------------------*/
-static BOOL g_eFlashType = eFLASH_TYPE_NONE;
+static E_FLASH_TYPE g_eFlashType = eFLASH_TYPE_NONE;
 static U08 g_u08FlashFrameCount = 0;
 static U08 g_u08FlashCount = 0;
 
@@ -129,6 +129,23 @@ void APP_Initialize( void )
 *-----------------------------------------------------------------------------*/
 void APP_FramePreProcess( void )
 {
+	/* 点滅状態更新 */
+	if( g_eFlashType != eFLASH_TYPE_NONE ){
+		/* 点滅中は状態を変えない */
+		/* DO NOTHING */
+
+	}else{
+		/* スイッチ状態取得 */
+		if( HW_PORT_IsActive( eINPUT_PORT_HAZARD )){
+			g_eFlashType = eFLASH_TYPE_HAZARD;
+		}else if( HW_PORT_IsActive( eINPUT_PORT_WINKER_R )){
+			g_eFlashType = eFLASH_TYPE_WINKER_R;
+		}else if( HW_PORT_IsActive( eINPUT_PORT_WINKER_L )){
+			g_eFlashType = eFLASH_TYPE_WINKER_L;
+		}else{
+			g_eFlashType = eFLASH_TYPE_NONE;
+		}
+	}
 }
 
 /*------------------------------------------------------------------------------
@@ -139,99 +156,65 @@ void APP_FramePreProcess( void )
 void APP_FrameMainProcess( void )
 {
 	if( g_eFlashType == eFLASH_TYPE_NONE ){
-		/* 点滅を停止 */
-		HW_CCP_EnableFlash( FALSE );
-
 		g_u08FlashFrameCount = 0;
 		g_u08FlashCount = 0;
-
-		/* スイッチ処理 */
-		if( HW_PORT_IsActive( eINPUT_PORT_HAZARD )){
-			g_eFlashType = eFLASH_TYPE_HAZARD;
-		}else if( HW_PORT_IsActive( eINPUT_PORT_WINKER_R )){
-			g_eFlashType = eFLASH_TYPE_WINKER_R;
-		}else if( HW_PORT_IsActive( eINPUT_PORT_WINKER_L )){
-			g_eFlashType = eFLASH_TYPE_WINKER_L;
-		}else{
-			g_eFlashType = eFLASH_TYPE_NONE;
-		}
-
-		/* 点灯開始 */
-		if( g_eFlashType != eFLASH_TYPE_NONE ){
-			HW_CCP_EnableFlash( TRUE );
-		}
 	}
 
-	/* 点滅 */
+	/* 点滅処理の停止/開始 */
+	if( g_eFlashType == eFLASH_TYPE_NONE ){
+		HW_CCP_EnableFlash( FALSE );
+	}else{
+		HW_CCP_EnableFlash( TRUE );
+	}
+
 	switch( g_eFlashType ){
 	case eFLASH_TYPE_NONE:
 		HW_PORT_Set( eOUTPUT_PORT_WINKER_R, FALSE );
 		HW_PORT_Set( eOUTPUT_PORT_WINKER_L, FALSE );
 		break;
-
 	case eFLASH_TYPE_HAZARD:
 		HW_PORT_Set( eOUTPUT_PORT_WINKER_R, TRUE );
 		HW_PORT_Set( eOUTPUT_PORT_WINKER_L, TRUE );
+		break;
+	case eFLASH_TYPE_WINKER_R:
+		HW_PORT_Set( eOUTPUT_PORT_WINKER_R, TRUE );
+		HW_PORT_Set( eOUTPUT_PORT_WINKER_L, FALSE );
+		break;
+	case eFLASH_TYPE_WINKER_L:
+		HW_PORT_Set( eOUTPUT_PORT_WINKER_R, FALSE );
+		HW_PORT_Set( eOUTPUT_PORT_WINKER_L, TRUE );
+		break;
+	default:
+		break;
+	}
 
+	/* 点滅出力 */
+	if( g_eFlashType == eFLASH_TYPE_HAZARD ){
 		if( g_u08FlashCount == 0 ){
 			HW_CCP_SetDuty( g_u08HazardInitialPattern_Ary[ g_u08FlashFrameCount ]);
 		}else{
 			HW_CCP_SetDuty( g_cu08FlashPattern_Ary[ g_u08FlashFrameCount ]);
 		}
-
-		g_u08FlashFrameCount++;
-		if( g_u08FlashFrameCount >= FLASH_PATTERN_NUM ){
-			g_u08FlashFrameCount = 0;
-			g_eFlashType = eFLASH_TYPE_NONE;
-
-			if( g_u08FlashCount < 0xFF ){
-				g_u08FlashCount++;
-			}
-		}
-		break;
-
-	case eFLASH_TYPE_WINKER_R:
-		HW_PORT_Set( eOUTPUT_PORT_WINKER_R, TRUE );
-		HW_PORT_Set( eOUTPUT_PORT_WINKER_L, FALSE );
-
+	}else if(( g_eFlashType == eFLASH_TYPE_WINKER_R ) || ( g_eFlashType == eFLASH_TYPE_WINKER_L )){
 		HW_CCP_SetDuty( g_cu08FlashPattern_Ary[ g_u08FlashFrameCount ]);
+	}
 
-		g_u08FlashFrameCount++;
-		if( g_u08FlashFrameCount >= FLASH_PATTERN_NUM ){
-			g_u08FlashFrameCount = 0;
-			g_eFlashType = eFLASH_TYPE_NONE;
+	/* 状態更新 */
+	g_u08FlashFrameCount++;
+	if( g_u08FlashFrameCount >= FLASH_PATTERN_NUM ){
+		E_FLASH_TYPE type = g_eFlashType;
 
-			if( g_u08FlashCount < 0xFF ){
-				g_u08FlashCount++;
+		g_u08FlashFrameCount = 0;
+		g_eFlashType = eFLASH_TYPE_NONE;
+
+		if( g_u08FlashCount < 0xFF ){
+			g_u08FlashCount++;
+			if(( type == eFLASH_TYPE_WINKER_R ) || ( type == eFLASH_TYPE_WINKER_L )){
 				if( g_u08FlashCount <= WINKER_AUTO_FLASH ){
-					g_eFlashType = eFLASH_TYPE_WINKER_R;
+					g_eFlashType = type;
 				}
 			}
 		}
-		break;
-
-	case eFLASH_TYPE_WINKER_L:
-		HW_PORT_Set( eOUTPUT_PORT_WINKER_R, FALSE );
-		HW_PORT_Set( eOUTPUT_PORT_WINKER_L, TRUE );
-
-		HW_CCP_SetDuty( g_cu08FlashPattern_Ary[ g_u08FlashFrameCount ]);
-
-		g_u08FlashFrameCount++;
-		if( g_u08FlashFrameCount >= FLASH_PATTERN_NUM ){
-			g_u08FlashFrameCount = 0;
-			g_eFlashType = eFLASH_TYPE_NONE;
-
-			if( g_u08FlashCount < 0xFF ){
-				g_u08FlashCount++;
-				if( g_u08FlashCount <= WINKER_AUTO_FLASH ){
-					g_eFlashType = eFLASH_TYPE_WINKER_L;
-				}
-			}
-		}
-		break;
-
-	default:
-		break;
 	}
 }
 
