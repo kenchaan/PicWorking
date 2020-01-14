@@ -84,10 +84,10 @@ void HW_WDT_Initialize( void )
 
 /*------------------------------------------------------------------------------
 * OverView	: 点滅設定
-* Parameter	: isEnable	: TRUE:有効 FALSE:無効
+* Parameter	: None
 * Return	: None
 *-----------------------------------------------------------------------------*/
-void HW_WDT_Clear( const BOOL isEnable )
+void HW_WDT_Clear( void )
 {
 	CLRWDT();
 }

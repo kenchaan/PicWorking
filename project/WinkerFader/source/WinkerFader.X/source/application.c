@@ -76,19 +76,19 @@ static U08 g_u08FlashCount = 0;
 *	static const data
 *-----------------------------------------------------------------------------*/
 static const U08 g_cu08FlashPattern_Ary[ FLASH_PATTERN_NUM ] = {
-	100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
-	100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
-	100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
-	100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
-	100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
-	96, 91, 87, 83, 79, 75, 72, 68, 65, 61,
-	58, 55, 52, 49, 46, 43, 40, 37, 35, 33,
-	30, 28, 26, 24, 22, 20, 18, 16, 15, 13,
-	12, 11, 9, 8, 7, 6, 5, 4, 4, 3,
-	2, 2, 1, 1, 1, 0, 0, 0, 0, 0
+	100, 98, 96, 94, 91, 89, 87, 85, 83, 81,
+	79, 77, 75, 74, 72, 70, 68, 66, 65, 63,
+	61, 60, 58, 56, 55, 53, 52, 50, 49, 47,
+	46, 44, 43, 41, 40, 39, 37, 36, 35, 34,
+	33, 31, 30, 29, 28, 27, 26, 25, 24, 23,
+	22, 21, 20, 19, 18, 17, 16, 16, 15, 14,
+	13, 13, 12, 11, 11, 10, 9, 9, 8, 8,
+	7, 7, 6, 6, 5, 5, 4, 4, 4, 3,
+	3, 3, 2, 2, 2, 2, 1, 1, 1, 1,
+	1, 1, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
-static const U08 g_u08HazardInitialPattern_Ary[ FLASH_PATTERN_NUM ] = {
+static const U08 g_cu08HazardInitialPattern_Ary[ FLASH_PATTERN_NUM ] = {
 	100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
 	100, 100, 0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 100, 100, 100, 100, 100, 100,
@@ -189,7 +189,7 @@ void APP_FrameMainProcess( void )
 	/* 点滅出力 */
 	if( g_eFlashType == eFLASH_TYPE_HAZARD ){
 		if( g_u08FlashCount == 0 ){
-			HW_CCP_SetDuty( g_u08HazardInitialPattern_Ary[ g_u08FlashFrameCount ]);
+			HW_CCP_SetDuty( g_cu08HazardInitialPattern_Ary[ g_u08FlashFrameCount ]);
 		}else{
 			HW_CCP_SetDuty( g_cu08FlashPattern_Ary[ g_u08FlashFrameCount ]);
 		}
@@ -208,7 +208,7 @@ void APP_FrameMainProcess( void )
 		if( g_u08FlashCount < 0xFF ){
 			g_u08FlashCount++;
 			if(( type == eFLASH_TYPE_WINKER_R ) || ( type == eFLASH_TYPE_WINKER_L )){
-				if( g_u08FlashCount <= WINKER_AUTO_FLASH ){
+				if( g_u08FlashCount < WINKER_AUTO_FLASH ){
 					g_eFlashType = type;
 				}
 			}

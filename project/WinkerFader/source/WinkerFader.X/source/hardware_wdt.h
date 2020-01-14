@@ -52,7 +52,7 @@ extern "C" {	/* } */
 *	extern function prototype
 *-----------------------------------------------------------------------------*/
 void HW_WDT_Initialize( void );
-void HW_WDT_Clear( const BOOL isEnable );
+void HW_WDT_Clear( void );
 
 
 /*------------------------------------------------------------------------------
