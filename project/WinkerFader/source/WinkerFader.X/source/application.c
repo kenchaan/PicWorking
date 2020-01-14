@@ -14,10 +14,10 @@
 #include <xc.h>
 #include "types.h"
 #include "regaccess.h"
+#include "hardware_ccp.h"
 #include "hardware_interrupt.h"
 #include "hardware_port.h"
 #include "hardware_timer.h"
-#include "hardware_ccp.h"
 #include "application.h"
 
 /*------------------------------------------------------------------------------
@@ -28,9 +28,7 @@
 /*------------------------------------------------------------------------------
 *	define
 *-----------------------------------------------------------------------------*/
-#define HAZARD_AUTO_FLASH		(1)
 #define WINKER_AUTO_FLASH		(5)
-
 #define FLASH_PATTERN_NUM		(100)
 
 /*------------------------------------------------------------------------------

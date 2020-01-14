@@ -33,17 +33,18 @@
 #include "types.h"
 #include "regaccess.h"
 #include "hardware.h"
+#include "hardware_ccp.h"
 #include "hardware_interrupt.h"
 #include "hardware_port.h"
 #include "hardware_timer.h"
-#include "hardware_ccp.h"
+#include "hardware_wdt.h"
 
 /*------------------------------------------------------------------------------
 *	pragma
 *-----------------------------------------------------------------------------*/
 // CONFIG1
 #pragma config FOSC = HS        // Oscillator Selection bits (HS oscillator: High-speed crystal/resonator on RA6/OSC2/CLKOUT and RA7/OSC1/CLKIN)
-#pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT enabled)
+#pragma config WDTE = ON        // Watchdog Timer Enable bit (WDT enabled)
 #pragma config PWRTE = ON       // Power-up Timer Enable bit (PWRT enabled)
 #pragma config MCLRE = ON       // RE3/MCLR pin function select bit (RE3/MCLR pin function is MCLR)
 #pragma config CP = OFF         // Code Protection bit (Program memory code protection is disabled)
@@ -116,6 +117,7 @@ void HW_Initialize( void )
 	/* 基本設定 */
 	REG_WRITE_08( PCON, 0x03 );
 
+	HW_WDT_Initialize();
 	HW_INT_Initialize();
 	HW_PORT_Initialize();
 	HW_TIM_Initialize();
@@ -175,7 +177,7 @@ void HW_FrameMainProcess( void )
 *-----------------------------------------------------------------------------*/
 void HW_FramePostProcess( void )
 {
-	/* DO NOTHING */
+	HW_WDT_Clear();
 }
 
 
