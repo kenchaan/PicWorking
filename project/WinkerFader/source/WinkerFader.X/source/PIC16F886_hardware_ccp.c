@@ -95,7 +95,7 @@ void HW_CCP_Initialize( void )
 *-----------------------------------------------------------------------------*/
 void HW_CCP_EnableFlash( const BOOL isEnable )
 {
-	HW_TIM_EnableTimer( eTIMER_TYPE_TMR2, isEnable );
+	HW_TIM_EnableTimer( eTIMER_TYPE_PWM, isEnable );
 	if( !isEnable ){
 		HW_PORT_Set( eOUTPUT_PORT_PWM, FALSE );
 	}

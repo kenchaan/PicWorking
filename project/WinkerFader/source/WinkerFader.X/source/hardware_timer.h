@@ -40,9 +40,7 @@ extern "C" {	/* } */
 *-----------------------------------------------------------------------------*/
 typedef enum tagE_TIMER_TYPE {
 	eTIMER_TYPE_MIN = 0,
-	eTIMER_TYPE_TMR0 = eTIMER_TYPE_MIN,
-	eTIMER_TYPE_TMR1,
-	eTIMER_TYPE_TMR2,
+	eTIMER_TYPE_PWM = eTIMER_TYPE_MIN,
 	eTIMER_TYPE_MAX,
 	eTIMER_TYPE_INVALID
 } E_TIMER_TYPE;

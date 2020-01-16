@@ -121,6 +121,7 @@ void interrupt InterruptHandler( void )
 
 	}else if( REG_READ_08( PIR1 ) & 0x02 ){
 		/* TMR2IF */
+		REG_WRITE_08( TMR1, TMR2_DEFAULT );
 		REG_CLR_08( PIR1, 0x02 );
 		g_isInterrupted_Ary[ eINTERRUPT_TYPE_TMR2 ] = TRUE;
 

@@ -115,13 +115,7 @@ void HW_TIM_EnableTimer( CE_TIMER_TYPE eType, const BOOL isEnable )
 {
 	if( isEnable ){
 		switch( eType ){
-		case eTIMER_TYPE_TMR0:
-			/* DO NOTHING */
-			break;
-		case eTIMER_TYPE_TMR1:
-			REG_SET_08( T1CON, 0x01 );
-			break;
-		case eTIMER_TYPE_TMR2:
+		case eTIMER_TYPE_PWM:
 			REG_SET_08( T2CON, 0x04 );
 			break;
 		default:
@@ -130,13 +124,7 @@ void HW_TIM_EnableTimer( CE_TIMER_TYPE eType, const BOOL isEnable )
 
 	}else{
 		switch( eType ){
-		case eTIMER_TYPE_TMR0:
-			/* DO NOTHING */
-			break;
-		case eTIMER_TYPE_TMR1:
-			REG_CLR_08( T1CON, 0x01 );
-			break;
-		case eTIMER_TYPE_TMR2:
+		case eTIMER_TYPE_PWM:
 			REG_CLR_08( T2CON, 0x04 );
 			break;
 		default:
