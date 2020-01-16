@@ -1,7 +1,7 @@
 /*******************************************************************************
 *	Author		|	Date		|	FileName
 *-------------------------------------------------------------------------------
-*	kenchaan	|	2020/01/13	|	PIC16F886_hardware_timer.c
+*	kenchaan	|	2020/01/16	|	PIC16F886_hardware_timer.c
 *-------------------------------------------------------------------------------
 *	Description	|	[PIC16F886]タイマ制御
 *-------------------------------------------------------------------------------
@@ -79,15 +79,15 @@
 void HW_TIM_Initialize( void)
 {
 	/* TMR0設定(フレーム処理用) */
-	/* 20MHz,1:256,61 → 9.984msec */
-	REG_RMW_08( OPTION_REG, 0x3F, 0x07 );
+	/* 20MHz,1:32,100 → 0.9984msec */
+	REG_RMW_08( OPTION_REG, 0x3F, 0x04 );
 	REG_WRITE_08( TMR0, TMR0_DEFAULT );
 	REG_SET_08( INTCON, 0x20 );
 
 	/* TMR2設定(PWM用) */
-	/* 20MHz,1:16,249 → 0.8msec */
+	/* 20MHz,1:2,249 → 0.1msec */
 	REG_WRITE_08( PR2, TMR2_PERIOD );
-	REG_WRITE_08( T2CON, 0x78 );
+	REG_WRITE_08( T2CON, 0x08 );
 	REG_SET_08( PIE1, 0x02 );
 }
 

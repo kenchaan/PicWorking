@@ -1,30 +1,30 @@
 /*******************************************************************************
 *	Author		|	Date		|	FileName
 *-------------------------------------------------------------------------------
-*	kenchaan	|	2020/01/13	|	PIC16F886_hardware.c
+*	kenchaan	|	2020/01/16	|	PIC16F886_hardware.c
 *-------------------------------------------------------------------------------
 *	Description	|	[PIC16F886]ハードウェア制御
 *-------------------------------------------------------------------------------
 *	Copyright (c) 2020 kenchaan All Rights Reserved.
 *******************************************************************************/
 
-	/*             Device overview      */
-	/*               ┌────┐       */
-	/*        MCLR =>│RE3  RB7│-> NC  */
-	/*   SW_HAZARD ->│RA0  RB6│-> NC  */
-	/* SW_WINKER_R ->│RA1  RB5│-> NC  */
-	/* SW_WINKER_R ->│RA2  RB4│-> NC  */
-	/*          NC <-│RA3  RB3│-> NC  */
-	/*          NC <-│RA4  RB2│-> NC  */
-	/*          NC <-│RA5  RB1│-> NC  */
-	/*         Vss ==│Vss  RB0│-> NC  */
-	/*         OSC ==│OSC  Vdd│== Vdd */
-	/*         OSC ==│OSC  Vss│== Vss */
-	/* OUTPUT_R_EN <-│RC0  RC7│-> NC  */
-	/* OUTPUT_L_EN <-│RC1  RC6│-> NC  */
-	/*         PWM <-│RC2  RC5│-> NC  */
-	/*          NC <-│RC3  RC4│-> NC  */
-	/*               └────┘       */
+	/*             Device overview           */
+	/*               ┌────┐            */
+	/*        MCLR =>│RE3  RB7│-> NC       */
+	/*    LUMI_VOL ->│RA0  RB6│-> NC       */
+	/*  TIMING_VOL ->│RA1  RB5│-> NC       */
+	/*          NC <-│RA2  RB4│-> NC       */
+	/*          NC <-│RA3  RB3│-> NC       */
+	/*          NC <-│RA4  RB2│<- WINKER_L */
+	/*          NC <-│RA5  RB1│<- WINKER_R */
+	/*         Vss ==│Vss  RB0│<- ILL      */
+	/*         OSC ==│OSC  Vdd│== Vdd      */
+	/*         OSC ==│OSC  Vss│== Vss      */
+	/* OUTPUT_R_EN <-│RC0  RC7│-> NC       */
+	/* OUTPUT_L_EN <-│RC1  RC6│-> NC       */
+	/*         PWM <-│RC2  RC5│-> NC       */
+	/*          NC <-│RC3  RC4│-> NC       */
+	/*               └────┘            */
 
 /*------------------------------------------------------------------------------
 *	include

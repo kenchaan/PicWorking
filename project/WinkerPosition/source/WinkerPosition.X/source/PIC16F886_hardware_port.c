@@ -1,7 +1,7 @@
 /*******************************************************************************
 *	Author		|	Date		|	FileName
 *-------------------------------------------------------------------------------
-*	kenchaan	|	2020/01/13	|	PIC16F886_hardware_port.c
+*	kenchaan	|	2020/01/16	|	PIC16F886_hardware_port.c
 *-------------------------------------------------------------------------------
 *	Description	|	[PIC16F886]ポート制御
 *-------------------------------------------------------------------------------
@@ -26,15 +26,13 @@
 *	define
 *-----------------------------------------------------------------------------*/
 #define CHATTER_TH				(3)
-#define CONTINUE_TH				(200)
-#define CONTINUE_INTERVAL		(10)
 
-#define SW_HAZARD_PORT			(PORTA)
-#define SW_HAZARD_BIT			(0x01)
-#define SW_WINKER_R_PORT		(PORTA)
-#define SW_WINKER_R_BIT			(0x02)
-#define SW_WINKER_L_PORT		(PORTA)
-#define SW_WINKER_L_BIT			(0x04)
+#define INPUT_ILL_PORT			(PORTB)
+#define INPUT_ILL_BIT			(0x01)
+#define INPUT_WINKER_R_PORT		(PORTB)
+#define INPUT_WINKER_R_BIT		(0x02)
+#define INPUT_WINKER_L_PORT		(PORTB)
+#define INPUT_WINKER_L_BIT		(0x04)
 
 #define OUTPUT_PWM_PORT			(PORTC)
 #define OUTPUT_PWM_BIT			(0x04)
@@ -105,7 +103,7 @@ void HW_PORT_Initialize( void )
 	REG_WRITE_08( WPUB, 0x00 );
 	REG_WRITE_08( IOCB, 0x00 );
 	REG_WRITE_08( PORTB, 0x00 );
-	REG_WRITE_08( TRISB, 0x00 );
+	REG_WRITE_08( TRISB, 0x07 );
 
 	/* ポートC */
 	REG_WRITE_08( PORTC, 0x00 );
@@ -126,15 +124,15 @@ void HW_PORT_Initialize( void )
 *-----------------------------------------------------------------------------*/
 void HW_PORT_Update( void )
 {
-	if( REG_READ_08( SW_HAZARD_PORT ) & SW_HAZARD_BIT ){
-		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_HAZARD ] < 0xFF ){
-			g_u08PortActiveCount_Ary[ eINPUT_PORT_HAZARD ]++;
+	if( REG_READ_08( INPUT_ILL_PORT ) & INPUT_ILL_BIT ){
+		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_ILL ] < 0xFF ){
+			g_u08PortActiveCount_Ary[ eINPUT_PORT_ILL ]++;
 		}
 	}else{
-		g_u08PortActiveCount_Ary[ eINPUT_PORT_HAZARD ] = 0;
+		g_u08PortActiveCount_Ary[ eINPUT_PORT_ILL ] = 0;
 	}
 
-	if( REG_READ_08( SW_WINKER_R_PORT ) & SW_WINKER_R_BIT ){
+	if( REG_READ_08( INPUT_WINKER_R_PORT ) & INPUT_WINKER_R_BIT ){
 		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_WINKER_R ] < 0xFF ){
 			g_u08PortActiveCount_Ary[ eINPUT_PORT_WINKER_R ]++;
 		}
@@ -142,7 +140,7 @@ void HW_PORT_Update( void )
 		g_u08PortActiveCount_Ary[ eINPUT_PORT_WINKER_R ] = 0;
 	}
 
-	if( REG_READ_08( SW_WINKER_L_PORT ) & SW_WINKER_L_BIT ){
+	if( REG_READ_08( INPUT_WINKER_L_PORT ) & INPUT_WINKER_L_BIT ){
 		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_WINKER_L ] < 0xFF ){
 			g_u08PortActiveCount_Ary[ eINPUT_PORT_WINKER_L ]++;
 		}

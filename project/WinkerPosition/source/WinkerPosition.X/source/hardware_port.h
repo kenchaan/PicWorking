@@ -6,7 +6,7 @@ extern "C" {	/* } */
 /*******************************************************************************
 *	Author		|	Date		|	FileName
 *-------------------------------------------------------------------------------
-*	kenchaan	|	2020/01/13	|	hardware_port.h
+*	kenchaan	|	2020/01/16	|	hardware_port.h
 *-------------------------------------------------------------------------------
 *	Description	|	ポート制御
 *-------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ extern "C" {	/* } */
 *-----------------------------------------------------------------------------*/
 typedef enum tagE_INPUT_PORT {
 	eINPUT_PORT_MIN = 0,
-	eINPUT_PORT_HAZARD = eINPUT_PORT_MIN,
+	eINPUT_PORT_ILL = eINPUT_PORT_MIN,
 	eINPUT_PORT_WINKER_R,
 	eINPUT_PORT_WINKER_L,
 	eINPUT_PORT_MAX,
