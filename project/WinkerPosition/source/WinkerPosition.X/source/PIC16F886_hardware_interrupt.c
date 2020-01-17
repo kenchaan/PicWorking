@@ -1,7 +1,7 @@
 /*******************************************************************************
 *	Author		|	Date		|	FileName
 *-------------------------------------------------------------------------------
-*	kenchaan	|	2020/01/13	|	PIC16F886_hardware_interrupt.c
+*	kenchaan	|	2020/01/17	|	PIC16F886_hardware_interrupt.c
 *-------------------------------------------------------------------------------
 *	Description	|	[PIC16F886]割り込み制御
 *-------------------------------------------------------------------------------
@@ -121,6 +121,7 @@ void interrupt InterruptHandler( void )
 
 	}else if( REG_READ_08( PIR1 ) & 0x02 ){
 		/* TMR2IF */
+		REG_WRITE_08( TMR0, TMR2_DEFAULT );
 		REG_CLR_08( PIR1, 0x02 );
 		g_isInterrupted_Ary[ eINTERRUPT_TYPE_TMR2 ] = TRUE;
 
