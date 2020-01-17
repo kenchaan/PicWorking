@@ -8,7 +8,7 @@ extern "C" {	/* } */
 *-------------------------------------------------------------------------------
 *	kenchaan	|	2020/01/13	|	hardware_port.h
 *-------------------------------------------------------------------------------
-*	Description	|	ポート制御
+*	Description	|	ポ�Eト制御
 *-------------------------------------------------------------------------------
 *	Copyright (c) 2020 kenchaan All Rights Reserved.
 *******************************************************************************/
@@ -51,8 +51,8 @@ typedef const E_INPUT_PORT CE_INPUT_PORT;
 typedef enum tagE_OUTPUT_PORT {
 	eOUTPUT_PORT_MIN = 0,
 	eOUTPUT_PORT_PWM = eOUTPUT_PORT_MIN,
-	eOUTPUT_PORT_WINKER_R,
-	eOUTPUT_PORT_WINKER_L,
+	eOUTPUT_PORT_R_EN,
+	eOUTPUT_PORT_L_EN,
 	eOUTPUT_PORT_POS_R_EN,
 	eOUTPUT_PORT_POS_L_EN,
 	eOUTPUT_PORT_MAX,

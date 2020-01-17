@@ -3,7 +3,7 @@
 *-------------------------------------------------------------------------------
 *	kenchaan	|	2020/01/13	|	application.c
 *-------------------------------------------------------------------------------
-*	Description	|	アプリケーション処理
+*	Description	|	アプリケーション処琁E
 *-------------------------------------------------------------------------------
 *	Copyright (c) 2020 kenchaan All Rights Reserved.
 *******************************************************************************/
@@ -111,7 +111,7 @@ static const U08 g_cu08HazardInitialPattern_Ary[ FLASH_PATTERN_NUM ] = {
 *-----------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------
-* OverView	: アプリケーション初期化
+* OverView	: アプリケーション初期匁E
 * Parameter	: None
 * Return	: None
 *-----------------------------------------------------------------------------*/
@@ -121,19 +121,19 @@ void APP_Initialize( void )
 }
 
 /*------------------------------------------------------------------------------
-* OverView	: フレーム事前処理
+* OverView	: フレーム事前処琁E
 * Parameter	: None
 * Return	: None
 *-----------------------------------------------------------------------------*/
 void APP_FramePreProcess( void )
 {
-	/* 点滅状態更新 */
+	/* 点滁E��態更新 */
 	if( g_eFlashType != eFLASH_TYPE_NONE ){
-		/* 点滅中は状態を変えない */
+		/* 点滁E��は状態を変えなぁE*/
 		/* DO NOTHING */
 
 	}else{
-		/* スイッチ状態取得 */
+		/* スイチE��状態取征E*/
 		if( HW_PORT_IsActive( eINPUT_PORT_HAZARD )){
 			g_eFlashType = eFLASH_TYPE_HAZARD;
 		}else if( HW_PORT_IsActive( eINPUT_PORT_WINKER_R )){
@@ -147,7 +147,7 @@ void APP_FramePreProcess( void )
 }
 
 /*------------------------------------------------------------------------------
-* OverView	: フレーム処理
+* OverView	: フレーム処琁E
 * Parameter	: None
 * Return	: None
 *-----------------------------------------------------------------------------*/
@@ -163,7 +163,7 @@ void APP_FrameMainProcess( void )
 		g_u08FlashCount = 0;
 	}
 
-	/* 点滅処理の停止/開始 */
+	/* 点滁E�E琁E�E停止/開姁E*/
 	if( g_eFlashType == eFLASH_TYPE_NONE ){
 		HW_CCP_EnableFlash( FALSE );
 	}else{
@@ -172,26 +172,26 @@ void APP_FrameMainProcess( void )
 
 	switch( g_eFlashType ){
 	case eFLASH_TYPE_NONE:
-		HW_PORT_Set( eOUTPUT_PORT_WINKER_R, FALSE );
-		HW_PORT_Set( eOUTPUT_PORT_WINKER_L, FALSE );
+		HW_PORT_Set( eOUTPUT_PORT_R_EN, FALSE );
+		HW_PORT_Set( eOUTPUT_PORT_L_EN, FALSE );
 		HW_PORT_Set( eOUTPUT_PORT_POS_R_EN, isPos );
 		HW_PORT_Set( eOUTPUT_PORT_POS_L_EN, isPos );
 		break;
 	case eFLASH_TYPE_HAZARD:
-		HW_PORT_Set( eOUTPUT_PORT_WINKER_R, TRUE );
-		HW_PORT_Set( eOUTPUT_PORT_WINKER_L, TRUE );
+		HW_PORT_Set( eOUTPUT_PORT_R_EN, TRUE );
+		HW_PORT_Set( eOUTPUT_PORT_L_EN, TRUE );
 		HW_PORT_Set( eOUTPUT_PORT_POS_R_EN, FALSE );
 		HW_PORT_Set( eOUTPUT_PORT_POS_L_EN, FALSE );
 		break;
 	case eFLASH_TYPE_WINKER_R:
-		HW_PORT_Set( eOUTPUT_PORT_WINKER_R, TRUE );
-		HW_PORT_Set( eOUTPUT_PORT_WINKER_L, FALSE );
+		HW_PORT_Set( eOUTPUT_PORT_R_EN, TRUE );
+		HW_PORT_Set( eOUTPUT_PORT_L_EN, FALSE );
 		HW_PORT_Set( eOUTPUT_PORT_POS_R_EN, FALSE );
 		HW_PORT_Set( eOUTPUT_PORT_POS_L_EN, isPos );
 		break;
 	case eFLASH_TYPE_WINKER_L:
-		HW_PORT_Set( eOUTPUT_PORT_WINKER_R, FALSE );
-		HW_PORT_Set( eOUTPUT_PORT_WINKER_L, TRUE );
+		HW_PORT_Set( eOUTPUT_PORT_R_EN, FALSE );
+		HW_PORT_Set( eOUTPUT_PORT_L_EN, TRUE );
 		HW_PORT_Set( eOUTPUT_PORT_POS_R_EN, isPos );
 		HW_PORT_Set( eOUTPUT_PORT_POS_L_EN, FALSE );
 		break;
@@ -199,7 +199,7 @@ void APP_FrameMainProcess( void )
 		break;
 	}
 
-	/* 点滅出力 */
+	/* 点滁E�E劁E*/
 	if( g_eFlashType == eFLASH_TYPE_HAZARD ){
 		if( g_u08FlashCount == 0 ){
 			HW_CCP_SetDuty( g_cu08HazardInitialPattern_Ary[ g_u08FlashFrameCount ]);
@@ -230,7 +230,7 @@ void APP_FrameMainProcess( void )
 }
 
 /*------------------------------------------------------------------------------
-* OverView	: フレーム事後処理
+* OverView	: フレーム事後�E琁E
 * Parameter	: None
 * Return	: None
 *-----------------------------------------------------------------------------*/
