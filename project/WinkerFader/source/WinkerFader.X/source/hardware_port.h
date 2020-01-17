@@ -8,7 +8,7 @@ extern "C" {	/* } */
 *-------------------------------------------------------------------------------
 *	kenchaan	|	2020/01/13	|	hardware_port.h
 *-------------------------------------------------------------------------------
-*	Description	|	ポ�Eト制御
+*	Description	|	ポート制御
 *-------------------------------------------------------------------------------
 *	Copyright (c) 2020 kenchaan All Rights Reserved.
 *******************************************************************************/
@@ -41,7 +41,6 @@ typedef enum tagE_INPUT_PORT {
 	eINPUT_PORT_HAZARD = eINPUT_PORT_MIN,
 	eINPUT_PORT_WINKER_R,
 	eINPUT_PORT_WINKER_L,
-	eINPUT_PORT_ILL,
 	eINPUT_PORT_POS_EN,
 	eINPUT_PORT_MAX,
 	eINPUT_PORT_INVALID
