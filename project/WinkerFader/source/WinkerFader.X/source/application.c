@@ -153,10 +153,8 @@ void APP_FramePreProcess( void )
 *-----------------------------------------------------------------------------*/
 void APP_FrameMainProcess( void )
 {
-	BOOL isPos = FALSE;
-	if( HW_PORT_IsActive( eINPUT_PORT_ILL ) && HW_PORT_IsActive( eINPUT_PORT_POS_EN )){
-		isPos = TRUE;
-	}
+	BOOL isPos = (BOOL)(HW_PORT_IsActive( eINPUT_PORT_ILL ) &&
+	                    HW_PORT_IsActive( eINPUT_PORT_POS_EN ));
 
 	if( g_eFlashType == eFLASH_TYPE_NONE ){
 		g_u08FlashFrameCount = 0;
