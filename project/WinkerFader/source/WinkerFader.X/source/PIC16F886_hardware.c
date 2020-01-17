@@ -13,10 +13,10 @@
 	/*        MCLR =>│RE3  RB7│-> NC              */
 	/*   SW_HAZARD ->│RA0  RB6│-> NC              */
 	/* SW_WINKER_R ->│RA1  RB5│-> NC              */
-	/* SW_WINKER_R ->│RA2  RB4│-> NC              */
+	/* SW_WINKER_L ->│RA2  RB4│-> NC              */
 	/*         ILL ->│RA3  RB3│-> NC              */
 	/*   SW_POS_EN ->│RA4  RB2│-> NC              */
-	/* POS_LUM_VOL ->│RA5  RB1│-> NC              */
+	/*          NC <-│RA5  RB1│-> NC              */
 	/*         Vss ==│Vss  RB0│-> NC              */
 	/*         OSC ==│OSC  Vdd│== Vdd             */
 	/*         OSC ==│OSC  Vss│== Vss             */
