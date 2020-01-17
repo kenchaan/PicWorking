@@ -8,23 +8,23 @@
 *	Copyright (c) 2020 kenchaan All Rights Reserved.
 *******************************************************************************/
 
-	/*             Device overview      */
-	/*               ┌────┐       */
-	/*        MCLR =>│RE3  RB7│-> NC  */
-	/*   SW_HAZARD ->│RA0  RB6│-> NC  */
-	/* SW_WINKER_R ->│RA1  RB5│-> NC  */
-	/* SW_WINKER_R ->│RA2  RB4│-> NC  */
-	/*          NC <-│RA3  RB3│-> NC  */
-	/*          NC <-│RA4  RB2│-> NC  */
-	/*          NC <-│RA5  RB1│-> NC  */
-	/*         Vss ==│Vss  RB0│-> NC  */
-	/*         OSC ==│OSC  Vdd│== Vdd */
-	/*         OSC ==│OSC  Vss│== Vss */
-	/* OUTPUT_R_EN <-│RC0  RC7│-> NC  */
-	/* OUTPUT_L_EN <-│RC1  RC6│-> NC  */
-	/*         PWM <-│RC2  RC5│-> NC  */
-	/*          NC <-│RC3  RC4│-> NC  */
-	/*               └────┘       */
+	/*             Device overview                  */
+	/*               ┌────┐                   */
+	/*        MCLR =>│RE3  RB7│-> NC              */
+	/*   SW_HAZARD ->│RA0  RB6│-> NC              */
+	/* SW_WINKER_R ->│RA1  RB5│-> NC              */
+	/* SW_WINKER_R ->│RA2  RB4│-> NC              */
+	/*         ILL ->│RA3  RB3│-> NC              */
+	/*   SW_POS_EN ->│RA4  RB2│-> NC              */
+	/* POS_LUM_VOL ->│RA5  RB1│-> NC              */
+	/*         Vss ==│Vss  RB0│-> NC              */
+	/*         OSC ==│OSC  Vdd│== Vdd             */
+	/*         OSC ==│OSC  Vss│== Vss             */
+	/*          NC <-│RC0  RC7│-> OUTPUT_POS_L_EN */
+	/*          NC <-│RC1  RC6│-> OUTPUT_POS_R_EN */
+	/*         PWM <-│RC2  RC5│-> OUTPUT_L_EN     */
+	/*          NC <-│RC3  RC4│-> OUTPUT_R_EN     */
+	/*               └────┘                   */
 
 /*------------------------------------------------------------------------------
 *	include

@@ -25,21 +25,29 @@
 /*------------------------------------------------------------------------------
 *	define
 *-----------------------------------------------------------------------------*/
-#define CHATTER_TH				(3)
+#define CHATTER_TH				(5)
 
 #define INPUT_SW_HAZARD_PORT	(PORTA)
 #define INPUT_SW_HAZARD_BIT		(0x01)
-#define INPUT_SW_WINKER_R_PORT	(PORTA)
-#define INPUT_SW_WINKER_R_BIT	(0x02)
-#define INPUT_SW_WINKER_L_PORT	(PORTA)
-#define INPUT_SW_WINKER_L_BIT	(0x04)
+#define INPUT_SW_R_PORT			(PORTA)
+#define INPUT_SW_R_BIT			(0x02)
+#define INPUT_SW_L_PORT			(PORTA)
+#define INPUT_SW_L_BIT			(0x04)
+#define INPUT_ILL_PORT			(PORTA)
+#define INPUT_ILL_BIT			(0x08)
+#define INPUT_SW_POS_EN_PORT	(PORTA)
+#define INPUT_SW_POS_EN_BIT		(0x10)
 
 #define OUTPUT_PWM_PORT			(PORTC)
 #define OUTPUT_PWM_BIT			(0x04)
-#define OUTPUT_WINKER_R_PORT	(PORTC)
-#define OUTPUT_WINKER_R_BIT		(0x01)
-#define OUTPUT_WINKER_L_PORT	(PORTC)
-#define OUTPUT_WINKER_L_BIT		(0x02)
+#define OUTPUT_R_PORT			(PORTC)
+#define OUTPUT_R_BIT			(0x10)
+#define OUTPUT_L_PORT			(PORTC)
+#define OUTPUT_L_BIT			(0x20)
+#define OUTPUT_POS_R_PORT		(PORTC)
+#define OUTPUT_POS_R_BIT		(0x40)
+#define OUTPUT_POS_L_PORT		(PORTC)
+#define OUTPUT_POS_L_BIT		(0x80)
 
 /*------------------------------------------------------------------------------
 *	macro
@@ -95,7 +103,7 @@ void HW_PORT_Initialize( void )
 	/* ポートA */
 	REG_WRITE_08( ANSEL, 0x00 );
 	REG_WRITE_08( PORTA, 0x00 );
-	REG_WRITE_08( TRISA, 0xC7 );
+	REG_WRITE_08( TRISA, 0xFF );
 
 	/* ポートB */
 	REG_RMW_08( OPTION_REG, 0xC0, 0x80 );
@@ -132,7 +140,7 @@ void HW_PORT_Update( void )
 		g_u08PortActiveCount_Ary[ eINPUT_PORT_HAZARD ] = 0;
 	}
 
-	if( REG_READ_08( INPUT_SW_WINKER_R_PORT ) & INPUT_SW_WINKER_R_BIT ){
+	if( REG_READ_08( INPUT_SW_R_PORT ) & INPUT_SW_R_BIT ){
 		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_WINKER_R ] < 0xFF ){
 			g_u08PortActiveCount_Ary[ eINPUT_PORT_WINKER_R ]++;
 		}
@@ -140,12 +148,28 @@ void HW_PORT_Update( void )
 		g_u08PortActiveCount_Ary[ eINPUT_PORT_WINKER_R ] = 0;
 	}
 
-	if( REG_READ_08( INPUT_SW_WINKER_L_PORT ) & INPUT_SW_WINKER_L_BIT ){
+	if( REG_READ_08( INPUT_SW_L_PORT ) & INPUT_SW_L_BIT ){
 		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_WINKER_L ] < 0xFF ){
 			g_u08PortActiveCount_Ary[ eINPUT_PORT_WINKER_L ]++;
 		}
 	}else{
 		g_u08PortActiveCount_Ary[ eINPUT_PORT_WINKER_L ] = 0;
+	}
+
+	if( REG_READ_08( INPUT_ILL_PORT ) & INPUT_ILL_BIT ){
+		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_ILL ] < 0xFF ){
+			g_u08PortActiveCount_Ary[ eINPUT_PORT_ILL ]++;
+		}
+	}else{
+		g_u08PortActiveCount_Ary[ eINPUT_PORT_ILL ] = 0;
+	}
+
+	if( REG_READ_08( INPUT_SW_POS_EN_PORT ) & INPUT_SW_POS_EN_BIT ){
+		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_POS_EN ] < 0xFF ){
+			g_u08PortActiveCount_Ary[ eINPUT_PORT_POS_EN ]++;
+		}
+	}else{
+		g_u08PortActiveCount_Ary[ eINPUT_PORT_POS_EN ] = 0;
 	}
 }
 
@@ -178,10 +202,16 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 			REG_SET_08( OUTPUT_PWM_PORT, OUTPUT_PWM_BIT );
 			break;
 		case eOUTPUT_PORT_WINKER_R:
-			REG_SET_08( OUTPUT_WINKER_R_PORT, OUTPUT_WINKER_R_BIT );
+			REG_SET_08( OUTPUT_R_PORT, OUTPUT_R_BIT );
 			break;
 		case eOUTPUT_PORT_WINKER_L:
-			REG_SET_08( OUTPUT_WINKER_L_PORT, OUTPUT_WINKER_L_BIT );
+			REG_SET_08( OUTPUT_L_PORT, OUTPUT_L_BIT );
+			break;
+		case eOUTPUT_PORT_WINKER_POS_R:
+			REG_SET_08( OUTPUT_POS_R_PORT, OUTPUT_POS_R_BIT );
+			break;
+		case eOUTPUT_PORT_WINKER_POS_L:
+			REG_SET_08( OUTPUT_POS_L_PORT, OUTPUT_POS_L_BIT );
 			break;
 		default:
 			break;
@@ -193,10 +223,16 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 			REG_CLR_08( OUTPUT_PWM_PORT, OUTPUT_PWM_BIT );
 			break;
 		case eOUTPUT_PORT_WINKER_R:
-			REG_CLR_08( OUTPUT_WINKER_R_PORT, OUTPUT_WINKER_R_BIT );
+			REG_CLR_08( OUTPUT_R_PORT, OUTPUT_R_BIT );
 			break;
 		case eOUTPUT_PORT_WINKER_L:
-			REG_CLR_08( OUTPUT_WINKER_L_PORT, OUTPUT_WINKER_L_BIT );
+			REG_CLR_08( OUTPUT_L_PORT, OUTPUT_L_BIT );
+			break;
+		case eOUTPUT_PORT_WINKER_POS_R:
+			REG_CLR_08( OUTPUT_POS_R_PORT, OUTPUT_POS_R_BIT );
+			break;
+		case eOUTPUT_PORT_WINKER_POS_L:
+			REG_CLR_08( OUTPUT_POS_L_PORT, OUTPUT_POS_L_BIT );
 			break;
 		default:
 			break;
