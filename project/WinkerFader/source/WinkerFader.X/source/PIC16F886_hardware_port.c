@@ -44,10 +44,10 @@
 #define OUTPUT_R_BIT			(0x10)
 #define OUTPUT_L_PORT			(PORTC)
 #define OUTPUT_L_BIT			(0x20)
-#define OUTPUT_POS_R_PORT		(PORTC)
-#define OUTPUT_POS_R_BIT		(0x40)
-#define OUTPUT_POS_L_PORT		(PORTC)
-#define OUTPUT_POS_L_BIT		(0x80)
+#define OUTPUT_POS_R_EN_PORT	(PORTC)
+#define OUTPUT_POS_R_EN_BIT		(0x40)
+#define OUTPUT_POS_L_EN_PORT	(PORTC)
+#define OUTPUT_POS_L_EN_BIT		(0x80)
 
 /*------------------------------------------------------------------------------
 *	macro
@@ -207,11 +207,11 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 		case eOUTPUT_PORT_WINKER_L:
 			REG_SET_08( OUTPUT_L_PORT, OUTPUT_L_BIT );
 			break;
-		case eOUTPUT_PORT_WINKER_POS_R:
-			REG_SET_08( OUTPUT_POS_R_PORT, OUTPUT_POS_R_BIT );
+		case eOUTPUT_PORT_POS_R_EN:
+			REG_SET_08( OUTPUT_POS_R_EN_PORT, OUTPUT_POS_R_EN_BIT );
 			break;
-		case eOUTPUT_PORT_WINKER_POS_L:
-			REG_SET_08( OUTPUT_POS_L_PORT, OUTPUT_POS_L_BIT );
+		case eOUTPUT_PORT_POS_L_EN:
+			REG_SET_08( OUTPUT_POS_L_EN_PORT, OUTPUT_POS_L_EN_BIT );
 			break;
 		default:
 			break;
@@ -228,11 +228,11 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 		case eOUTPUT_PORT_WINKER_L:
 			REG_CLR_08( OUTPUT_L_PORT, OUTPUT_L_BIT );
 			break;
-		case eOUTPUT_PORT_WINKER_POS_R:
-			REG_CLR_08( OUTPUT_POS_R_PORT, OUTPUT_POS_R_BIT );
+		case eOUTPUT_PORT_POS_R_EN:
+			REG_CLR_08( OUTPUT_POS_R_EN_PORT, OUTPUT_POS_R_EN_BIT );
 			break;
-		case eOUTPUT_PORT_WINKER_POS_L:
-			REG_CLR_08( OUTPUT_POS_L_PORT, OUTPUT_POS_L_BIT );
+		case eOUTPUT_PORT_POS_L_EN:
+			REG_CLR_08( OUTPUT_POS_L_EN_PORT, OUTPUT_POS_L_EN_BIT );
 			break;
 		default:
 			break;

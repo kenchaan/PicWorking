@@ -153,6 +153,11 @@ void APP_FramePreProcess( void )
 *-----------------------------------------------------------------------------*/
 void APP_FrameMainProcess( void )
 {
+	BOOL isPos = FALSE;
+	if( HW_PORT_IsActive( eINPUT_PORT_ILL ) && HW_PORT_IsActive( eINPUT_PORT_POS_EN )){
+		isPos = TRUE;
+	}
+
 	if( g_eFlashType == eFLASH_TYPE_NONE ){
 		g_u08FlashFrameCount = 0;
 		g_u08FlashCount = 0;
@@ -169,18 +174,26 @@ void APP_FrameMainProcess( void )
 	case eFLASH_TYPE_NONE:
 		HW_PORT_Set( eOUTPUT_PORT_WINKER_R, FALSE );
 		HW_PORT_Set( eOUTPUT_PORT_WINKER_L, FALSE );
+		HW_PORT_Set( eOUTPUT_PORT_POS_R_EN, isPos );
+		HW_PORT_Set( eOUTPUT_PORT_POS_L_EN, isPos );
 		break;
 	case eFLASH_TYPE_HAZARD:
 		HW_PORT_Set( eOUTPUT_PORT_WINKER_R, TRUE );
 		HW_PORT_Set( eOUTPUT_PORT_WINKER_L, TRUE );
+		HW_PORT_Set( eOUTPUT_PORT_POS_R_EN, FALSE );
+		HW_PORT_Set( eOUTPUT_PORT_POS_L_EN, FALSE );
 		break;
 	case eFLASH_TYPE_WINKER_R:
 		HW_PORT_Set( eOUTPUT_PORT_WINKER_R, TRUE );
 		HW_PORT_Set( eOUTPUT_PORT_WINKER_L, FALSE );
+		HW_PORT_Set( eOUTPUT_PORT_POS_R_EN, FALSE );
+		HW_PORT_Set( eOUTPUT_PORT_POS_L_EN, isPos );
 		break;
 	case eFLASH_TYPE_WINKER_L:
 		HW_PORT_Set( eOUTPUT_PORT_WINKER_R, FALSE );
 		HW_PORT_Set( eOUTPUT_PORT_WINKER_L, TRUE );
+		HW_PORT_Set( eOUTPUT_PORT_POS_R_EN, isPos );
+		HW_PORT_Set( eOUTPUT_PORT_POS_L_EN, FALSE );
 		break;
 	default:
 		break;
