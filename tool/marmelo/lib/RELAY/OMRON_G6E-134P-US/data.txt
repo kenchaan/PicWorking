@@ -1,0 +1,14 @@
+<body>
+	explanation=ICソケット。DIP14パッケージ,300mil幅用。
+	numLeads=5
+	rxLead2=5
+	ryLead2=0
+	rxLead3=0
+	ryLead3=3
+	rxLead4=3
+	ryLead4=3
+	rxLead5=5
+	ryLead5=3
+	xLeadInImg=4
+	yLeadInImg=4
+</body>
