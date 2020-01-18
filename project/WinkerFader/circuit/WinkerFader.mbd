@@ -13,8 +13,8 @@
 		</properties>
 		<statistics>
 			numHole=28,19
-			numParts=31
-			numWires=176
+			numParts=29
+			numWires=151
 			numCmtTags=0
 		</statistics>
 		<options>
@@ -26,9 +26,9 @@
 		<parts>
 			<part0>
 				namePMF=Q
-				namePmodel=PowerMOS-FET
-				deg=90
-				pos=17,3
+				namePmodel=PowerMOS-FET_side2
+				deg=0
+				pos=23,1
 				zOrder=0
 				ann=0
 				val1=
@@ -37,22 +37,22 @@
 				comment=
 			</part0>
 			<part1>
-				namePMF=ICsocket
-				namePmodel=DIP28-300mil
-				deg=90
-				pos=4,4
+				namePMF=Q
+				namePmodel=PowerMOS-FET_side2
+				deg=0
+				pos=23,10
 				zOrder=1
-				ann=0
+				ann=1
 				val1=
 				val2=
 				val3=
 				comment=
 			</part1>
 			<part2>
-				namePMF=D
-				namePmodel=resin-2.54
+				namePMF=RELAY
+				namePmodel=OMRON_G6E-134P-US
 				deg=180
-				pos=1,9
+				pos=23,18
 				zOrder=2
 				ann=0
 				val1=
@@ -61,10 +61,10 @@
 				comment=
 			</part2>
 			<part3>
-				namePMF=D
-				namePmodel=resin-2.54
-				deg=270
-				pos=8,1
+				namePMF=RELAY
+				namePmodel=OMRON_G6E-134P-US
+				deg=180
+				pos=23,9
 				zOrder=3
 				ann=1
 				val1=
@@ -75,10 +75,10 @@
 			<part4>
 				namePMF=D
 				namePmodel=resin-2.54
-				deg=180
-				pos=1,11
-				zOrder=7
-				ann=2
+				deg=90
+				pos=17,17
+				zOrder=4
+				ann=0
 				val1=
 				val2=
 				val3=
@@ -87,10 +87,10 @@
 			<part5>
 				namePMF=D
 				namePmodel=resin-2.54
-				deg=180
-				pos=1,13
-				zOrder=8
-				ann=3
+				deg=90
+				pos=17,8
+				zOrder=5
+				ann=1
 				val1=
 				val2=
 				val3=
@@ -99,10 +99,10 @@
 			<part6>
 				namePMF=R
 				namePmodel=RD-7.62
-				deg=180
-				pos=3,5
-				zOrder=4
-				ann=1
+				deg=0
+				pos=15,1
+				zOrder=6
+				ann=0
 				val1=
 				val2=
 				val3=
@@ -111,10 +111,10 @@
 			<part7>
 				namePMF=R
 				namePmodel=RD-7.62
-				deg=180
-				pos=3,6
-				zOrder=5
-				ann=2
+				deg=0
+				pos=19,2
+				zOrder=7
+				ann=1
 				val1=
 				val2=
 				val3=
@@ -123,10 +123,10 @@
 			<part8>
 				namePMF=R
 				namePmodel=RD-7.62
-				deg=180
-				pos=3,7
-				zOrder=6
-				ann=3
+				deg=0
+				pos=15,10
+				zOrder=8
+				ann=2
 				val1=
 				val2=
 				val3=
@@ -135,46 +135,46 @@
 			<part9>
 				namePMF=R
 				namePmodel=RD-7.62
-				deg=270
-				pos=6,3
+				deg=0
+				pos=19,11
 				zOrder=9
-				ann=0
+				ann=3
 				val1=
 				val2=
 				val3=
 				comment=
 			</part9>
 			<part10>
-				namePMF=R
-				namePmodel=RD-7.62
-				deg=270
-				pos=5,3
+				namePMF=ICsocket
+				namePmodel=DIP8-300mil
+				deg=90
+				pos=11,1
 				zOrder=10
-				ann=4
+				ann=0
 				val1=
 				val2=
 				val3=
 				comment=
 			</part10>
 			<part11>
-				namePMF=RSN
-				namePmodel=CERALOCK
+				namePMF=ICsocket
+				namePmodel=DIP28-300mil
 				deg=90
-				pos=3,12
+				pos=7,1
 				zOrder=11
-				ann=0
+				ann=1
 				val1=
 				val2=
 				val3=
 				comment=
 			</part11>
 			<part12>
-				namePMF=ICsocket
-				namePmodel=DIP8-300mil
-				deg=90
-				pos=11,14
+				namePMF=R
+				namePmodel=RD-7.62
+				deg=0
+				pos=23,13
 				zOrder=12
-				ann=1
+				ann=4
 				val1=
 				val2=
 				val3=
@@ -183,9 +183,9 @@
 			<part13>
 				namePMF=R
 				namePmodel=RD-7.62
-				deg=270
-				pos=16,6
-				zOrder=20
+				deg=0
+				pos=23,4
+				zOrder=13
 				ann=5
 				val1=
 				val2=
@@ -194,23 +194,23 @@
 			</part13>
 			<part14>
 				namePMF=Q
-				namePmodel=PowerMOS-FET
-				deg=90
-				pos=17,12
-				zOrder=13
-				ann=1
+				namePmodel=TO220_side
+				deg=270
+				pos=12,14
+				zOrder=14
+				ann=2
 				val1=
 				val2=
 				val3=
 				comment=
 			</part14>
 			<part15>
-				namePMF=Q
-				namePmodel=TO220
-				deg=180
-				pos=11,7
-				zOrder=14
-				ann=2
+				namePMF=C
+				namePmodel=MLCC-2.54
+				deg=0
+				pos=12,15
+				zOrder=15
+				ann=0
 				val1=
 				val2=
 				val3=
@@ -220,9 +220,9 @@
 				namePMF=C
 				namePmodel=MLCC-2.54
 				deg=0
-				pos=10,6
-				zOrder=15
-				ann=0
+				pos=13,16
+				zOrder=16
+				ann=2
 				val1=
 				val2=
 				val3=
@@ -230,10 +230,10 @@
 			</part16>
 			<part17>
 				namePMF=C
-				namePmodel=MLCC-2.54
-				deg=0
-				pos=9,8
-				zOrder=16
+				namePmodel=CE-5
+				deg=270
+				pos=12,18
+				zOrder=17
 				ann=1
 				val1=
 				val2=
@@ -243,58 +243,58 @@
 			<part18>
 				namePMF=C
 				namePmodel=CE-5
-				deg=180
-				pos=11,4
-				zOrder=17
-				ann=2
-				val1=
-				val2=
-				val3=
-				comment=
-			</part18>
-			<part19>
-				namePMF=C
-				namePmodel=CE-5
-				deg=0
-				pos=9,10
+				deg=90
+				pos=10,16
 				zOrder=18
 				ann=4
 				val1=
 				val2=
 				val3=
 				comment=
+			</part18>
+			<part19>
+				namePMF=D
+				namePmodel=resin-2.54
+				deg=90
+				pos=2,4
+				zOrder=19
+				ann=2
+				val1=
+				val2=
+				val3=
+				comment=
 			</part19>
 			<part20>
-				namePMF=R
-				namePmodel=RD-7.62
-				deg=270
-				pos=16,15
-				zOrder=19
-				ann=6
+				namePMF=D
+				namePmodel=resin-2.54
+				deg=90
+				pos=2,7
+				zOrder=20
+				ann=3
 				val1=
 				val2=
 				val3=
 				comment=
 			</part20>
 			<part21>
-				namePMF=R
-				namePmodel=RD-7.62
-				deg=180
-				pos=17,18
+				namePMF=D
+				namePmodel=resin-2.54
+				deg=90
+				pos=2,10
 				zOrder=21
-				ann=7
+				ann=4
 				val1=
 				val2=
 				val3=
 				comment=
 			</part21>
 			<part22>
-				namePMF=R
-				namePmodel=RD-7.62
-				deg=180
-				pos=17,9
+				namePMF=D
+				namePmodel=resin-2.54
+				deg=90
+				pos=2,13
 				zOrder=22
-				ann=8
+				ann=5
 				val1=
 				val2=
 				val3=
@@ -303,10 +303,10 @@
 			<part23>
 				namePMF=R
 				namePmodel=RD-7.62
-				deg=270
-				pos=19,7
+				deg=90
+				pos=4,1
 				zOrder=23
-				ann=9
+				ann=6
 				val1=
 				val2=
 				val3=
@@ -315,330 +315,102 @@
 			<part24>
 				namePMF=R
 				namePmodel=RD-7.62
-				deg=270
-				pos=19,16
+				deg=90
+				pos=5,1
 				zOrder=24
-				ann=10
+				ann=7
 				val1=
 				val2=
 				val3=
 				comment=
 			</part24>
 			<part25>
-				namePMF=RELAY
-				namePmodel=OMRON_G6E-134P-US
-				deg=270
-				pos=21,8
+				namePMF=R
+				namePmodel=RD-7.62
+				deg=90
+				pos=6,1
 				zOrder=25
-				ann=0
+				ann=8
 				val1=
 				val2=
 				val3=
 				comment=
 			</part25>
 			<part26>
-				namePMF=RELAY
-				namePmodel=OMRON_G6E-134P-US
-				deg=270
-				pos=21,15
+				namePMF=RSN
+				namePmodel=CERALOCK
+				deg=90
+				pos=6,9
 				zOrder=26
-				ann=1
+				ann=0
 				val1=
 				val2=
 				val3=
 				comment=
 			</part26>
 			<part27>
-				namePMF=D
-				namePmodel=resin-5.08
-				deg=270
-				pos=20,12
+				namePMF=R
+				namePmodel=RD-7.62
+				deg=90
+				pos=5,9
 				zOrder=27
-				ann=4
+				ann=9
 				val1=
 				val2=
 				val3=
 				comment=
 			</part27>
 			<part28>
-				namePMF=D
-				namePmodel=resin-5.08
-				deg=270
-				pos=20,5
+				namePMF=R
+				namePmodel=RD-7.62
+				deg=90
+				pos=4,10
 				zOrder=28
-				ann=5
+				ann=10
 				val1=
 				val2=
 				val3=
 				comment=
 			</part28>
-			<part29>
-				namePMF=LED
-				namePmodel=5mm-Bl
-				deg=180
-				pos=14,7
-				zOrder=29
-				ann=0
-				val1=
-				val2=
-				val3=
-				comment=
-			</part29>
-			<part30>
-				namePMF=R
-				namePmodel=RD-7.62
-				deg=270
-				pos=13,12
-				zOrder=30
-				ann=11
-				val1=
-				val2=
-				val3=
-				comment=
-			</part30>
 		</parts>
 		<wires>
 			<wire0>
-				side=back
-				shielded=FALSE
-				pos=3,6
-				pos2=2,6
-				color=0xFF
-				ann=12
+				side=front
+				shielded=TRUE
+				pos=0,3
+				pos2=2,3
+				color=0xFF6464
+				ann=0
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire0>
 			<wire1>
-				side=back
-				shielded=FALSE
-				pos=3,11
-				pos2=2,11
-				color=0xFF
-				ann=17
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire1>
-			<wire2>
-				side=back
-				shielded=FALSE
-				pos=4,5
-				pos2=3,5
-				color=0xFF
-				ann=13
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire2>
-			<wire3>
-				side=back
-				shielded=FALSE
-				pos=0,4
-				pos2=0,5
-				color=0xFF
-				ann=19
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire3>
-			<wire4>
-				side=back
-				shielded=FALSE
-				pos=3,6
-				pos2=4,6
-				color=0xFF
-				ann=14
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire4>
-			<wire5>
-				side=back
-				shielded=FALSE
-				pos=4,7
-				pos2=3,7
-				color=0xFF
-				ann=15
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire5>
-			<wire6>
-				side=back
-				shielded=FALSE
-				pos=0,7
-				pos2=0,6
-				color=0xFF
-				ann=16
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire6>
-			<wire7>
-				side=back
-				shielded=FALSE
-				pos=3,7
-				pos2=3,11
-				color=0xFF
-				ann=20
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire7>
-			<wire8>
-				side=back
-				shielded=FALSE
-				pos=0,6
-				pos2=0,5
-				color=0xFF
-				ann=18
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire8>
-			<wire9>
-				side=back
-				shielded=FALSE
-				pos=2,11
-				pos2=2,12
-				color=0xFF
-				ann=21
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire9>
-			<wire10>
-				side=back
-				shielded=FALSE
-				pos=1,9
-				pos2=1,5
-				color=0xFF
-				ann=22
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire10>
-			<wire11>
-				side=back
-				shielded=FALSE
-				pos=4,16
-				pos2=5,16
-				color=0xFF
-				ann=23
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire11>
-			<wire12>
-				side=back
-				shielded=FALSE
-				pos=4,4
-				pos2=4,1
-				color=0xFF
-				ann=24
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire12>
-			<wire13>
-				side=back
-				shielded=FALSE
-				pos=1,5
-				pos2=3,5
-				color=0xFF
-				ann=25
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire13>
-			<wire14>
-				side=back
-				shielded=FALSE
-				pos=2,12
-				pos2=1,12
-				color=0xFF
-				ann=26
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire14>
-			<wire15>
-				side=back
-				shielded=FALSE
-				pos=3,14
-				pos2=4,13
-				color=0xFF
-				ann=27
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire15>
-			<wire16>
-				side=back
-				shielded=FALSE
-				pos=3,13
-				pos2=2,13
-				color=0xFF
-				ann=28
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire16>
-			<wire17>
 				side=front
 				shielded=TRUE
-				pos=3,0
+				pos=2,3
 				pos2=3,2
-				color=0xFF6464
-				ann=0
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire17>
-			<wire18>
-				side=front
-				shielded=TRUE
-				pos=3,2
-				pos2=2,3
 				color=0xFF6464
 				ann=1
 				val1=
 				val2=
 				val3=
 				comment=
-			</wire18>
-			<wire19>
+			</wire1>
+			<wire2>
 				side=front
 				shielded=TRUE
-				pos=2,3
-				pos2=0,3
+				pos=3,2
+				pos2=3,0
 				color=0xFF6464
 				ann=2
 				val1=
 				val2=
 				val3=
 				comment=
-			</wire19>
-			<wire20>
+			</wire2>
+			<wire3>
 				side=front
 				shielded=TRUE
 				pos=0,15
@@ -649,8 +421,8 @@
 				val2=
 				val3=
 				comment=
-			</wire20>
-			<wire21>
+			</wire3>
+			<wire4>
 				side=front
 				shielded=TRUE
 				pos=2,15
@@ -661,20 +433,20 @@
 				val2=
 				val3=
 				comment=
-			</wire21>
-			<wire22>
+			</wire4>
+			<wire5>
 				side=front
 				shielded=TRUE
-				pos=3,18
-				pos2=3,16
+				pos=3,16
+				pos2=3,18
 				color=0xFF6464
 				ann=5
 				val1=
 				val2=
 				val3=
 				comment=
-			</wire22>
-			<wire23>
+			</wire5>
+			<wire6>
 				side=front
 				shielded=TRUE
 				pos=24,18
@@ -685,8 +457,8 @@
 				val2=
 				val3=
 				comment=
-			</wire23>
-			<wire24>
+			</wire6>
+			<wire7>
 				side=front
 				shielded=TRUE
 				pos=24,16
@@ -697,8 +469,8 @@
 				val2=
 				val3=
 				comment=
-			</wire24>
-			<wire25>
+			</wire7>
+			<wire8>
 				side=front
 				shielded=TRUE
 				pos=25,15
@@ -709,8 +481,8 @@
 				val2=
 				val3=
 				comment=
-			</wire25>
-			<wire26>
+			</wire8>
+			<wire9>
 				side=front
 				shielded=TRUE
 				pos=24,0
@@ -721,8 +493,8 @@
 				val2=
 				val3=
 				comment=
-			</wire26>
-			<wire27>
+			</wire9>
+			<wire10>
 				side=front
 				shielded=TRUE
 				pos=24,2
@@ -733,8 +505,8 @@
 				val2=
 				val3=
 				comment=
-			</wire27>
-			<wire28>
+			</wire10>
+			<wire11>
 				side=front
 				shielded=TRUE
 				pos=25,3
@@ -745,12 +517,216 @@
 				val2=
 				val3=
 				comment=
+			</wire11>
+			<wire12>
+				side=back
+				shielded=FALSE
+				pos=23,17
+				pos2=23,18
+				color=0xFF
+				ann=12
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire12>
+			<wire13>
+				side=back
+				shielded=FALSE
+				pos=23,9
+				pos2=23,8
+				color=0xFF
+				ann=13
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire13>
+			<wire14>
+				side=back
+				shielded=FALSE
+				pos=20,6
+				pos2=20,5
+				color=0xFF
+				ann=14
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire14>
+			<wire15>
+				side=back
+				shielded=FALSE
+				pos=19,11
+				pos2=20,11
+				color=0xFF
+				ann=15
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire15>
+			<wire16>
+				side=back
+				shielded=FALSE
+				pos=20,14
+				pos2=20,15
+				color=0xFF
+				ann=17
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire16>
+			<wire17>
+				side=back
+				shielded=FALSE
+				pos=17,18
+				pos2=18,18
+				color=0xFF
+				ann=18
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire17>
+			<wire18>
+				side=back
+				shielded=FALSE
+				pos=17,17
+				pos2=23,17
+				color=0xFF
+				ann=19
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire18>
+			<wire19>
+				side=back
+				shielded=FALSE
+				pos=23,8
+				pos2=17,8
+				color=0xFF
+				ann=20
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire19>
+			<wire20>
+				side=back
+				shielded=FALSE
+				pos=17,9
+				pos2=18,9
+				color=0xFF
+				ann=21
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire20>
+			<wire21>
+				side=back
+				shielded=FALSE
+				pos=23,12
+				pos2=16,12
+				color=0xFF
+				ann=22
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire21>
+			<wire22>
+				side=back
+				shielded=FALSE
+				pos=23,14
+				pos2=22,14
+				color=0xFF
+				ann=16
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire22>
+			<wire23>
+				side=back
+				shielded=FALSE
+				pos=22,11
+				pos2=22,10
+				color=0xFF
+				ann=23
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire23>
+			<wire24>
+				side=back
+				shielded=FALSE
+				pos=22,10
+				pos2=23,10
+				color=0xFF
+				ann=24
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire24>
+			<wire25>
+				side=back
+				shielded=FALSE
+				pos=22,2
+				pos2=22,1
+				color=0xFF
+				ann=25
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire25>
+			<wire26>
+				side=back
+				shielded=FALSE
+				pos=22,1
+				pos2=23,1
+				color=0xFF
+				ann=26
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire26>
+			<wire27>
+				side=back
+				shielded=FALSE
+				pos=18,15
+				pos2=16,15
+				color=0xFF
+				ann=27
+				val1=
+				val2=
+				val3=
+				comment=
+			</wire27>
+			<wire28>
+				side=back
+				shielded=FALSE
+				pos=16,15
+				pos2=16,13
+				color=0xFF
+				ann=28
+				val1=
+				val2=
+				val3=
+				comment=
 			</wire28>
 			<wire29>
 				side=back
 				shielded=FALSE
-				pos=3,12
-				pos2=4,12
+				pos=16,12
+				pos2=16,6
 				color=0xFF
 				ann=29
 				val1=
@@ -761,8 +737,8 @@
 			<wire30>
 				side=back
 				shielded=FALSE
-				pos=4,8
-				pos2=5,8
+				pos=23,5
+				pos2=22,5
 				color=0xFF
 				ann=30
 				val1=
@@ -773,8 +749,8 @@
 			<wire31>
 				side=back
 				shielded=FALSE
-				pos=6,9
-				pos2=6,3
+				pos=18,6
+				pos2=16,6
 				color=0xFF
 				ann=31
 				val1=
@@ -785,8 +761,8 @@
 			<wire32>
 				side=back
 				shielded=FALSE
-				pos=5,8
-				pos2=5,3
+				pos=16,6
+				pos2=16,3
 				color=0xFF
 				ann=32
 				val1=
@@ -797,8 +773,8 @@
 			<wire33>
 				side=back
 				shielded=FALSE
-				pos=6,9
-				pos2=4,9
+				pos=23,3
+				pos2=16,3
 				color=0xFF
 				ann=33
 				val1=
@@ -809,8 +785,8 @@
 			<wire34>
 				side=back
 				shielded=FALSE
-				pos=7,12
-				pos2=6,12
+				pos=19,2
+				pos2=20,2
 				color=0xFF
 				ann=34
 				val1=
@@ -821,8 +797,8 @@
 			<wire35>
 				side=back
 				shielded=FALSE
-				pos=5,3
-				pos2=5,1
+				pos=15,1
+				pos2=15,2
 				color=0xFF
 				ann=35
 				val1=
@@ -833,21 +809,21 @@
 			<wire36>
 				side=back
 				shielded=FALSE
-				pos=6,2
-				pos2=10,2
+				pos=17,9
+				pos2=17,11
 				color=0xFF
-				ann=41
+				ann=36
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire36>
 			<wire37>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=6,0
-				pos2=5,0
-				color=0xFF
+				pos=22,5
+				pos2=21,4
+				color=0xFF0000
 				ann=37
 				val1=
 				val2=
@@ -857,8 +833,8 @@
 			<wire38>
 				side=back
 				shielded=FALSE
-				pos=5,0
-				pos2=4,0
+				pos=22,5
+				pos2=21,5
 				color=0xFF
 				ann=38
 				val1=
@@ -869,8 +845,8 @@
 			<wire39>
 				side=front
 				shielded=FALSE
-				pos=4,0
-				pos2=4,1
+				pos=22,4
+				pos2=21,5
 				color=0xFF0000
 				ann=39
 				val1=
@@ -879,11 +855,11 @@
 				comment=
 			</wire39>
 			<wire40>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=0,4
-				pos2=1,4
-				color=0xFF0000
+				pos=21,5
+				pos2=20,5
+				color=0xFF
 				ann=40
 				val1=
 				val2=
@@ -891,36 +867,36 @@
 				comment=
 			</wire40>
 			<wire41>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=6,2
-				pos2=6,3
-				color=0xFF
-				ann=36
+				pos=21,14
+				pos2=22,13
+				color=0xFF0000
+				ann=41
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire41>
 			<wire42>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=10,0
-				pos2=10,1
-				color=0xFF0000
-				ann=43
+				pos=21,14
+				pos2=20,14
+				color=0xFF
+				ann=42
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire42>
 			<wire43>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=8,1
-				pos2=5,1
-				color=0xFF
-				ann=42
+				pos=21,13
+				pos2=22,14
+				color=0xFF0000
+				ann=43
 				val1=
 				val2=
 				val3=
@@ -929,10 +905,10 @@
 			<wire44>
 				side=back
 				shielded=FALSE
-				pos=11,1
-				pos2=11,2
+				pos=22,14
+				pos2=21,14
 				color=0xFF
-				ann=57
+				ann=44
 				val1=
 				val2=
 				val3=
@@ -941,10 +917,10 @@
 			<wire45>
 				side=back
 				shielded=FALSE
-				pos=2,6
-				pos2=2,10
+				pos=22,10
+				pos2=18,10
 				color=0xFF
-				ann=44
+				ann=45
 				val1=
 				val2=
 				val3=
@@ -953,10 +929,10 @@
 			<wire46>
 				side=back
 				shielded=FALSE
-				pos=1,12
-				pos2=1,13
+				pos=15,2
+				pos2=14,2
 				color=0xFF
-				ann=45
+				ann=46
 				val1=
 				val2=
 				val3=
@@ -965,58 +941,58 @@
 			<wire47>
 				side=back
 				shielded=FALSE
-				pos=1,11
-				pos2=1,10
-				color=0xFF
-				ann=46
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire47>
-			<wire48>
-				side=back
-				shielded=FALSE
-				pos=1,10
-				pos2=2,10
+				pos=18,1
+				pos2=22,1
 				color=0xFF
 				ann=47
 				val1=
 				val2=
 				val3=
 				comment=
+			</wire47>
+			<wire48>
+				side=front
+				shielded=FALSE
+				pos=18,4
+				pos2=19,5
+				color=0xFF0000
+				ann=48
+				val1=
+				val2=
+				val3=
+				comment=
 			</wire48>
 			<wire49>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=5,16
-				pos2=5,18
-				color=0xFF
-				ann=48
+				pos=18,5
+				pos2=19,4
+				color=0xFF0000
+				ann=49
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire49>
 			<wire50>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=14,14
-				pos2=13,14
-				color=0xFF
-				ann=49
+				pos=18,14
+				pos2=19,13
+				color=0xFF0000
+				ann=50
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire50>
 			<wire51>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=6,13
-				pos2=7,13
-				color=0xFF
-				ann=50
+				pos=18,13
+				pos2=19,14
+				color=0xFF0000
+				ann=51
 				val1=
 				val2=
 				val3=
@@ -1025,22 +1001,22 @@
 			<wire52>
 				side=back
 				shielded=FALSE
-				pos=6,13
-				pos2=6,14
+				pos=23,15
+				pos2=23,16
 				color=0xFF
-				ann=51
+				ann=52
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire52>
 			<wire53>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=6,12
-				pos2=6,11
-				color=0xFF0000
-				ann=52
+				pos=23,16
+				pos2=19,16
+				color=0xFF
+				ann=53
 				val1=
 				val2=
 				val3=
@@ -1049,10 +1025,10 @@
 			<wire54>
 				side=back
 				shielded=FALSE
-				pos=7,14
-				pos2=8,14
+				pos=19,16
+				pos2=19,14
 				color=0xFF
-				ann=53
+				ann=54
 				val1=
 				val2=
 				val3=
@@ -1061,10 +1037,10 @@
 			<wire55>
 				side=back
 				shielded=FALSE
-				pos=11,4
-				pos2=11,6
+				pos=23,6
+				pos2=23,7
 				color=0xFF
-				ann=54
+				ann=55
 				val1=
 				val2=
 				val3=
@@ -1073,10 +1049,10 @@
 			<wire56>
 				side=back
 				shielded=FALSE
-				pos=7,15
-				pos2=9,15
+				pos=23,7
+				pos2=19,7
 				color=0xFF
-				ann=55
+				ann=56
 				val1=
 				val2=
 				val3=
@@ -1085,10 +1061,10 @@
 			<wire57>
 				side=back
 				shielded=FALSE
-				pos=10,6
-				pos2=10,4
+				pos=19,7
+				pos2=19,5
 				color=0xFF
-				ann=56
+				ann=57
 				val1=
 				val2=
 				val3=
@@ -1097,22 +1073,22 @@
 			<wire58>
 				side=back
 				shielded=FALSE
-				pos=10,2
-				pos2=10,1
+				pos=14,4
+				pos2=15,4
 				color=0xFF
-				ann=58
+				ann=59
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire58>
 			<wire59>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=11,0
-				pos2=11,1
-				color=0xFF0000
-				ann=59
+				pos=14,3
+				pos2=13,3
+				color=0xFF
+				ann=60
 				val1=
 				val2=
 				val3=
@@ -1121,8 +1097,8 @@
 			<wire60>
 				side=back
 				shielded=FALSE
-				pos=10,15
-				pos2=10,14
+				pos=13,3
+				pos2=13,1
 				color=0xFF
 				ann=61
 				val1=
@@ -1133,8 +1109,8 @@
 			<wire61>
 				side=back
 				shielded=FALSE
-				pos=10,14
-				pos2=11,14
+				pos=13,1
+				pos2=14,1
 				color=0xFF
 				ann=62
 				val1=
@@ -1145,8 +1121,8 @@
 			<wire62>
 				side=back
 				shielded=FALSE
-				pos=10,17
-				pos2=7,17
+				pos=11,2
+				pos2=12,2
 				color=0xFF
 				ann=63
 				val1=
@@ -1157,8 +1133,8 @@
 			<wire63>
 				side=back
 				shielded=FALSE
-				pos=7,16
-				pos2=11,16
+				pos=11,4
+				pos2=12,4
 				color=0xFF
 				ann=64
 				val1=
@@ -1169,8 +1145,8 @@
 			<wire64>
 				side=front
 				shielded=FALSE
-				pos=10,15
-				pos2=10,17
+				pos=15,11
+				pos2=17,11
 				color=0xFF0000
 				ann=65
 				val1=
@@ -1181,8 +1157,8 @@
 			<wire65>
 				side=back
 				shielded=FALSE
-				pos=11,15
-				pos2=12,15
+				pos=17,18
+				pos2=15,18
 				color=0xFF
 				ann=66
 				val1=
@@ -1193,8 +1169,8 @@
 			<wire66>
 				side=back
 				shielded=FALSE
-				pos=11,17
-				pos2=12,17
+				pos=15,4
+				pos2=15,10
 				color=0xFF
 				ann=67
 				val1=
@@ -1205,10 +1181,10 @@
 			<wire67>
 				side=back
 				shielded=FALSE
-				pos=13,18
-				pos2=13,16
+				pos=10,3
+				pos2=11,3
 				color=0xFF
-				ann=68
+				ann=58
 				val1=
 				val2=
 				val3=
@@ -1217,10 +1193,10 @@
 			<wire68>
 				side=back
 				shielded=FALSE
-				pos=5,18
-				pos2=13,18
+				pos=10,1
+				pos2=11,1
 				color=0xFF
-				ann=69
+				ann=68
 				val1=
 				val2=
 				val3=
@@ -1229,70 +1205,70 @@
 			<wire69>
 				side=back
 				shielded=FALSE
-				pos=13,16
-				pos2=14,16
+				pos=7,13
+				pos2=8,13
 				color=0xFF
-				ann=70
+				ann=69
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire69>
 			<wire70>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=13,0
-				pos2=14,1
-				color=0xFF0000
-				ann=71
+				pos=8,13
+				pos2=8,0
+				color=0xFF
+				ann=70
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire70>
 			<wire71>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=13,1
-				pos2=14,0
-				color=0xFF0000
-				ann=72
+				pos=10,10
+				pos2=9,10
+				color=0xFF
+				ann=71
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire71>
 			<wire72>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=16,0
-				pos2=17,1
-				color=0xFF0000
-				ann=73
+				pos=13,0
+				pos2=13,1
+				color=0xFF
+				ann=72
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire72>
 			<wire73>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=17,0
-				pos2=16,1
-				color=0xFF0000
-				ann=74
+				pos=7,1
+				pos2=7,0
+				color=0xFF
+				ann=73
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire73>
 			<wire74>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=15,15
-				pos2=15,9
-				color=0xFF
-				ann=60
+				pos=7,0
+				pos2=6,0
+				color=0xFF0000
+				ann=74
 				val1=
 				val2=
 				val3=
@@ -1301,8 +1277,8 @@
 			<wire75>
 				side=back
 				shielded=FALSE
-				pos=10,4
-				pos2=10,3
+				pos=23,13
+				pos2=23,14
 				color=0xFF
 				ann=75
 				val1=
@@ -1313,10 +1289,10 @@
 			<wire76>
 				side=back
 				shielded=FALSE
-				pos=9,10
-				pos2=9,8
+				pos=23,5
+				pos2=23,4
 				color=0xFF
-				ann=77
+				ann=76
 				val1=
 				val2=
 				val3=
@@ -1325,10 +1301,10 @@
 			<wire77>
 				side=back
 				shielded=FALSE
-				pos=11,7
-				pos2=11,6
+				pos=26,4
+				pos2=25,4
 				color=0xFF
-				ann=78
+				ann=77
 				val1=
 				val2=
 				val3=
@@ -1337,10 +1313,10 @@
 			<wire78>
 				side=back
 				shielded=FALSE
-				pos=9,7
-				pos2=9,6
+				pos=25,13
+				pos2=26,13
 				color=0xFF
-				ann=79
+				ann=78
 				val1=
 				val2=
 				val3=
@@ -1349,10 +1325,10 @@
 			<wire79>
 				side=back
 				shielded=FALSE
-				pos=9,8
-				pos2=9,7
+				pos=16,13
+				pos2=12,13
 				color=0xFF
-				ann=80
+				ann=79
 				val1=
 				val2=
 				val3=
@@ -1361,10 +1337,10 @@
 			<wire80>
 				side=back
 				shielded=FALSE
-				pos=13,16
-				pos2=13,14
+				pos=15,12
+				pos2=10,12
 				color=0xFF
-				ann=76
+				ann=80
 				val1=
 				val2=
 				val3=
@@ -1373,10 +1349,10 @@
 			<wire81>
 				side=back
 				shielded=FALSE
-				pos=10,7
-				pos2=10,8
+				pos=10,11
+				pos2=15,11
 				color=0xFF
-				ann=82
+				ann=81
 				val1=
 				val2=
 				val3=
@@ -1385,10 +1361,10 @@
 			<wire82>
 				side=back
 				shielded=FALSE
-				pos=10,8
-				pos2=10,10
+				pos=16,13
+				pos2=16,12
 				color=0xFF
-				ann=83
+				ann=82
 				val1=
 				val2=
 				val3=
@@ -1397,34 +1373,34 @@
 			<wire83>
 				side=back
 				shielded=FALSE
-				pos=10,7
-				pos2=10,6
+				pos=12,13
+				pos2=12,14
 				color=0xFF
-				ann=84
+				ann=83
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire83>
 			<wire84>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=9,6
-				pos2=9,5
-				color=0xFF0000
-				ann=85
+				pos=15,14
+				pos2=15,18
+				color=0xFF
+				ann=84
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire84>
 			<wire85>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=8,14
-				pos2=8,12
-				color=0xFF
-				ann=86
+				pos=15,14
+				pos2=15,12
+				color=0xFF0000
+				ann=85
 				val1=
 				val2=
 				val3=
@@ -1433,10 +1409,10 @@
 			<wire86>
 				side=back
 				shielded=FALSE
-				pos=14,11
-				pos2=12,11
+				pos=10,9
+				pos2=9,9
 				color=0xFF
-				ann=87
+				ann=86
 				val1=
 				val2=
 				val3=
@@ -1445,45 +1421,45 @@
 			<wire87>
 				side=back
 				shielded=FALSE
-				pos=9,13
-				pos2=9,15
+				pos=8,0
+				pos2=13,0
 				color=0xFF
-				ann=88
+				ann=87
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire87>
 			<wire88>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=9,13
-				pos2=11,13
-				color=0xFF
-				ann=89
+				pos=9,8
+				pos2=9,9
+				color=0xFF0000
+				ann=88
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire88>
 			<wire89>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=14,17
-				pos2=16,17
-				color=0xFF
-				ann=81
+				pos=5,18
+				pos2=4,17
+				color=0xFF0000
+				ann=89
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire89>
 			<wire90>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=10,3
-				pos2=12,3
-				color=0xFF
+				pos=5,17
+				pos2=4,18
+				color=0xFF0000
 				ann=90
 				val1=
 				val2=
@@ -1491,11 +1467,11 @@
 				comment=
 			</wire90>
 			<wire91>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=12,1
-				pos2=12,3
-				color=0xFF
+				pos=7,17
+				pos2=8,18
+				color=0xFF0000
 				ann=91
 				val1=
 				val2=
@@ -1503,11 +1479,11 @@
 				comment=
 			</wire91>
 			<wire92>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=13,1
-				pos2=12,1
-				color=0xFF
+				pos=8,17
+				pos2=7,18
+				color=0xFF0000
 				ann=92
 				val1=
 				val2=
@@ -1517,8 +1493,8 @@
 			<wire93>
 				side=back
 				shielded=FALSE
-				pos=16,1
-				pos2=15,1
+				pos=8,17
+				pos2=10,17
 				color=0xFF
 				ann=93
 				val1=
@@ -1529,8 +1505,8 @@
 			<wire94>
 				side=back
 				shielded=FALSE
-				pos=15,1
-				pos2=15,2
+				pos=13,17
+				pos2=13,16
 				color=0xFF
 				ann=94
 				val1=
@@ -1541,8 +1517,8 @@
 			<wire95>
 				side=back
 				shielded=FALSE
-				pos=15,2
-				pos2=13,2
+				pos=13,15
+				pos2=13,14
 				color=0xFF
 				ann=95
 				val1=
@@ -1553,8 +1529,8 @@
 			<wire96>
 				side=back
 				shielded=FALSE
-				pos=13,4
-				pos2=11,4
+				pos=13,16
+				pos2=13,15
 				color=0xFF
 				ann=96
 				val1=
@@ -1565,8 +1541,8 @@
 			<wire97>
 				side=back
 				shielded=FALSE
-				pos=13,4
-				pos2=13,2
+				pos=14,14
+				pos2=14,16
 				color=0xFF
 				ann=97
 				val1=
@@ -1577,8 +1553,8 @@
 			<wire98>
 				side=back
 				shielded=FALSE
-				pos=14,15
-				pos2=15,15
+				pos=14,17
+				pos2=14,16
 				color=0xFF
 				ann=98
 				val1=
@@ -1589,8 +1565,8 @@
 			<wire99>
 				side=back
 				shielded=FALSE
-				pos=16,17
-				pos2=16,15
+				pos=14,18
+				pos2=12,18
 				color=0xFF
 				ann=99
 				val1=
@@ -1601,8 +1577,8 @@
 			<wire100>
 				side=back
 				shielded=FALSE
-				pos=16,12
-				pos2=17,12
+				pos=12,17
+				pos2=13,17
 				color=0xFF
 				ann=100
 				val1=
@@ -1611,11 +1587,11 @@
 				comment=
 			</wire100>
 			<wire101>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=15,6
-				pos2=16,6
-				color=0xFF
+				pos=14,17
+				pos2=14,18
+				color=0xFF0000
 				ann=101
 				val1=
 				val2=
@@ -1625,8 +1601,8 @@
 			<wire102>
 				side=back
 				shielded=FALSE
-				pos=16,3
-				pos2=17,3
+				pos=10,17
+				pos2=12,17
 				color=0xFF
 				ann=102
 				val1=
@@ -1637,8 +1613,8 @@
 			<wire103>
 				side=back
 				shielded=FALSE
-				pos=14,9
-				pos2=15,9
+				pos=5,17
+				pos2=5,16
 				color=0xFF
 				ann=103
 				val1=
@@ -1649,8 +1625,8 @@
 			<wire104>
 				side=back
 				shielded=FALSE
-				pos=15,9
-				pos2=15,6
+				pos=5,16
+				pos2=10,16
 				color=0xFF
 				ann=104
 				val1=
@@ -1661,8 +1637,8 @@
 			<wire105>
 				side=back
 				shielded=FALSE
-				pos=16,9
-				pos2=17,9
+				pos=10,16
+				pos2=12,16
 				color=0xFF
 				ann=105
 				val1=
@@ -1673,8 +1649,8 @@
 			<wire106>
 				side=back
 				shielded=FALSE
-				pos=14,17
-				pos2=14,18
+				pos=12,16
+				pos2=12,15
 				color=0xFF
 				ann=106
 				val1=
@@ -1685,8 +1661,8 @@
 			<wire107>
 				side=back
 				shielded=FALSE
-				pos=16,18
-				pos2=17,18
+				pos=12,15
+				pos2=12,14
 				color=0xFF
 				ann=107
 				val1=
@@ -1695,11 +1671,11 @@
 				comment=
 			</wire107>
 			<wire108>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=18,5
-				pos2=18,1
-				color=0xFF
+				pos=0,4
+				pos2=1,5
+				color=0xFF0000
 				ann=108
 				val1=
 				val2=
@@ -1707,11 +1683,11 @@
 				comment=
 			</wire108>
 			<wire109>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=18,1
-				pos2=17,1
-				color=0xFF
+				pos=1,4
+				pos2=0,5
+				color=0xFF0000
 				ann=109
 				val1=
 				val2=
@@ -1719,11 +1695,11 @@
 				comment=
 			</wire109>
 			<wire110>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=17,5
-				pos2=18,5
-				color=0xFF
+				pos=0,7
+				pos2=1,8
+				color=0xFF0000
 				ann=110
 				val1=
 				val2=
@@ -1731,11 +1707,11 @@
 				comment=
 			</wire110>
 			<wire111>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=18,5
-				pos2=18,6
-				color=0xFF
+				pos=1,7
+				pos2=0,8
+				color=0xFF0000
 				ann=111
 				val1=
 				val2=
@@ -1743,11 +1719,11 @@
 				comment=
 			</wire111>
 			<wire112>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=18,8
-				pos2=18,14
-				color=0xFF
+				pos=0,10
+				pos2=1,11
+				color=0xFF0000
 				ann=112
 				val1=
 				val2=
@@ -1755,11 +1731,11 @@
 				comment=
 			</wire112>
 			<wire113>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=18,14
-				pos2=17,14
-				color=0xFF
+				pos=1,10
+				pos2=0,11
+				color=0xFF0000
 				ann=113
 				val1=
 				val2=
@@ -1767,11 +1743,11 @@
 				comment=
 			</wire113>
 			<wire114>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=17,16
-				pos2=19,16
-				color=0xFF
+				pos=0,13
+				pos2=1,14
+				color=0xFF0000
 				ann=114
 				val1=
 				val2=
@@ -1779,11 +1755,11 @@
 				comment=
 			</wire114>
 			<wire115>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=19,14
-				pos2=19,13
-				color=0xFF
+				pos=1,13
+				pos2=0,14
+				color=0xFF0000
 				ann=115
 				val1=
 				val2=
@@ -1793,8 +1769,8 @@
 			<wire116>
 				side=back
 				shielded=FALSE
-				pos=19,5
-				pos2=19,4
+				pos=4,1
+				pos2=5,1
 				color=0xFF
 				ann=116
 				val1=
@@ -1805,8 +1781,8 @@
 			<wire117>
 				side=back
 				shielded=FALSE
-				pos=17,7
-				pos2=19,7
+				pos=5,1
+				pos2=6,1
 				color=0xFF
 				ann=117
 				val1=
@@ -1817,8 +1793,8 @@
 			<wire118>
 				side=back
 				shielded=FALSE
-				pos=12,0
-				pos2=13,0
+				pos=6,1
+				pos2=7,1
 				color=0xFF
 				ann=118
 				val1=
@@ -1829,8 +1805,8 @@
 			<wire119>
 				side=back
 				shielded=FALSE
-				pos=19,9
-				pos2=19,7
+				pos=5,4
+				pos2=5,6
 				color=0xFF
 				ann=119
 				val1=
@@ -1841,8 +1817,8 @@
 			<wire120>
 				side=back
 				shielded=FALSE
-				pos=19,9
-				pos2=21,9
+				pos=5,6
+				pos2=2,6
 				color=0xFF
 				ann=120
 				val1=
@@ -1853,10 +1829,10 @@
 			<wire121>
 				side=back
 				shielded=FALSE
-				pos=21,8
-				pos2=21,6
+				pos=2,6
+				pos2=2,7
 				color=0xFF
-				ann=125
+				ann=121
 				val1=
 				val2=
 				val3=
@@ -1865,34 +1841,34 @@
 			<wire122>
 				side=back
 				shielded=FALSE
-				pos=20,15
-				pos2=21,15
+				pos=4,4
+				pos2=4,2
 				color=0xFF
-				ann=126
+				ann=122
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire122>
 			<wire123>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=26,13
-				pos2=27,14
-				color=0xFF0000
-				ann=127
+				pos=4,2
+				pos2=7,2
+				color=0xFF
+				ann=123
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire123>
 			<wire124>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=27,13
-				pos2=26,14
-				color=0xFF0000
-				ann=128
+				pos=7,3
+				pos2=5,3
+				color=0xFF
+				ann=124
 				val1=
 				val2=
 				val3=
@@ -1901,10 +1877,10 @@
 			<wire125>
 				side=back
 				shielded=FALSE
-				pos=24,15
-				pos2=24,14
+				pos=5,3
+				pos2=5,4
 				color=0xFF
-				ann=129
+				ann=125
 				val1=
 				val2=
 				val3=
@@ -1913,10 +1889,10 @@
 			<wire126>
 				side=back
 				shielded=FALSE
-				pos=24,14
-				pos2=26,14
+				pos=7,4
+				pos2=6,4
 				color=0xFF
-				ann=130
+				ann=126
 				val1=
 				val2=
 				val3=
@@ -1925,10 +1901,10 @@
 			<wire127>
 				side=back
 				shielded=FALSE
-				pos=24,12
-				pos2=23,12
+				pos=6,9
+				pos2=7,9
 				color=0xFF
-				ann=131
+				ann=127
 				val1=
 				val2=
 				val3=
@@ -1937,10 +1913,10 @@
 			<wire128>
 				side=back
 				shielded=FALSE
-				pos=23,12
-				pos2=23,16
+				pos=7,10
+				pos2=6,11
 				color=0xFF
-				ann=132
+				ann=128
 				val1=
 				val2=
 				val3=
@@ -1949,10 +1925,10 @@
 			<wire129>
 				side=back
 				shielded=FALSE
-				pos=23,16
-				pos2=19,16
+				pos=6,10
+				pos2=5,10
 				color=0xFF
-				ann=133
+				ann=129
 				val1=
 				val2=
 				val3=
@@ -1961,10 +1937,10 @@
 			<wire130>
 				side=back
 				shielded=FALSE
-				pos=24,8
-				pos2=26,8
+				pos=7,8
+				pos2=6,8
 				color=0xFF
-				ann=134
+				ann=130
 				val1=
 				val2=
 				val3=
@@ -1973,10 +1949,10 @@
 			<wire131>
 				side=back
 				shielded=FALSE
-				pos=22,3
-				pos2=21,3
+				pos=1,5
+				pos2=2,5
 				color=0xFF
-				ann=135
+				ann=131
 				val1=
 				val2=
 				val3=
@@ -1985,34 +1961,34 @@
 			<wire132>
 				side=back
 				shielded=FALSE
-				pos=23,9
-				pos2=23,5
+				pos=2,4
+				pos2=4,4
 				color=0xFF
-				ann=137
+				ann=132
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire132>
 			<wire133>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=26,7
-				pos2=27,8
-				color=0xFF0000
-				ann=138
+				pos=6,4
+				pos2=6,7
+				color=0xFF
+				ann=133
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire133>
 			<wire134>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=27,7
-				pos2=26,8
-				color=0xFF0000
-				ann=139
+				pos=6,7
+				pos2=3,7
+				color=0xFF
+				ann=134
 				val1=
 				val2=
 				val3=
@@ -2021,10 +1997,10 @@
 			<wire135>
 				side=back
 				shielded=FALSE
-				pos=24,10
-				pos2=25,10
+				pos=3,7
+				pos2=3,10
 				color=0xFF
-				ann=140
+				ann=135
 				val1=
 				val2=
 				val3=
@@ -2033,10 +2009,10 @@
 			<wire136>
 				side=back
 				shielded=FALSE
-				pos=25,10
-				pos2=25,9
+				pos=3,10
+				pos2=2,10
 				color=0xFF
-				ann=141
+				ann=136
 				val1=
 				val2=
 				val3=
@@ -2045,10 +2021,10 @@
 			<wire137>
 				side=back
 				shielded=FALSE
-				pos=24,5
-				pos2=26,5
+				pos=2,13
+				pos2=2,12
 				color=0xFF
-				ann=142
+				ann=137
 				val1=
 				val2=
 				val3=
@@ -2057,10 +2033,10 @@
 			<wire138>
 				side=back
 				shielded=FALSE
-				pos=25,4
-				pos2=24,4
+				pos=2,12
+				pos2=5,12
 				color=0xFF
-				ann=143
+				ann=138
 				val1=
 				val2=
 				val3=
@@ -2069,22 +2045,22 @@
 			<wire139>
 				side=back
 				shielded=FALSE
-				pos=24,4
-				pos2=24,3
+				pos=2,14
+				pos2=1,14
 				color=0xFF
-				ann=144
+				ann=139
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire139>
 			<wire140>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=25,9
-				pos2=25,7
-				color=0xFF0000
-				ann=145
+				pos=1,11
+				pos2=2,11
+				color=0xFF
+				ann=140
 				val1=
 				val2=
 				val3=
@@ -2093,10 +2069,10 @@
 			<wire141>
 				side=back
 				shielded=FALSE
-				pos=23,1
-				pos2=18,1
+				pos=2,8
+				pos2=1,8
 				color=0xFF
-				ann=146
+				ann=141
 				val1=
 				val2=
 				val3=
@@ -2105,10 +2081,10 @@
 			<wire142>
 				side=back
 				shielded=FALSE
-				pos=23,1
-				pos2=23,3
+				pos=5,9
+				pos2=4,9
 				color=0xFF
-				ann=147
+				ann=142
 				val1=
 				val2=
 				val3=
@@ -2117,22 +2093,22 @@
 			<wire143>
 				side=back
 				shielded=FALSE
-				pos=23,3
-				pos2=24,3
+				pos=5,12
+				pos2=7,12
 				color=0xFF
-				ann=148
+				ann=149
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire143>
 			<wire144>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=21,10
-				pos2=20,10
-				color=0xFF
-				ann=149
+				pos=4,8
+				pos2=4,9
+				color=0xFF0000
+				ann=143
 				val1=
 				val2=
 				val3=
@@ -2141,58 +2117,58 @@
 			<wire145>
 				side=back
 				shielded=FALSE
-				pos=14,10
-				pos2=11,10
+				pos=5,13
+				pos2=5,14
 				color=0xFF
-				ann=150
+				ann=145
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire145>
 			<wire146>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=4,11
-				pos2=5,11
-				color=0xFF
-				ann=151
+				pos=4,14
+				pos2=5,15
+				color=0xFF0000
+				ann=146
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire146>
 			<wire147>
-				side=back
+				side=front
 				shielded=FALSE
-				pos=11,10
-				pos2=11,11
-				color=0xFF
-				ann=152
+				pos=4,15
+				pos2=5,14
+				color=0xFF0000
+				ann=147
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire147>
 			<wire148>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=14,10
-				pos2=19,10
-				color=0xFF0000
-				ann=153
+				pos=5,14
+				pos2=7,14
+				color=0xFF
+				ann=148
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire148>
 			<wire149>
-				side=front
+				side=back
 				shielded=FALSE
-				pos=14,11
-				pos2=19,11
-				color=0xFF0000
-				ann=154
+				pos=4,10
+				pos2=4,9
+				color=0xFF
+				ann=144
 				val1=
 				val2=
 				val3=
@@ -2201,315 +2177,15 @@
 			<wire150>
 				side=back
 				shielded=FALSE
-				pos=12,11
-				pos2=12,12
+				pos=4,13
+				pos2=5,13
 				color=0xFF
-				ann=155
+				ann=150
 				val1=
 				val2=
 				val3=
 				comment=
 			</wire150>
-			<wire151>
-				side=front
-				shielded=FALSE
-				pos=11,13
-				pos2=11,11
-				color=0xFF0000
-				ann=156
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire151>
-			<wire152>
-				side=back
-				shielded=FALSE
-				pos=19,11
-				pos2=22,11
-				color=0xFF
-				ann=157
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire152>
-			<wire153>
-				side=back
-				shielded=FALSE
-				pos=22,11
-				pos2=22,3
-				color=0xFF
-				ann=158
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire153>
-			<wire154>
-				side=back
-				shielded=FALSE
-				pos=23,5
-				pos2=24,5
-				color=0xFF
-				ann=159
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire154>
-			<wire155>
-				side=front
-				shielded=FALSE
-				pos=21,9
-				pos2=23,9
-				color=0xFF0000
-				ann=160
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire155>
-			<wire156>
-				side=back
-				shielded=FALSE
-				pos=20,10
-				pos2=19,10
-				color=0xFF
-				ann=161
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire156>
-			<wire157>
-				side=back
-				shielded=FALSE
-				pos=20,3
-				pos2=21,3
-				color=0xFF
-				ann=162
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire157>
-			<wire158>
-				side=back
-				shielded=FALSE
-				pos=20,12
-				pos2=20,15
-				color=0xFF
-				ann=163
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire158>
-			<wire159>
-				side=back
-				shielded=FALSE
-				pos=20,5
-				pos2=21,5
-				color=0xFF
-				ann=164
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire159>
-			<wire160>
-				side=back
-				shielded=FALSE
-				pos=20,6
-				pos2=21,6
-				color=0xFF
-				ann=165
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire160>
-			<wire161>
-				side=back
-				shielded=FALSE
-				pos=21,6
-				pos2=21,5
-				color=0xFF
-				ann=166
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire161>
-			<wire162>
-				side=back
-				shielded=FALSE
-				pos=21,14
-				pos2=21,15
-				color=0xFF
-				ann=167
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire162>
-			<wire163>
-				side=back
-				shielded=FALSE
-				pos=12,12
-				pos2=8,12
-				color=0xFF
-				ann=168
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire163>
-			<wire164>
-				side=back
-				shielded=FALSE
-				pos=13,14
-				pos2=13,12
-				color=0xFF
-				ann=169
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire164>
-			<wire165>
-				side=back
-				shielded=FALSE
-				pos=13,9
-				pos2=13,7
-				color=0xFF
-				ann=170
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire165>
-			<wire166>
-				side=back
-				shielded=FALSE
-				pos=14,7
-				pos2=14,6
-				color=0xFF
-				ann=171
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire166>
-			<wire167>
-				side=front
-				shielded=FALSE
-				pos=27,5
-				pos2=26,4
-				color=0xFF0000
-				ann=172
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire167>
-			<wire168>
-				side=front
-				shielded=FALSE
-				pos=27,4
-				pos2=26,5
-				color=0xFF0000
-				ann=173
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire168>
-			<wire169>
-				side=front
-				shielded=FALSE
-				pos=26,10
-				pos2=27,11
-				color=0xFF0000
-				ann=174
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire169>
-			<wire170>
-				side=front
-				shielded=FALSE
-				pos=27,10
-				pos2=26,11
-				color=0xFF0000
-				ann=175
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire170>
-			<wire171>
-				side=back
-				shielded=FALSE
-				pos=25,6
-				pos2=25,7
-				color=0xFF
-				ann=176
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire171>
-			<wire172>
-				side=front
-				shielded=FALSE
-				pos=25,4
-				pos2=25,6
-				color=0xFF0000
-				ann=177
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire172>
-			<wire173>
-				side=front
-				shielded=FALSE
-				pos=25,6
-				pos2=25,7
-				color=0xFF0000
-				ann=178
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire173>
-			<wire174>
-				side=back
-				shielded=FALSE
-				pos=24,12
-				pos2=26,12
-				color=0xFF
-				ann=179
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire174>
-			<wire175>
-				side=back
-				shielded=FALSE
-				pos=26,12
-				pos2=26,11
-				color=0xFF
-				ann=180
-				val1=
-				val2=
-				val3=
-				comment=
-			</wire175>
 		</wires>
 		<cmtTags>
 		</cmtTags>
