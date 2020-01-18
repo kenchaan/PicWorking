@@ -1,0 +1,10 @@
+<body>
+	explanation=トランジスタ。TO220パッケージ。
+	numLeads=3
+	rxLead2=0
+	ryLead2=1
+	rxLead3=0
+	ryLead3=2
+	xLeadInImg=1
+	yLeadInImg=11
+</body>

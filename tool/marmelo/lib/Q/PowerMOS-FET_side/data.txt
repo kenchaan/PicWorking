@@ -1,0 +1,10 @@
+<body>
+	explanation=ƒpƒ[MOS-FETB
+	numLeads=3
+	rxLead2=0
+	ryLead2=2
+	rxLead3=0
+	ryLead3=4
+	xLeadInImg=2
+	yLeadInImg=11
+</body>

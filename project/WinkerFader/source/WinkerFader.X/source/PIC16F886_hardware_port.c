@@ -33,21 +33,21 @@
 #define INPUT_SW_R_BIT			(0x02)
 #define INPUT_SW_L_PORT			(PORTA)
 #define INPUT_SW_L_BIT			(0x04)
-#define INPUT_ILL_PORT			(PORTA)
-#define INPUT_ILL_BIT			(0x08)
-#define INPUT_SW_POS_EN_PORT	(PORTA)
-#define INPUT_SW_POS_EN_BIT		(0x10)
+#define INPUT_ILL_PORT			(PORTC)
+#define INPUT_ILL_BIT			(0x02)
+#define INPUT_SW_POS_EN_PORT	(PORTC)
+#define INPUT_SW_POS_EN_BIT		(0x08)
 
 #define OUTPUT_PWM_PORT			(PORTC)
 #define OUTPUT_PWM_BIT			(0x04)
-#define OUTPUT_R_PORT			(PORTC)
-#define OUTPUT_R_BIT			(0x10)
-#define OUTPUT_L_PORT			(PORTC)
-#define OUTPUT_L_BIT			(0x20)
+#define OUTPUT_R_EN_PORT		(PORTB)
+#define OUTPUT_R_EN_BIT			(0x80)
+#define OUTPUT_L_EN_PORT		(PORTB)
+#define OUTPUT_L_EN_BIT			(0x20)
 #define OUTPUT_POS_R_EN_PORT	(PORTC)
-#define OUTPUT_POS_R_EN_BIT		(0x40)
+#define OUTPUT_POS_R_EN_BIT		(0x80)
 #define OUTPUT_POS_L_EN_PORT	(PORTC)
-#define OUTPUT_POS_L_EN_BIT		(0x80)
+#define OUTPUT_POS_L_EN_BIT		(0x40)
 
 /*------------------------------------------------------------------------------
 *	macro
@@ -103,7 +103,7 @@ void HW_PORT_Initialize( void )
 	/* ポートA */
 	REG_WRITE_08( ANSEL, 0x00 );
 	REG_WRITE_08( PORTA, 0x00 );
-	REG_WRITE_08( TRISA, 0xFF );
+	REG_WRITE_08( TRISA, 0xC7 );
 
 	/* ポートB */
 	REG_RMW_08( OPTION_REG, 0xC0, 0x80 );
@@ -115,7 +115,7 @@ void HW_PORT_Initialize( void )
 
 	/* ポートC */
 	REG_WRITE_08( PORTC, 0x00 );
-	REG_WRITE_08( TRISC, 0x00 );
+	REG_WRITE_08( TRISC, 0x0A );
 
 	/* ポートE */
 	/* DO NOTHING */
@@ -202,10 +202,10 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 			REG_SET_08( OUTPUT_PWM_PORT, OUTPUT_PWM_BIT );
 			break;
 		case eOUTPUT_PORT_R_EN:
-			REG_SET_08( OUTPUT_R_PORT, OUTPUT_R_BIT );
+			REG_SET_08( OUTPUT_R_EN_PORT, OUTPUT_R_EN_BIT );
 			break;
 		case eOUTPUT_PORT_L_EN:
-			REG_SET_08( OUTPUT_L_PORT, OUTPUT_L_BIT );
+			REG_SET_08( OUTPUT_L_EN_PORT, OUTPUT_L_EN_BIT );
 			break;
 		case eOUTPUT_PORT_POS_R_EN:
 			REG_SET_08( OUTPUT_POS_R_EN_PORT, OUTPUT_POS_R_EN_BIT );
@@ -223,10 +223,10 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 			REG_CLR_08( OUTPUT_PWM_PORT, OUTPUT_PWM_BIT );
 			break;
 		case eOUTPUT_PORT_R_EN:
-			REG_CLR_08( OUTPUT_R_PORT, OUTPUT_R_BIT );
+			REG_CLR_08( OUTPUT_R_EN_PORT, OUTPUT_R_EN_BIT );
 			break;
 		case eOUTPUT_PORT_L_EN:
-			REG_CLR_08( OUTPUT_L_PORT, OUTPUT_L_BIT );
+			REG_CLR_08( OUTPUT_L_EN_PORT, OUTPUT_L_EN_BIT );
 			break;
 		case eOUTPUT_PORT_POS_R_EN:
 			REG_CLR_08( OUTPUT_POS_R_EN_PORT, OUTPUT_POS_R_EN_BIT );
