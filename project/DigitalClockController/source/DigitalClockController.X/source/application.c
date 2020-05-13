@@ -102,16 +102,12 @@ void APP_FramePreProcess( void )
 	/* スイッチ処理 */
 	if( HW_PORT_IsActive( eINPUT_PORT_HOUR )){
 		h++;
-		if( h >= 24 ){
-			h = 0;
-		}
+		h %= 24;
 	}
 
 	if( HW_PORT_IsActive( eINPUT_PORT_MINUTE )){
 		m++;
-		if( m >= 60 ){
-			m = 0;
-		}
+		m %= 60;
 	}
 
 	if( HW_PORT_IsActive( eINPUT_PORT_SECOND_RST )){
@@ -148,8 +144,8 @@ void APP_FrameMainProcess( void )
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_01 ] = (U08)( h % 10 );
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_MINUTE_10 ] = (U08)( m / 10 );
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_MINUTE_01 ] = (U08)( m % 10 );
-			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_SECOND_10 ] = (U08)( m / 10 );
-			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_SECOND_01 ] = (U08)( m % 10 );
+			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_SECOND_10 ] = (U08)( s / 10 );
+			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_SECOND_01 ] = (U08)( s % 10 );
 
 			if( g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_10 ] == 0 ){
 				g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_10 ] = 20;

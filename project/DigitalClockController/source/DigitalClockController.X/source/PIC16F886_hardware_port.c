@@ -36,6 +36,9 @@
 #define SW_SECOND_RST_PORT		(PORTA)
 #define SW_SECOND_RST_BIT		(0x04)
 
+#define ERROR_PROC_FAIL_PORT	(PORTA)
+#define ERROR_PROC_FAIL_BIT		(0x20)
+
 #define DIGIT_H10_PORT			(PORTC)
 #define DIGIT_H10_BIT			(0x04)
 #define DIGIT_H01_PORT			(PORTC)
@@ -197,6 +200,33 @@ BOOL HW_PORT_IsActive( CE_INPUT_PORT port )
 		return TRUE;
 	}else{
 		return FALSE;
+	}
+}
+
+/*------------------------------------------------------------------------------
+* OverView	: ポート出力
+* Parameter	: port		: 出力ポート
+* 			: isActive	: TRUE:Active FALSE:NotActive
+* Return	: None
+*-----------------------------------------------------------------------------*/
+void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
+{
+	if( isActive ){
+		switch( port ){
+		case eOUTPUT_PORT_ERROR_PROC_FAIL:
+			REG_SET_08( ERROR_PROC_FAIL_PORT, ERROR_PROC_FAIL_BIT );
+			break;
+		default:
+			break;
+		}
+	}else{
+		switch( port ){
+		case eOUTPUT_PORT_ERROR_PROC_FAIL:
+			REG_CLR_08( ERROR_PROC_FAIL_PORT, ERROR_PROC_FAIL_BIT );
+			break;
+		default:
+			break;
+		}
 	}
 }
 

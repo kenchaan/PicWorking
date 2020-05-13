@@ -16,7 +16,7 @@
 	/* SW_SECOND_RST ->│RA2  RB4│-> SEG_E          */
 	/*            NC <-│RA3  RB3│-> SEG_D          */
 	/*            NC <-│RA4  RB2│-> SEG_C          */
-	/*            NC <-│RA5  RB1│-> SEG_B          */
+	/* ERR_PROC_FAIL <-│RA5  RB1│-> SEG_B          */
 	/*           Vss ==│Vss  RB0│-> SEG_A          */
 	/*           OSC ==│OSC  Vdd│== Vdd            */
 	/*           OSC ==│OSC  Vss│== Vss            */
@@ -138,6 +138,13 @@ void HW_StartProcess( void )
 *-----------------------------------------------------------------------------*/
 void HW_WaitFrameStart( void )
 {
+	/* 処理落ち確認 */
+	if( HW_INT_IsInterrupted( eINTERRUPT_TYPE_TMR0 )){
+		HW_PORT_Set( eOUTPUT_PORT_ERROR_PROC_FAIL, TRUE );
+	}else{
+		HW_PORT_Set( eOUTPUT_PORT_ERROR_PROC_FAIL, FALSE );
+	}
+
 	/* フレーム開始待ち */
 	while( TRUE ){
 		if( HW_INT_IsInterrupted( eINTERRUPT_TYPE_TMR0 )){

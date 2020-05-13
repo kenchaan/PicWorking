@@ -80,7 +80,7 @@ static volatile BOOL g_isUpdatedTime = FALSE;
 void HW_TIM_Initialize( void)
 {
 	/* TMR0ê›íË(ÉtÉåÅ[ÉÄèàóùóp) */
-	/* 20MHz,1:64,0 Å® 3.2768msec */
+	/* 20MHz,1:32,0 Å® 1.6384msec */
 	REG_RMW_08( OPTION_REG, 0x3F, 0x05 );
 	REG_WRITE_08( TMR0, TMR0_DEFAULT );
 	REG_SET_08( INTCON, 0x20 );
