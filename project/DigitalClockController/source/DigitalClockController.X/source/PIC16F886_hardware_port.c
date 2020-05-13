@@ -25,9 +25,9 @@
 /*------------------------------------------------------------------------------
 *	define
 *-----------------------------------------------------------------------------*/
-#define CHATTER_TH				(3)
-#define CONTINUE_TH				(200)
-#define CONTINUE_INTERVAL		(10)
+#define CHATTER_TH				(6)
+#define CONTINUE_TH				(400)
+#define CONTINUE_INTERVAL		(20)
 
 #define SW_HOUR_PORT			(PORTA)
 #define SW_HOUR_BIT				(0x01)
@@ -35,9 +35,6 @@
 #define SW_MINUTE_BIT			(0x02)
 #define SW_SECOND_RST_PORT		(PORTA)
 #define SW_SECOND_RST_BIT		(0x04)
-
-#define ERROR_PROC_FAIL_PORT	(PORTA)
-#define ERROR_PROC_FAIL_BIT		(0x20)
 
 #define DIGIT_H10_PORT			(PORTC)
 #define DIGIT_H10_BIT			(0x04)
@@ -77,7 +74,7 @@
 /*------------------------------------------------------------------------------
 *	static variable
 *-----------------------------------------------------------------------------*/
-static U08 g_u08PortActiveCount_Ary[ eINPUT_PORT_MAX ];
+static U16 g_u16PortActiveCount_Ary[ eINPUT_PORT_MAX ];
 
 /*------------------------------------------------------------------------------
 *	static function prototype
@@ -149,7 +146,7 @@ void HW_PORT_Initialize( void )
 	/* DO NOTHING */
 
 	for( E_INPUT_PORT e = eINPUT_PORT_MIN; e < eINPUT_PORT_MAX; e++ ){
-		g_u08PortActiveCount_Ary[ e ] = 0;
+		g_u16PortActiveCount_Ary[ e ] = 0;
 	}
 }
 
@@ -161,27 +158,24 @@ void HW_PORT_Initialize( void )
 void HW_PORT_Update( void )
 {
 	if( REG_READ_08( SW_HOUR_PORT ) & SW_HOUR_BIT ){
-		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_HOUR ] < 0xFF ){
-			g_u08PortActiveCount_Ary[ eINPUT_PORT_HOUR ]++;
-		}
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_HOUR ]++;
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_HOUR ] %= 10000;
 	}else{
-		g_u08PortActiveCount_Ary[ eINPUT_PORT_HOUR ] = 0;
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_HOUR ] = 0;
 	}
 
 	if( REG_READ_08( SW_MINUTE_PORT ) & SW_MINUTE_BIT ){
-		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_MINUTE ] < 0xFF ){
-			g_u08PortActiveCount_Ary[ eINPUT_PORT_MINUTE ]++;
-		}
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_MINUTE ]++;
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_MINUTE ] %= 10000;
 	}else{
-		g_u08PortActiveCount_Ary[ eINPUT_PORT_MINUTE ] = 0;
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_MINUTE ] = 0;
 	}
 
 	if( REG_READ_08( SW_SECOND_RST_PORT ) & SW_SECOND_RST_BIT ){
-		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_SECOND_RST ] < 0xFF ){
-			g_u08PortActiveCount_Ary[ eINPUT_PORT_SECOND_RST ]++;
-		}
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_SECOND_RST ]++;
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_SECOND_RST ] %= 10000;
 	}else{
-		g_u08PortActiveCount_Ary[ eINPUT_PORT_SECOND_RST ] = 0;
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_SECOND_RST ] = 0;
 	}
 }
 
@@ -193,40 +187,13 @@ void HW_PORT_Update( void )
 *-----------------------------------------------------------------------------*/
 BOOL HW_PORT_IsActive( CE_INPUT_PORT port )
 {
-	if( g_u08PortActiveCount_Ary[ port ] == CHATTER_TH ){
+	if( g_u16PortActiveCount_Ary[ port ] == CHATTER_TH ){
 		return TRUE;
-	}else if( g_u08PortActiveCount_Ary[ port ] >= CONTINUE_TH ){
-		g_u08PortActiveCount_Ary[ port ] -= CONTINUE_INTERVAL;
+	}else if( g_u16PortActiveCount_Ary[ port ] >= CONTINUE_TH ){
+		g_u16PortActiveCount_Ary[ port ] -= CONTINUE_INTERVAL;
 		return TRUE;
 	}else{
 		return FALSE;
-	}
-}
-
-/*------------------------------------------------------------------------------
-* OverView	: ポート出力
-* Parameter	: port		: 出力ポート
-* 			: isActive	: TRUE:Active FALSE:NotActive
-* Return	: None
-*-----------------------------------------------------------------------------*/
-void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
-{
-	if( isActive ){
-		switch( port ){
-		case eOUTPUT_PORT_ERROR_PROC_FAIL:
-			REG_SET_08( ERROR_PROC_FAIL_PORT, ERROR_PROC_FAIL_BIT );
-			break;
-		default:
-			break;
-		}
-	}else{
-		switch( port ){
-		case eOUTPUT_PORT_ERROR_PROC_FAIL:
-			REG_CLR_08( ERROR_PROC_FAIL_PORT, ERROR_PROC_FAIL_BIT );
-			break;
-		default:
-			break;
-		}
 	}
 }
 
@@ -238,10 +205,6 @@ void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive )
 *-----------------------------------------------------------------------------*/
 void HW_PORT_SetSegData( CE_OUTPUT_PORT_DIGIT digit, const U08 data )
 {
-	if( data >= 22 ){
-		return;
-	}
-
 	/* 消灯 */
 	REG_CLR_08( DIGIT_H10_PORT, DIGIT_H10_BIT );
 	REG_CLR_08( DIGIT_H01_PORT, DIGIT_H01_BIT );
@@ -251,11 +214,7 @@ void HW_PORT_SetSegData( CE_OUTPUT_PORT_DIGIT digit, const U08 data )
 	REG_CLR_08( DIGIT_S01_PORT, DIGIT_S01_BIT );
 
 	/* データセット */
-	if( digit != eOUTPUT_PORT_DIGIT_NONE ){
-		REG_WRITE_08( SEG_DATA_PORT, g_cu08SegData_Ary[ data ] );
-	}else{
-		REG_WRITE_08( SEG_DATA_PORT, 0x00 );
-	}
+	REG_WRITE_08( SEG_DATA_PORT, g_cu08SegData_Ary[ data ] );
 
 	/* 点灯 */
 	switch( digit ){

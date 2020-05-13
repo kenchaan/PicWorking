@@ -131,59 +131,6 @@ void HW_StartProcess( void )
 	HW_INT_StartProcess();
 }
 
-/*------------------------------------------------------------------------------
-* OverView	: フレーム待ち処理
-* Parameter	: None
-* Return	: None
-*-----------------------------------------------------------------------------*/
-void HW_WaitFrameStart( void )
-{
-	/* 処理落ち確認 */
-	if( HW_INT_IsInterrupted( eINTERRUPT_TYPE_TMR0 )){
-		HW_PORT_Set( eOUTPUT_PORT_ERROR_PROC_FAIL, TRUE );
-	}else{
-		HW_PORT_Set( eOUTPUT_PORT_ERROR_PROC_FAIL, FALSE );
-	}
-
-	/* フレーム開始待ち */
-	while( TRUE ){
-		if( HW_INT_IsInterrupted( eINTERRUPT_TYPE_TMR0 )){
-			break;
-		}
-	}
-}
-
-/*------------------------------------------------------------------------------
-* OverView	: フレーム事前処理
-* Parameter	: None
-* Return	: None
-*-----------------------------------------------------------------------------*/
-void HW_FramePreProcess( void )
-{
-	HW_TIM_Update();
-	HW_PORT_Update();
-}
-
-/*------------------------------------------------------------------------------
-* OverView	: フレーム処理
-* Parameter	: None
-* Return	: None
-*-----------------------------------------------------------------------------*/
-void HW_FrameMainProcess( void )
-{
-	/* DO NOTHING */
-}
-
-/*------------------------------------------------------------------------------
-* OverView	: フレーム事後処理
-* Parameter	: None
-* Return	: None
-*-----------------------------------------------------------------------------*/
-void HW_FramePostProcess( void )
-{
-	/* DO NOTHING */
-}
-
 
 /*------------------------------------------------------------------------------
 *	End Of File

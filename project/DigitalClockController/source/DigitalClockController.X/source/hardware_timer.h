@@ -55,11 +55,8 @@ extern "C" {	/* } */
 void HW_TIM_Initialize( void);
 void HW_TIM_StartProcess( void );
 void HW_TIM_Update( void );
-BOOL HW_TIM_IsUpdatedTime( void );
-U32  HW_TIM_GetTimeCount( void );
+U32 HW_TIM_GetTimeCount( void );
 void HW_TIM_SetTimeCount( const U32 count );
-void HW_TIM_ClearTimeCount( void );
-void HW_TIM_EnableUpdateCount( const BOOL isEnable );
 
 
 /*------------------------------------------------------------------------------
