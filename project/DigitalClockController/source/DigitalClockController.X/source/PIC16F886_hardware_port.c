@@ -25,6 +25,8 @@
 /*------------------------------------------------------------------------------
 *	define
 *-----------------------------------------------------------------------------*/
+#define COUNTER_MAX				(1000)
+
 #define CHATTER_TH				(3)
 #define CONTINUE_TH				(200)
 #define CONTINUE_INTERVAL		(10)
@@ -77,7 +79,7 @@
 /*------------------------------------------------------------------------------
 *	static variable
 *-----------------------------------------------------------------------------*/
-static U08 g_u08PortActiveCount_Ary[ eINPUT_PORT_MAX ];
+static U16 g_u16PortActiveCount_Ary[ eINPUT_PORT_MAX ];
 
 /*------------------------------------------------------------------------------
 *	static function prototype
@@ -149,7 +151,7 @@ void HW_PORT_Initialize( void )
 	/* DO NOTHING */
 
 	for( E_INPUT_PORT e = eINPUT_PORT_MIN; e < eINPUT_PORT_MAX; e++ ){
-		g_u08PortActiveCount_Ary[ e ] = 0;
+		g_u16PortActiveCount_Ary[ e ] = 0;
 	}
 }
 
@@ -161,27 +163,24 @@ void HW_PORT_Initialize( void )
 void HW_PORT_Update( void )
 {
 	if( REG_READ_08( SW_HOUR_PORT ) & SW_HOUR_BIT ){
-		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_HOUR ] < 0xFF ){
-			g_u08PortActiveCount_Ary[ eINPUT_PORT_HOUR ]++;
-		}
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_HOUR ]++;
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_HOUR ] %= COUNTER_MAX;
 	}else{
-		g_u08PortActiveCount_Ary[ eINPUT_PORT_HOUR ] = 0;
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_HOUR ] = 0;
 	}
 
 	if( REG_READ_08( SW_MINUTE_PORT ) & SW_MINUTE_BIT ){
-		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_MINUTE ] < 0xFF ){
-			g_u08PortActiveCount_Ary[ eINPUT_PORT_MINUTE ]++;
-		}
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_MINUTE ]++;
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_MINUTE ] %= COUNTER_MAX;
 	}else{
-		g_u08PortActiveCount_Ary[ eINPUT_PORT_MINUTE ] = 0;
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_MINUTE ] = 0;
 	}
 
 	if( REG_READ_08( SW_SECOND_RST_PORT ) & SW_SECOND_RST_BIT ){
-		if( g_u08PortActiveCount_Ary[ eINPUT_PORT_SECOND_RST ] < 0xFF ){
-			g_u08PortActiveCount_Ary[ eINPUT_PORT_SECOND_RST ]++;
-		}
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_SECOND_RST ]++;
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_SECOND_RST ] %= COUNTER_MAX;
 	}else{
-		g_u08PortActiveCount_Ary[ eINPUT_PORT_SECOND_RST ] = 0;
+		g_u16PortActiveCount_Ary[ eINPUT_PORT_SECOND_RST ] = 0;
 	}
 }
 
@@ -193,14 +192,14 @@ void HW_PORT_Update( void )
 *-----------------------------------------------------------------------------*/
 BOOL HW_PORT_IsActive( CE_INPUT_PORT port )
 {
-	if( g_u08PortActiveCount_Ary[ port ] == CHATTER_TH ){
+	if( g_u16PortActiveCount_Ary[ port ] == CHATTER_TH ){
 		return TRUE;
-	}else if( g_u08PortActiveCount_Ary[ port ] >= CONTINUE_TH ){
-		g_u08PortActiveCount_Ary[ port ] -= CONTINUE_INTERVAL;
+	}else if( g_u16PortActiveCount_Ary[ port ] >= CONTINUE_TH ){
+		g_u16PortActiveCount_Ary[ port ] -= CONTINUE_INTERVAL;
 		return TRUE;
-	}else{
-		return FALSE;
 	}
+
+	return FALSE;
 }
 
 /*------------------------------------------------------------------------------
@@ -251,11 +250,7 @@ void HW_PORT_SetSegData( CE_OUTPUT_PORT_DIGIT digit, const U08 data )
 	REG_CLR_08( DIGIT_S01_PORT, DIGIT_S01_BIT );
 
 	/* データセット */
-	if( digit != eOUTPUT_PORT_DIGIT_NONE ){
-		REG_WRITE_08( SEG_DATA_PORT, g_cu08SegData_Ary[ data ] );
-	}else{
-		REG_WRITE_08( SEG_DATA_PORT, 0x00 );
-	}
+	REG_WRITE_08( SEG_DATA_PORT, g_cu08SegData_Ary[ data ] );
 
 	/* 点灯 */
 	switch( digit ){

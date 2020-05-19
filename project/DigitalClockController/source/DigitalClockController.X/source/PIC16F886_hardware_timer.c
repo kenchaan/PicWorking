@@ -51,7 +51,6 @@
 *	static variable
 *-----------------------------------------------------------------------------*/
 static volatile U32 g_u32TimeCount = 0;
-static volatile BOOL g_isUpdatedTime = FALSE;
 
 /*------------------------------------------------------------------------------
 *	static function prototype
@@ -80,7 +79,7 @@ static volatile BOOL g_isUpdatedTime = FALSE;
 void HW_TIM_Initialize( void)
 {
 	/* TMR0設定(フレーム処理用) */
-	/* 20MHz,1:32,0 → 1.6384msec */
+	/* 20MHz,1:64,0 → 1.6384msec */
 	REG_RMW_08( OPTION_REG, 0x3F, 0x05 );
 	REG_WRITE_08( TMR0, TMR0_DEFAULT );
 	REG_SET_08( INTCON, 0x20 );
@@ -115,19 +114,7 @@ void HW_TIM_Update( void )
 {
 	if( HW_INT_IsInterrupted( eINTERRUPT_TYPE_TMR1 )){
 		g_u32TimeCount++;
-		g_isUpdatedTime = TRUE;
 	}
-}
-
-/*------------------------------------------------------------------------------
-* OverView	: タイマ更新有無取得
-* Parameter	: None
-* Return	: TRUE	: 更新あり
-* 			: FALSE	: 更新なし
-*-----------------------------------------------------------------------------*/
-BOOL HW_TIM_IsUpdatedTime( void )
-{
-	return g_isUpdatedTime;
 }
 
 /*------------------------------------------------------------------------------
@@ -148,18 +135,6 @@ U32 HW_TIM_GetTimeCount( void )
 void HW_TIM_SetTimeCount( const U32 count )
 {
 	g_u32TimeCount = count;
-	g_isUpdatedTime = TRUE;
-}
-
-/*------------------------------------------------------------------------------
-* OverView	: 時間カウントクリア
-* Parameter	: None
-* Return	: None
-*-----------------------------------------------------------------------------*/
-void HW_TIM_ClearTimeCount( void )
-{
-	g_u32TimeCount = 0;
-	g_isUpdatedTime = TRUE;
 }
 
 

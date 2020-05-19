@@ -52,9 +52,7 @@ extern "C" {	/* } */
 *	extern function prototype
 *-----------------------------------------------------------------------------*/
 void APP_Initialize( void );
-void APP_FramePreProcess( void );
-void APP_FrameMainProcess( void );
-void APP_FramePostProcess( void );
+void APP_FrameProcess( void );
 
 
 /*------------------------------------------------------------------------------

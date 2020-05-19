@@ -138,30 +138,24 @@ void HW_StartProcess( void )
 *-----------------------------------------------------------------------------*/
 void HW_WaitFrameStart( void )
 {
+	BOOL interrupted = HW_INT_IsInterrupted( eINTERRUPT_TYPE_TMR0 );
+
 	/* 処理落ち確認 */
-	if( HW_INT_IsInterrupted( eINTERRUPT_TYPE_TMR0 )){
+	if( interrupted ){
 		HW_PORT_Set( eOUTPUT_PORT_ERROR_PROC_FAIL, TRUE );
 	}else{
 		HW_PORT_Set( eOUTPUT_PORT_ERROR_PROC_FAIL, FALSE );
 	}
 
 	/* フレーム開始待ち */
-	while( TRUE ){
-		if( HW_INT_IsInterrupted( eINTERRUPT_TYPE_TMR0 )){
-			break;
+	if( !interrupted ){
+		/* 処理落ちしてた場合は開始待ちせずに抜ける */
+		while( TRUE ){
+			if( HW_INT_IsInterrupted( eINTERRUPT_TYPE_TMR0 )){
+				break;
+			}
 		}
 	}
-}
-
-/*------------------------------------------------------------------------------
-* OverView	: フレーム事前処理
-* Parameter	: None
-* Return	: None
-*-----------------------------------------------------------------------------*/
-void HW_FramePreProcess( void )
-{
-	HW_TIM_Update();
-	HW_PORT_Update();
 }
 
 /*------------------------------------------------------------------------------
@@ -169,19 +163,10 @@ void HW_FramePreProcess( void )
 * Parameter	: None
 * Return	: None
 *-----------------------------------------------------------------------------*/
-void HW_FrameMainProcess( void )
+void HW_FrameProcess( void )
 {
-	/* DO NOTHING */
-}
-
-/*------------------------------------------------------------------------------
-* OverView	: フレーム事後処理
-* Parameter	: None
-* Return	: None
-*-----------------------------------------------------------------------------*/
-void HW_FramePostProcess( void )
-{
-	/* DO NOTHING */
+	HW_TIM_Update();
+	HW_PORT_Update();
 }
 
 

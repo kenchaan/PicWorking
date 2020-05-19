@@ -54,6 +54,7 @@
 *-----------------------------------------------------------------------------*/
 static U08 g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_MAX ];
 static E_OUTPUT_PORT_DIGIT g_eOutputDigit = eOUTPUT_PORT_DIGIT_MIN;
+static U32 g_u32PreTimeCount = 0;
 
 /*------------------------------------------------------------------------------
 *	static function prototype
@@ -87,11 +88,11 @@ void APP_Initialize( void )
 }
 
 /*------------------------------------------------------------------------------
-* OverView	: フレーム事前処理
+* OverView	: フレーム処理
 * Parameter	: None
 * Return	: None
 *-----------------------------------------------------------------------------*/
-void APP_FramePreProcess( void )
+void APP_FrameProcess( void )
 {
 	U32 count = HW_TIM_GetTimeCount();
 	U08 h = (U08)(  (U32)( count / 2 ) / 3600 );
@@ -104,42 +105,25 @@ void APP_FramePreProcess( void )
 		h++;
 		h %= 24;
 	}
-
 	if( HW_PORT_IsActive( eINPUT_PORT_MINUTE )){
 		m++;
 		m %= 60;
 	}
-
 	if( HW_PORT_IsActive( eINPUT_PORT_SECOND_RST )){
 		s = 0;
 	}
-
 	U32 updated = ( (U32)h * 3600 + (U32)m * 60 + (U32)s ) * 2 + (U32)ss;
 	if( updated != count ){
 		HW_TIM_SetTimeCount( updated );
 	}
-}
 
-/*------------------------------------------------------------------------------
-* OverView	: フレーム処理
-* Parameter	: None
-* Return	: None
-*-----------------------------------------------------------------------------*/
-void APP_FrameMainProcess( void )
-{
 	if( g_eOutputDigit == eOUTPUT_PORT_DIGIT_MIN ){
 		/* 時間更新 */
-		if( HW_TIM_IsUpdatedTime() ){
-			U32 count = HW_TIM_GetTimeCount();
-			if( count >= 172800 ){
-				HW_TIM_ClearTimeCount();
-				count = 0;
-			}
+		U32 count = HW_TIM_GetTimeCount();
+		count %= 172800;
+		if( count != g_u32PreTimeCount ){
+			HW_TIM_SetTimeCount( count );
 
-			U32 totalsec = (U32)( count / 2 );
-			U08 h = (U08)(  totalsec / 3600 );
-			U08 m = (U08)(( totalsec % 3600 ) / 60 );
-			U08 s = (U08)(  totalsec % 60 );
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_10 ] = (U08)( h / 10 );
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_01 ] = (U08)( h % 10 );
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_MINUTE_10 ] = (U08)( m / 10 );
@@ -156,6 +140,8 @@ void APP_FrameMainProcess( void )
 				g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_01 ] += 10;
 				g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_MINUTE_01 ] += 10;
 			}
+
+			g_u32PreTimeCount = count;
 		}
 	}
 
@@ -168,16 +154,6 @@ void APP_FrameMainProcess( void )
 	if( g_eOutputDigit >= eOUTPUT_PORT_DIGIT_MAX ){
 		g_eOutputDigit = eOUTPUT_PORT_DIGIT_MIN;
 	}
-}
-
-/*------------------------------------------------------------------------------
-* OverView	: フレーム事後処理
-* Parameter	: None
-* Return	: None
-*-----------------------------------------------------------------------------*/
-void APP_FramePostProcess( void )
-{
-	/* DO NOTHING */
 }
 
 

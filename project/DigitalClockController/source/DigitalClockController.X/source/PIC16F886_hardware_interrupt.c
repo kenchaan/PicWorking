@@ -209,9 +209,7 @@ void HW_INT_StartProcess( void )
 BOOL HW_INT_IsInterrupted( CE_INTERRUPT_TYPE type )
 {
 	BOOL interrupted = g_isInterrupted_Ary[ type ];
-	if( interrupted ){
-		g_isInterrupted_Ary[ type ] = FALSE;
-	}
+	g_isInterrupted_Ary[ type ] = FALSE;
 
 	return interrupted;
 }
