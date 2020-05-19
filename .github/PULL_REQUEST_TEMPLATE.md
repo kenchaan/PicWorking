@@ -9,8 +9,8 @@
 
 **[Supplements]**
 
-¡ ª Regular PullRequest ª ¡
-¡ « Release PullRequest « ¡
+â†‘ Regular PullRequest â†‘
+â†“ Release PullRequest â†“
 
 **[ReleaseItem]**
 
