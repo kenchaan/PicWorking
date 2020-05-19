@@ -53,6 +53,10 @@ extern "C" {	/* } */
 *-----------------------------------------------------------------------------*/
 void HW_Initialize( void );
 void HW_StartProcess( void );
+void HW_WaitFrameStart( void );
+void HW_FramePreProcess( void );
+void HW_FrameMainProcess( void );
+void HW_FramePostProcess( void );
 
 
 /*------------------------------------------------------------------------------
