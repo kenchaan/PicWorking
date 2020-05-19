@@ -101,28 +101,31 @@ void APP_FrameProcess( void )
 	U08 ss = (U08)( count % 2 );
 
 	/* スイッチ処理 */
+	BOOL updated = FALSE;
 	if( HW_PORT_IsActive( eINPUT_PORT_HOUR )){
 		h++;
 		h %= 24;
+		updated = TRUE;
 	}
 	if( HW_PORT_IsActive( eINPUT_PORT_MINUTE )){
 		m++;
 		m %= 60;
+		updated = TRUE;
 	}
 	if( HW_PORT_IsActive( eINPUT_PORT_SECOND_RST )){
 		s = 0;
+		updated = TRUE;
 	}
-	U32 updated = ( (U32)h * 3600 + (U32)m * 60 + (U32)s ) * 2 + (U32)ss;
-	if( updated != count ){
-		HW_TIM_SetTimeCount( updated );
+	if( updated ){
+		ss = 0;
+		count = (( (U32)h * 3600 + (U32)m * 60 + (U32)s ) * 2 ) % 172800;
+		HW_TIM_SetTimeCount( count );
 	}
 
+	/* 時間更新 */
 	if( g_eOutputDigit == eOUTPUT_PORT_DIGIT_MIN ){
-		/* 時間更新 */
-		U32 count = HW_TIM_GetTimeCount();
-		count %= 172800;
 		if( count != g_u32PreTimeCount ){
-			HW_TIM_SetTimeCount( count );
+			g_u32PreTimeCount = count;
 
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_10 ] = (U08)( h / 10 );
 			g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_01 ] = (U08)( h % 10 );
@@ -140,8 +143,6 @@ void APP_FrameProcess( void )
 				g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_HOUR_01 ] += 10;
 				g_u08DigitData_Ary[ eOUTPUT_PORT_DIGIT_MINUTE_01 ] += 10;
 			}
-
-			g_u32PreTimeCount = count;
 		}
 	}
 

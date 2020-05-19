@@ -114,6 +114,7 @@ void HW_TIM_Update( void )
 {
 	if( HW_INT_IsInterrupted( eINTERRUPT_TYPE_TMR1 )){
 		g_u32TimeCount++;
+		g_u32TimeCount %= 172800;
 	}
 }
 
@@ -134,7 +135,7 @@ U32 HW_TIM_GetTimeCount( void )
 *-----------------------------------------------------------------------------*/
 void HW_TIM_SetTimeCount( const U32 count )
 {
-	g_u32TimeCount = count;
+	g_u32TimeCount = count % 172800;
 }
 
 
