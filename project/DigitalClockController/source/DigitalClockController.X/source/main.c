@@ -84,7 +84,15 @@ void main( void )
 
 	while( TRUE ){
 		HW_WaitFrameStart();
-		APP_FrameProcess();
+
+		HW_FramePreProcess();
+		APP_FramePreProcess();
+
+		HW_FrameMainProcess();
+		APP_FrameMainProcess();
+
+		HW_FramePostProcess();
+		APP_FramePostProcess();
 	}
 }
 

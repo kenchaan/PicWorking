@@ -22,7 +22,7 @@ extern "C" {	/* } */
 *	define
 *-----------------------------------------------------------------------------*/
 #define TMR0_DEFAULT			(0x00)
-#define TMR1H_DEFAULT			(0xC0)
+#define TMR1H_DEFAULT			(0x80)
 
 /*------------------------------------------------------------------------------
 *	macro
@@ -55,8 +55,8 @@ extern "C" {	/* } */
 void HW_TIM_Initialize( void);
 void HW_TIM_StartProcess( void );
 void HW_TIM_Update( void );
-U32 HW_TIM_GetTimeCount( void );
-void HW_TIM_SetTimeCount( const U32 count );
+U32 HW_TIM_GetTimeCountSec( void );
+void HW_TIM_SetTimeCountSec( const U32 count );
 
 
 /*------------------------------------------------------------------------------

@@ -50,7 +50,7 @@
 /*------------------------------------------------------------------------------
 *	static variable
 *-----------------------------------------------------------------------------*/
-static volatile U32 g_u32TimeCount = 0;
+static volatile U32 g_u32TimeCountSec = 0;
 
 /*------------------------------------------------------------------------------
 *	static function prototype
@@ -79,13 +79,13 @@ static volatile U32 g_u32TimeCount = 0;
 void HW_TIM_Initialize( void)
 {
 	/* TMR0設定(フレーム処理用) */
-	/* 20MHz,1:64,0 → 1.6384msec */
+	/* 20MHz,1:32,0 → 3.2768msec */
 	REG_RMW_08( OPTION_REG, 0x3F, 0x05 );
 	REG_WRITE_08( TMR0, TMR0_DEFAULT );
 	REG_SET_08( INTCON, 0x20 );
 
 	/* TMR1設定(時間カウント用) */
-	/* 32.768kHz(External),1:1,49152 → 0.5sec */
+	/* 32.768kHz(External),1:1,32768 → 1.0sec */
 	REG_WRITE_08( T1CON, 0x0B );
 	REG_WRITE_08( TMR1H, TMR1H_DEFAULT );
 	REG_SET_08( PIE1, 0x01 );
@@ -113,8 +113,10 @@ void HW_TIM_StartProcess( void )
 void HW_TIM_Update( void )
 {
 	if( HW_INT_IsInterrupted( eINTERRUPT_TYPE_TMR1 )){
-		g_u32TimeCount++;
-		g_u32TimeCount %= 172800;
+		g_u32TimeCountSec++;
+		if( g_u32TimeCountSec >= 86400 ){
+			g_u32TimeCountSec -= 86400;
+		}
 	}
 }
 
@@ -123,9 +125,9 @@ void HW_TIM_Update( void )
 * Parameter	: None
 * Return	: 時間カウント値
 *-----------------------------------------------------------------------------*/
-U32 HW_TIM_GetTimeCount( void )
+U32 HW_TIM_GetTimeCountSec( void )
 {
-	return g_u32TimeCount;
+	return g_u32TimeCountSec;
 }
 
 /*------------------------------------------------------------------------------
@@ -133,9 +135,9 @@ U32 HW_TIM_GetTimeCount( void )
 * Parameter	: count	: 時間カウント値
 * Return	: None
 *-----------------------------------------------------------------------------*/
-void HW_TIM_SetTimeCount( const U32 count )
+void HW_TIM_SetTimeCountSec( const U32 count )
 {
-	g_u32TimeCount = count % 172800;
+	g_u32TimeCountSec = count;
 }
 
 

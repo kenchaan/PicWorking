@@ -21,7 +21,7 @@ extern "C" {	/* } */
 /*------------------------------------------------------------------------------
 *	define
 *-----------------------------------------------------------------------------*/
-#define EXIST_SECOND_DIGITS		(TRUE)
+
 
 /*------------------------------------------------------------------------------
 *	macro
@@ -54,19 +54,6 @@ typedef enum tagE_OUTPUT_PORT {
 } E_OUTPUT_PORT;
 typedef const E_OUTPUT_PORT CE_OUTPUT_PORT;
 
-typedef enum tagE_OUTPUT_PORT_DIGIT {
-	eOUTPUT_PORT_DIGIT_MIN = 0,
-	eOUTPUT_PORT_DIGIT_HOUR_10 = eOUTPUT_PORT_DIGIT_MIN,
-	eOUTPUT_PORT_DIGIT_HOUR_01,
-	eOUTPUT_PORT_DIGIT_MINUTE_10,
-	eOUTPUT_PORT_DIGIT_MINUTE_01,
-	eOUTPUT_PORT_DIGIT_SECOND_10,
-	eOUTPUT_PORT_DIGIT_SECOND_01,
-	eOUTPUT_PORT_DIGIT_MAX,
-	eOUTPUT_PORT_DIGIT_NONE,
-	eOUTPUT_PORT_DIGIT_INVALID
-} E_OUTPUT_PORT_DIGIT;
-typedef const E_OUTPUT_PORT_DIGIT CE_OUTPUT_PORT_DIGIT;
 
 /*------------------------------------------------------------------------------
 *	struct
@@ -85,7 +72,7 @@ void HW_PORT_Initialize( void );
 void HW_PORT_Update( void );
 BOOL HW_PORT_IsActive( CE_INPUT_PORT port );
 void HW_PORT_Set( CE_OUTPUT_PORT port, const BOOL isActive );
-void HW_PORT_SetSegData( CE_OUTPUT_PORT_DIGIT digit, const U08 data );
+void HW_PORT_SetSegData( const U08 data[] );
 
 
 /*------------------------------------------------------------------------------
