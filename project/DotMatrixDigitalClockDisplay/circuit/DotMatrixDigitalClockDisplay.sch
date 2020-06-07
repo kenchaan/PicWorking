@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.2">
+<eagle version="9.6.1">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -7597,17 +7597,17 @@ W = angled&lt;p&gt;
 <part name="R11" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="0207/2V" package3d_urn="urn:adsk.eagle:package:23490/1" value="100"/>
 <part name="R12" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="0207/2V" package3d_urn="urn:adsk.eagle:package:23490/1" value="100"/>
 <part name="R13" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="0207/2V" package3d_urn="urn:adsk.eagle:package:23490/1" value="100"/>
-<part name="IC1" library="ic-package" library_urn="urn:adsk.eagle:library:239" deviceset="DIL28" device="-3" package3d_urn="urn:adsk.eagle:package:827/2"/>
-<part name="IC2" library="ic-package" library_urn="urn:adsk.eagle:library:239" deviceset="DIL28" device="-3" package3d_urn="urn:adsk.eagle:package:827/2"/>
-<part name="IC3" library="ic-package" library_urn="urn:adsk.eagle:library:239" deviceset="DIL18" device="" package3d_urn="urn:adsk.eagle:package:16424/2"/>
+<part name="IC1" library="ic-package" library_urn="urn:adsk.eagle:library:239" deviceset="DIL28" device="-3" package3d_urn="urn:adsk.eagle:package:827/2" value="PIC16F886"/>
+<part name="IC2" library="ic-package" library_urn="urn:adsk.eagle:library:239" deviceset="DIL28" device="-3" package3d_urn="urn:adsk.eagle:package:827/2" value="PIC16F886"/>
+<part name="IC3" library="ic-package" library_urn="urn:adsk.eagle:library:239" deviceset="DIL18" device="" package3d_urn="urn:adsk.eagle:package:16424/2" value="TBD62083APG"/>
 <part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="Q1" library="murata-resonators" deviceset="CSTLS_X" device=""/>
+<part name="Q1" library="murata-resonators" deviceset="CSTLS_X" device="" value="20MHz"/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="IC4" library="ic-package" library_urn="urn:adsk.eagle:library:239" deviceset="DIL18" device="" package3d_urn="urn:adsk.eagle:package:16424/2"/>
+<part name="IC4" library="ic-package" library_urn="urn:adsk.eagle:library:239" deviceset="DIL18" device="" package3d_urn="urn:adsk.eagle:package:16424/2" value="TBD62083APG"/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="P+2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
-<part name="Q2" library="murata-resonators" deviceset="CSTLS_X" device=""/>
+<part name="Q2" library="murata-resonators" deviceset="CSTLS_X" device="" value="20MHz"/>
 <part name="GND4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="SV2" library="con-lstb" library_urn="urn:adsk.eagle:library:162" deviceset="MA06-1" device="" package3d_urn="urn:adsk.eagle:package:8340/1"/>
 <part name="SV1" library="con-lstb" library_urn="urn:adsk.eagle:library:162" deviceset="MA08-1" device="" package3d_urn="urn:adsk.eagle:package:8343/1"/>
